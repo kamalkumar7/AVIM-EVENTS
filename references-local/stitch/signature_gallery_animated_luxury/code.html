@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Gallery - AVIM Events</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600&amp;family=EB+Garamond:wght@400&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-primary": "#ffb2b9",
+                        "error-container": "#ffdad6",
+                        "secondary-container": "#fed255",
+                        "surface-bright": "#fff8ef",
+                        "tertiary": "#735c10",
+                        "primary-fixed": "#ffdadc",
+                        "on-primary-fixed-variant": "#852034",
+                        "tertiary-container": "#c5a857",
+                        "background": "#fff8ef",
+                        "secondary-fixed-dim": "#ecc246",
+                        "on-secondary-fixed": "#241a00",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#241a00",
+                        "primary-container": "#6e0d25",
+                        "surface": "#fff8ef",
+                        "on-secondary-container": "#735a00",
+                        "on-primary-container": "#f77788",
+                        "on-surface": "#1e1b14",
+                        "tertiary-fixed-dim": "#e2c46f",
+                        "outline-variant": "#ddc0c1",
+                        "surface-tint": "#a4384a",
+                        "on-tertiary-fixed-variant": "#584400",
+                        "secondary-fixed": "#ffe08e",
+                        "on-primary-fixed": "#400010",
+                        "secondary": "#755b00",
+                        "on-tertiary-container": "#4f3d00",
+                        "inverse-surface": "#333028",
+                        "on-secondary-fixed-variant": "#584400",
+                        "surface-container-highest": "#e8e2d6",
+                        "outline": "#897173",
+                        "inverse-on-surface": "#f7f0e4",
+                        "surface-variant": "#e8e2d6",
+                        "surface-container-high": "#eee7dc",
+                        "primary": "#4b0014",
+                        "on-surface-variant": "#564243",
+                        "on-primary": "#ffffff",
+                        "surface-dim": "#e0d9ce",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-low": "#faf3e7",
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#ffb2b9",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "error": "#ba1a1a",
+                        "surface-container": "#f4ede1",
+                        "on-background": "#1e1b14",
+                        "tertiary-fixed": "#ffe08c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "margin-mobile": "20px",
+                        "unit": "8px",
+                        "container-max": "1280px",
+                        "section-gap": "120px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Playfair Display"],
+                        "display-lg-mobile": ["Playfair Display"],
+                        "label-caps": ["Be Vietnam Pro"],
+                        "subheading-sm": ["EB Garamond"],
+                        "headline-md": ["Playfair Display"],
+                        "body-rt": ["Be Vietnam Pro"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "display-lg-mobile": ["40px", {"lineHeight": "48px", "fontWeight": "700"}],
+                        "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.15em", "fontWeight": "600"}],
+                        "subheading-sm": ["20px", {"lineHeight": "28px", "letterSpacing": "0.05em", "fontWeight": "400"}],
+                        "headline-md": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "body-rt": ["16px", {"lineHeight": "26px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Custom Styles for Jharokha Arch and Jaali Pattern */
+        .jharokha-arch {
+            clip-path: path('M 0,50 Q 0,0 50,0 T 100,50 L 100,100 L 0,100 Z'); /* Simplified arch for demonstration, CSS clip-path doesn't scale perfectly without viewBox tricks, using border-radius approximation instead for responsive layout */
+            border-top-left-radius: 50% 20%;
+            border-top-right-radius: 50% 20%;
+        }
+        
+        .jharokha-mask {
+            mask-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M 0 30 C 0 0, 50 0, 50 0 C 50 0, 100 0, 100 30 L 100 100 L 0 100 Z" fill="black"/></svg>');
+            -webkit-mask-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M 0 30 C 0 0, 50 0, 50 0 C 50 0, 100 0, 100 30 L 100 100 L 0 100 Z" fill="black"/></svg>');
+            mask-size: 100% 100%;
+            -webkit-mask-size: 100% 100%;
+        }
+
+        .jaali-pattern {
+            background-image: repeating-linear-gradient(45deg, rgba(110, 13, 37, 0.02) 0, rgba(110, 13, 37, 0.02) 2px, transparent 2px, transparent 8px),
+                              repeating-linear-gradient(-45deg, rgba(110, 13, 37, 0.02) 0, rgba(110, 13, 37, 0.02) 2px, transparent 2px, transparent 8px);
+        }
+        
+        .jaali-pattern-light {
+            background-image: repeating-linear-gradient(45deg, rgba(201, 162, 39, 0.05) 0, rgba(201, 162, 39, 0.05) 1px, transparent 1px, transparent 10px),
+                              repeating-linear-gradient(-45deg, rgba(201, 162, 39, 0.05) 0, rgba(201, 162, 39, 0.05) 1px, transparent 1px, transparent 10px);
+        }
+
+        /* Hide scrollbar for masonry */
+        .masonry-scroll::-webkit-scrollbar {
+            display: none;
+        }
+        .masonry-scroll {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .gold-filigree-border {
+            border: 0.5px solid #C9A227; /* Antique Gold */
+        }
+        
+        .ambient-gold-shadow {
+            box-shadow: 0 10px 30px -10px rgba(110, 13, 37, 0.05);
+        }
+
+        /* Luxury Animation System */
+        @keyframes revealUp {
+            0% {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-reveal {
+            opacity: 0;
+            animation: revealUp 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+        
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+        .delay-400 { animation-delay: 400ms; }
+        .delay-500 { animation-delay: 500ms; }
+        .delay-600 { animation-delay: 600ms; }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-rt antialiased min-h-screen flex flex-col relative overflow-x-hidden jaali-pattern">
+<!-- TopNavBar (Web) -->
+<nav class="hidden md:flex fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md border-b border-tertiary-container/30">
+<div class="flex justify-between items-center px-margin-desktop py-4 max-w-container-max mx-auto w-full">
+<div class="font-display-lg text-headline-md text-primary dark:text-on-primary-container tracking-tighter">
+                AVIM Events
+            </div>
+<div class="flex items-center gap-8">
+<a class="text-on-surface-variant hover:text-secondary-container transition-all duration-300 font-label-caps text-label-caps" href="#">Home</a>
+<a class="text-on-surface-variant hover:text-secondary-container transition-all duration-300 font-label-caps text-label-caps" href="#">About</a>
+<a class="text-on-surface-variant hover:text-secondary-container transition-all duration-300 font-label-caps text-label-caps" href="#">Services</a>
+<a class="text-primary font-bold border-b-2 border-secondary pb-1 hover:text-secondary-container transition-all duration-300 font-label-caps text-label-caps" href="#">Gallery</a>
+<a class="text-on-surface-variant hover:text-secondary-container transition-all duration-300 font-label-caps text-label-caps" href="#">Venues</a>
+<a class="text-on-surface-variant hover:text-secondary-container transition-all duration-300 font-label-caps text-label-caps" href="#">Contact</a>
+</div>
+<button class="bg-primary-container text-on-primary border border-tertiary-container px-6 py-2 rounded-DEFAULT font-label-caps text-label-caps scale-95 active:scale-90 transition-transform ambient-gold-shadow">
+                Plan Your Event
+            </button>
+</div>
+</nav>
+<!-- SideNavBar (Mobile) -->
+<div class="md:hidden fixed inset-y-0 right-0 w-80 z-[60] bg-surface dark:bg-surface-dim border-l border-tertiary-container/50 shadow-2xl translate-x-full transition-transform duration-500 ease-in-out flex flex-col h-full py-8" id="mobile-nav">
+<div class="px-6 mb-8 flex justify-between items-center">
+<div>
+<div class="font-display-lg-mobile text-headline-md text-primary">AVIM Events</div>
+<div class="font-subheading-sm text-subheading-sm text-on-surface-variant mt-1">Luxury Royal Hospitality</div>
+</div>
+<button class="text-on-surface-variant p-2" id="close-mobile-nav">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto px-4 space-y-2">
+<a class="flex items-center gap-4 text-on-surface-variant px-6 py-3 font-subheading-sm text-subheading-sm hover:bg-surface-container-high transition-all rounded-full" href="#">
+<span class="material-symbols-outlined">home</span>Home
+            </a>
+<a class="flex items-center gap-4 text-on-surface-variant px-6 py-3 font-subheading-sm text-subheading-sm hover:bg-surface-container-high transition-all rounded-full" href="#">
+<span class="material-symbols-outlined">info</span>About
+            </a>
+<a class="flex items-center gap-4 text-on-surface-variant px-6 py-3 font-subheading-sm text-subheading-sm hover:bg-surface-container-high transition-all rounded-full" href="#">
+<span class="material-symbols-outlined">auto_awesome</span>Services
+            </a>
+<a class="flex items-center gap-4 bg-secondary-container text-on-secondary-container rounded-full px-6 py-3 font-subheading-sm text-subheading-sm hover:bg-surface-container-high transition-all" href="#">
+<span class="material-symbols-outlined">collections</span>Gallery
+            </a>
+<a class="flex items-center gap-4 text-on-surface-variant px-6 py-3 font-subheading-sm text-subheading-sm hover:bg-surface-container-high transition-all rounded-full" href="#">
+<span class="material-symbols-outlined">location_on</span>Venues
+            </a>
+<a class="flex items-center gap-4 text-on-surface-variant px-6 py-3 font-subheading-sm text-subheading-sm hover:bg-surface-container-high transition-all rounded-full" href="#">
+<span class="material-symbols-outlined">mail</span>Contact
+            </a>
+</div>
+<div class="px-6 mt-auto border-t border-tertiary-container/30 pt-6 space-y-4">
+<button class="w-full bg-primary-container text-on-primary border border-tertiary-container px-6 py-3 rounded-DEFAULT font-label-caps text-label-caps ambient-gold-shadow">
+                Plan Your Event
+            </button>
+<div class="flex gap-4 justify-center">
+<a class="text-on-surface-variant hover:text-primary transition-colors p-2" href="#">
+<span class="material-symbols-outlined">camera_alt</span>
+</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors p-2" href="#">
+<span class="material-symbols-outlined">call</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Mobile Header Trigger -->
+<div class="md:hidden fixed top-0 w-full z-40 bg-surface/90 backdrop-blur-md border-b border-tertiary-container/30 px-margin-mobile py-4 flex justify-between items-center">
+<div class="font-display-lg-mobile text-headline-md text-primary tracking-tighter">
+            AVIM Events
+        </div>
+<button class="text-primary p-2" id="open-mobile-nav">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+<!-- Main Content -->
+<main class="flex-1 pt-24 md:pt-32 pb-section-gap">
+<!-- Hero Section -->
+<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mb-section-gap text-center relative">
+<div class="absolute inset-0 flex items-center justify-center -z-10 opacity-10 pointer-events-none">
+<!-- Signature Motif Background -->
+<svg fill="none" height="400" viewbox="0 0 100 100" width="400" xmlns="http://www.w3.org/2000/svg">
+<path d="M50 0 C60 40, 90 50, 100 50 C90 50, 60 60, 50 100 C40 60, 10 50, 0 50 C10 50, 40 40, 50 0 Z" fill="#C9A227"></path>
+</svg>
+</div>
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-primary mb-6 relative inline-block">
+                A Tapestry of Celebrations
+                <span class="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-24 h-px bg-tertiary-container"></span>
+</h1>
+<p class="font-subheading-sm text-subheading-sm text-on-surface-variant max-w-2xl mx-auto mt-8">
+                Explore a curated collection of our most breathtaking events. From majestic royal weddings to sophisticated corporate galas, every frame captures the essence of impeccable hospitality and meticulous design.
+            </p>
+</section>
+<!-- Gallery Section (Dark Background as requested) -->
+<section class="bg-primary text-on-primary py-section-gap px-margin-mobile md:px-margin-desktop relative overflow-hidden">
+<!-- Subtle Jaali on dark bg -->
+<div class="absolute inset-0 jaali-pattern-light opacity-20 pointer-events-none"></div>
+<div class="max-w-container-max mx-auto relative z-10">
+<!-- Filter Tabs -->
+<div class="flex flex-wrap justify-center gap-4 mb-16">
+<button class="px-6 py-2 rounded-full border border-tertiary-container bg-surface text-primary font-label-caps text-label-caps transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] hover:-translate-y-1 hover:shadow-[0_4px_20px_rgba(201,162,39,0.15)]">All</button>
+<button class="px-6 py-2 rounded-full border border-tertiary-container/30 text-on-primary hover:border-tertiary-container font-label-caps text-label-caps transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] hover:-translate-y-1 hover:shadow-[0_4px_20px_rgba(201,162,39,0.15)]">Weddings</button>
+<button class="px-6 py-2 rounded-full border border-tertiary-container/30 text-on-primary hover:border-tertiary-container font-label-caps text-label-caps transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] hover:-translate-y-1 hover:shadow-[0_4px_20px_rgba(201,162,39,0.15)]">Corporate</button>
+<button class="px-6 py-2 rounded-full border border-tertiary-container/30 text-on-primary hover:border-tertiary-container font-label-caps text-label-caps transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] hover:-translate-y-1 hover:shadow-[0_4px_20px_rgba(201,162,39,0.15)]">Social</button>
+</div>
+<!-- Masonry Grid (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter animate-reveal">
+<!-- Col 1 -->
+<div class="space-y-gutter">
+<!-- Tall Image -->
+<div class="relative group overflow-hidden gold-filigree-border jharokha-arch h-96 animate-reveal delay-100">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="A stunning high-end Indian wedding stage decoration featuring a towering floral archway made of deep red roses and cascading white orchids. The lighting is dramatic and moody, highlighting the intricate gold filigree structures framing the stage. The aesthetic is luxurious, royal Rajputana style with a modern 5-star touch. Deep maroon backdrop." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDa_pGtCo36-qdvHJuiBXWXZscTFPfFuGenslb29UJbe8f50evZMZm9fKjMtMASungonD3_DJEGHW8l8JCTl0_nQkZrizyO18dSt8GgY5B5gEK8lrkkmufZYGHClMUeOJcX2S7uIRXuSRwPx5ESxpqz396EMqoEVmi1-Ndyc3EdDDwoe5ZpLNWzD3tvCcH6T_0_nTDrmaIayrZwYc5uEdS5ck-CSF8x2Qihd0HmdTaqkAYmyJbDIeR6_w')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+<div>
+<span class="inline-block bg-primary-container text-tertiary-container px-3 py-1 text-[10px] font-label-caps tracking-widest mb-2 border border-tertiary-container/50">WEDDING</span>
+<h3 class="font-subheading-sm text-subheading-sm text-surface">The Royal Mandap</h3>
+</div>
+</div>
+</div>
+<!-- Short Image -->
+<div class="relative group overflow-hidden gold-filigree-border rounded-DEFAULT h-64 animate-reveal delay-200">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="Close up of a luxurious dining table setting at a high-end corporate gala. The table features antique gold cutlery, crystal glassware, and a low, lush centerpiece of white lotuses and exotic greenery. The lighting is warm and ambient, reflecting off the gold accents. The background is a soft, out-of-focus grand ballroom. Exudes sophisticated 5-star hospitality." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBTWfBDYGyStoDnusUV4s-y6je2d1HVUQczQk09mpYkWqgOtklkSsMZ8c5y4V6pth8oQx_CD029JdZtxiaaOyRYJHe8WfGwmrkabcwxpQG2bZvw6TymlLiHTMpb8w1n2ImwKl_uBPkUDAXb6QXqjFXkBcwirzchfNUL1It15qK3tKCvxVLQEVrVhFQi-f_sxZ2ZuCaWz0MZfTmGYSjLOwFVhhML7R_sgiHE_OH2wqktvNKgvZonqS8Xiw')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+<div>
+<span class="inline-block bg-primary-container text-tertiary-container px-3 py-1 text-[10px] font-label-caps tracking-widest mb-2 border border-tertiary-container/50">CORPORATE</span>
+<h3 class="font-subheading-sm text-subheading-sm text-surface">Gala Dinner Setup</h3>
+</div>
+</div>
+</div>
+</div>
+<!-- Col 2 -->
+<div class="space-y-gutter md:mt-12">
+<!-- Short Image -->
+<div class="relative group overflow-hidden gold-filigree-border rounded-DEFAULT h-64 animate-reveal delay-300">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="A grand, opulent chandelier hanging from a beautifully painted ceiling with subtle Mughal motifs. The warm golden light spills over a luxurious lounge area below, featuring plush velvet seating in deep maroon and ivory. The setting is intimate yet highly prestigious, reflecting a high-end social event aesthetic." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAU1ZbqfnvGyOq-h2l8ou0Ka_H5jJhqWLZCPAUMkbOqPkXRBdHmNcQZWQJZE23lDhuOWuNq-uDtQT40rcb66XmczxWQUD4sPRGKCS5CaJDoiYQFJiBztyL6g7Uns6BvB9hDrUc-SPD711oh9fI3hBIXQVqeTIoOGMCLFviMPwAwW3GguLk_e-dujEdtOYUxb3HbAXZhM5rIfbhONz8DerMDxQvZlkhpzq5Ei4e5-qoCICnEC2KijI17jA')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+<div>
+<span class="inline-block bg-primary-container text-tertiary-container px-3 py-1 text-[10px] font-label-caps tracking-widest mb-2 border border-tertiary-container/50">SOCIAL</span>
+<h3 class="font-subheading-sm text-subheading-sm text-surface">Lounge Ambiance</h3>
+</div>
+</div>
+</div>
+<!-- Tall Image (Jharokha) -->
+<div class="relative group overflow-hidden gold-filigree-border jharokha-arch h-96 animate-reveal delay-400">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="A breathtaking view of a heritage palace venue transformed for an evening celebration. Thousands of warm fairy lights drape the ancient sandstone walls, while elaborate floral rangoli patterns decorate the floor. A subtle, transparent Jharokha arch frames the scene. The mood is magical, royal, and deeply traditional with flawless modern execution." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCSNG-EjALXCPLWVdKlK37e_JHMpsPcJZfkdYhB9hWGAx5nsrTDVV54M0JanPVEpclFhQzenHBtINbdTdWeGLNgwvSX296PwHDMizqBuB8Y8d1GfINRgEXGZoPXvYDHLXlutwQvmqEBX_xOvuj9we46n8vj12yEHIggKmqH4XtqFp3rsdLIhFsg3SKw2mW2VYctxNwaOrnvwhlnksjTRGoy8O2f-6pc4S8Fat5hCViEqbTxTRAKvrpJPQ')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+<div>
+<span class="inline-block bg-primary-container text-tertiary-container px-3 py-1 text-[10px] font-label-caps tracking-widest mb-2 border border-tertiary-container/50">VENUE</span>
+<h3 class="font-subheading-sm text-subheading-sm text-surface">Palace Illumination</h3>
+</div>
+</div>
+</div>
+</div>
+<!-- Col 3 -->
+<div class="space-y-gutter">
+<!-- Tall Image -->
+<div class="relative group overflow-hidden gold-filigree-border jharokha-arch h-96 animate-reveal delay-500">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="A sophisticated floral installation featuring exotic blooms arranged in a modern, asymmetric design. The flowers are rich tones of burgundy, blush, and cream, accented with touches of gold-painted foliage. The background is a clean, dark maroon wall, highlighting the vibrant colors and texture of the arrangement. Minimalist yet luxurious styling." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC3kGEiL-rkIUy8RL2vGzcuC756VRxFQUmr4wPUhB7r_xty7pZzDzprzixfNy-ZNLOQyMjOwX4F2VnYcI93rHkM_9WGNXBcOSr5cgKxM1dZ3NYZq6eWRja8Subwbyvp5hliOSV2TWNtk4QKZdUgZGexw5CEl5s1sX_RnabYM3FuWci3KilfeNoepHeMb_ykywjaQMvjFxqBv6lxZcnuzxZtV0yssnV21mdKC-GqML6IgKbWAxG3lXgmVg')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+<div>
+<span class="inline-block bg-primary-container text-tertiary-container px-3 py-1 text-[10px] font-label-caps tracking-widest mb-2 border border-tertiary-container/50">DECOR</span>
+<h3 class="font-subheading-sm text-subheading-sm text-surface">Exotic Florals</h3>
+</div>
+</div>
+</div>
+<!-- Short Image -->
+<div class="relative group overflow-hidden gold-filigree-border rounded-DEFAULT h-64 animate-reveal delay-600">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="An elegant welcome walkway for a high-profile event. The path is lined with tall, slender gold candelabras holding glowing candles. The floor is covered in a deep red carpet with intricate gold filigree borders. The lighting creates a dramatic, inviting, and exclusive VIP atmosphere." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBfer-7XiBZGaonvfDrZDt6YMuIRT55XYs5fwI4MmoMXKojHmQcOiR2M8hrUK2g7Mw3aYdWAuWZg9ZaCRtS05byZPuKbsqRwBV5jNbFC6qYK9cwkabUhPzJEfwdQiG5P5YpCvc2PiDMMR4aOF6VsmIvejJomUcqkWHMyAlBYYQ511rP0pSeMoZ9exsFdhqCxGy1jDaaSqdioWqEBt9csiqWPJlhayKBxeHNORndlOldyhyTWksH1Pq9nA')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+<div>
+<span class="inline-block bg-primary-container text-tertiary-container px-3 py-1 text-[10px] font-label-caps tracking-widest mb-2 border border-tertiary-container/50">WEDDING</span>
+<h3 class="font-subheading-sm text-subheading-sm text-surface">The Grand Entrance</h3>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-16 text-center animate-reveal delay-500">
+<button class="bg-surface text-primary border border-tertiary-container px-8 py-3 rounded-DEFAULT font-label-caps text-label-caps hover:bg-surface-container-low transition-all duration-300 inline-flex items-center gap-2 hover:-translate-y-1 hover:shadow-lg">
+                        Load More <span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Signature Motif End -->
+<div class="flex justify-center mt-section-gap opacity-50">
+<svg fill="none" height="60" viewbox="0 0 100 100" width="60" xmlns="http://www.w3.org/2000/svg">
+<path d="M50 0 C55 20, 80 45, 100 50 C80 55, 55 80, 50 100 C45 80, 20 55, 0 50 C20 45, 45 20, 50 0 Z" fill="#C9A227"></path>
+<circle cx="50" cy="50" fill="#6E0D25" r="10"></circle>
+</svg>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full mt-section-gap border-t border-tertiary-container/30 bg-surface-container-highest">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-desktop py-16 max-w-container-max mx-auto">
+<div class="col-span-1 md:col-span-2">
+<div class="font-display-lg text-headline-md text-primary dark:text-tertiary-fixed-dim mb-4">
+                    AVIM Events
+                </div>
+<p class="font-body-rt text-body-rt text-on-surface-variant max-w-sm mb-6">
+                    Crafting unforgettable royal experiences through meticulous design and unparalleled hospitality.
+                </p>
+</div>
+<div class="col-span-1">
+<h4 class="font-label-caps text-label-caps text-primary mb-4 tracking-widest">Connect</h4>
+<ul class="space-y-3 font-body-rt text-body-rt">
+<li><a class="text-on-surface-variant hover:text-primary dark:hover:text-tertiary-fixed transition-colors" href="#">Instagram</a></li>
+<li><a class="text-on-surface-variant hover:text-primary dark:hover:text-tertiary-fixed transition-colors" href="#">LinkedIn</a></li>
+<li><a class="text-on-surface-variant hover:text-primary dark:hover:text-tertiary-fixed transition-colors" href="#">Twitter</a></li>
+</ul>
+</div>
+<div class="col-span-1">
+<h4 class="font-label-caps text-label-caps text-primary mb-4 tracking-widest">Legal</h4>
+<ul class="space-y-3 font-body-rt text-body-rt">
+<li><a class="text-on-surface-variant hover:text-primary dark:hover:text-tertiary-fixed transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="text-on-surface-variant hover:text-primary dark:hover:text-tertiary-fixed transition-colors" href="#">Terms of Service</a></li>
+</ul>
+</div>
+<div class="col-span-1 md:col-span-4 mt-12 pt-8 border-t border-tertiary-container/20 text-center font-body-rt text-body-rt text-on-surface-variant text-sm">
+                © 2024 AVIM Events. Crafted for Royalty.
+            </div>
+</div>
+</footer>
+<script>
+        // Simple mobile nav toggle
+        const openNavBtn = document.getElementById('open-mobile-nav');
+        const closeNavBtn = document.getElementById('close-mobile-nav');
+        const mobileNav = document.getElementById('mobile-nav');
+
+        openNavBtn.addEventListener('click', () => {
+            mobileNav.classList.remove('translate-x-full');
+        });
+
+        closeNavBtn.addEventListener('click', () => {
+            mobileNav.classList.add('translate-x-full');
+        });
+    </script>
+</body></html>

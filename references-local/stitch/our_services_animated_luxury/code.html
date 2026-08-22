@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Services - AVIM Events</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Be+Vietnam+Pro:wght@400;600&amp;family=EB+Garamond:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-primary": "#ffb2b9",
+                    "error-container": "#ffdad6",
+                    "secondary-container": "#fed255",
+                    "surface-bright": "#fff8ef",
+                    "tertiary": "#735c10",
+                    "primary-fixed": "#ffdadc",
+                    "on-primary-fixed-variant": "#852034",
+                    "tertiary-container": "#c5a857",
+                    "background": "#fff8ef",
+                    "secondary-fixed-dim": "#ecc246",
+                    "on-secondary-fixed": "#241a00",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-fixed": "#241a00",
+                    "primary-container": "#6e0d25",
+                    "surface": "#fff8ef",
+                    "on-secondary-container": "#735a00",
+                    "on-primary-container": "#f77788",
+                    "on-surface": "#1e1b14",
+                    "tertiary-fixed-dim": "#e2c46f",
+                    "outline-variant": "#ddc0c1",
+                    "surface-tint": "#a4384a",
+                    "on-tertiary-fixed-variant": "#584400",
+                    "secondary-fixed": "#ffe08e",
+                    "on-primary-fixed": "#400010",
+                    "secondary": "#755b00",
+                    "on-tertiary-container": "#4f3d00",
+                    "inverse-surface": "#333028",
+                    "on-secondary-fixed-variant": "#584400",
+                    "surface-container-highest": "#e8e2d6",
+                    "outline": "#897173",
+                    "inverse-on-surface": "#f7f0e4",
+                    "surface-variant": "#e8e2d6",
+                    "surface-container-high": "#eee7dc",
+                    "primary": "#4b0014",
+                    "on-surface-variant": "#564243",
+                    "on-primary": "#ffffff",
+                    "surface-dim": "#e0d9ce",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-low": "#faf3e7",
+                    "on-error": "#ffffff",
+                    "primary-fixed-dim": "#ffb2b9",
+                    "on-secondary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "error": "#ba1a1a",
+                    "surface-container": "#f4ede1",
+                    "on-background": "#1e1b14",
+                    "tertiary-fixed": "#ffe08c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "margin-desktop": "64px",
+                    "margin-mobile": "20px",
+                    "unit": "8px",
+                    "container-max": "1280px",
+                    "section-gap": "120px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Playfair Display"],
+                    "display-lg-mobile": ["Playfair Display"],
+                    "label-caps": ["Be Vietnam Pro"],
+                    "subheading-sm": ["EB Garamond"],
+                    "headline-md": ["Playfair Display"],
+                    "body-rt": ["Be Vietnam Pro"]
+            },
+            "fontSize": {
+                    "display-lg": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "display-lg-mobile": ["40px", {"lineHeight": "48px", "fontWeight": "700"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.15em", "fontWeight": "600"}],
+                    "subheading-sm": ["20px", {"lineHeight": "28px", "letterSpacing": "0.05em", "fontWeight": "400"}],
+                    "headline-md": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "body-rt": ["16px", {"lineHeight": "26px", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .jaali-bg {
+            background-image: radial-gradient(circle at center, rgba(110, 13, 37, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .jharokha-arch {
+            clip-path: path('M0,100 L0,1000 L1000,1000 L1000,100 Q1000,0 500,0 Q0,0 0,100 Z');
+            border-top-left-radius: 50%;
+            border-top-right-radius: 50%;
+        }
+        .gold-border-1px {
+            border: 1px solid #C9A227;
+        }
+        .gold-divider {
+            height: 1px;
+            background-color: #C9A227;
+        }
+
+        /* Animation System */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .reveal-up.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .img-entrance {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1) 0.2s, transform 1.2s cubic-bezier(0.25, 1, 0.5, 1) 0.2s;
+        }
+        .img-entrance.is-visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .btn-shimmer {
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-shimmer::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(201, 162, 39, 0.4), transparent);
+            transform: skewX(-20deg);
+            animation: shimmer 3.5s infinite cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 200%; }
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-rt antialiased relative min-h-screen flex flex-col">
+<!-- Background Jaali Pattern -->
+<div class="fixed inset-0 jaali-bg pointer-events-none z-[-1]"></div>
+<!-- TopNavBar (Web) -->
+<nav class="hidden md:flex fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md border-b border-tertiary-container/30">
+<div class="flex justify-between items-center px-margin-desktop py-4 max-w-container-max mx-auto w-full">
+<div class="font-display-lg text-headline-md text-primary dark:text-on-primary-container tracking-tighter">AVIM Events</div>
+<div class="flex items-center gap-8">
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors font-label-caps text-label-caps" href="#">Home</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors font-label-caps text-label-caps" href="#">About</a>
+<a class="text-primary font-bold border-b-2 border-secondary pb-1 font-label-caps text-label-caps" href="#">Services</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors font-label-caps text-label-caps" href="#">Gallery</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors font-label-caps text-label-caps" href="#">Venues</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors font-label-caps text-label-caps" href="#">Contact</a>
+</div>
+<button class="bg-primary-container text-on-primary text-label-caps font-label-caps px-6 py-3 rounded-DEFAULT gold-border-1px scale-95 active:scale-90 transition-transform btn-shimmer">Plan Your Event</button>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-grow pt-[100px] md:pt-[140px] pb-section-gap">
+<!-- Hero Section -->
+<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mb-section-gap text-center relative reveal-up">
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-px h-16 bg-tertiary-container/50 hidden md:block"></div>
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-primary mb-6 pt-12 md:pt-24">Bespoke Event Services</h1>
+<p class="font-subheading-sm text-subheading-sm text-on-surface-variant max-w-2xl mx-auto mb-12">Crafting unparalleled experiences steeped in royal grandeur and executed with flawless modern precision.</p>
+<div class="flex justify-center items-center gap-4">
+<div class="h-px w-16 bg-tertiary-container"></div>
+<span class="material-symbols-outlined text-tertiary-container" style="font-variation-settings: 'FILL' 1;">flare</span>
+<div class="h-px w-16 bg-tertiary-container"></div>
+</div>
+</section>
+<!-- Service 1: Royal Weddings (Image Left) -->
+<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mb-section-gap">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter items-center reveal-up">
+<div class="order-2 md:order-1 relative p-4">
+<div class="absolute inset-0 border border-tertiary-container/30 translate-x-4 translate-y-4 rounded-t-full"></div>
+<img class="w-full aspect-[4/5] object-cover jharokha-arch shadow-2xl shadow-primary-container/5 relative z-10 img-entrance" data-alt="A luxurious royal Indian wedding setup outdoors. Featuring a majestic floral mandap draped in deep maroons, antique gold accents, and thousands of marigolds. High-key bright lighting, modern luxury aesthetic mixed with traditional Rajputana grandeur. Ivory background tones dominating the surrounding space." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2v1T09JTO08bm468VaR_8Vq1kBs1-f6a9IQ8ZB6TgK1YjbdZr1p3CGAmDknPwSbYcoF_KNuZuvTQeRq9wVKcnTQ5q4kGWLGCuXrIiVioCoPuiITVVS4SPnYSmEoYCdX-zYAsy8jqFXvX3ytIuOsEwiOYAPnY8G7n9_7MpJbWaQulXe6iYdqzlLcy6u4XX_RRVDrBRZZIXoRAsoijq3WbzTI6Pbtz6og7I5uU-_caJm2A3vQiKkgkHSw"/>
+</div>
+<div class="order-1 md:order-2 space-y-6 md:pl-12">
+<div class="font-label-caps text-label-caps text-tertiary-container tracking-widest uppercase">The Pinnacle of Grandeur</div>
+<h2 class="font-headline-md text-headline-md text-primary">Royal Weddings</h2>
+<p class="font-body-rt text-body-rt text-on-surface-variant">Experience a union celebrated with the opulence of royalty. From securing heritage palaces to curating menus fit for kings, our wedding services blend timeless traditions with contemporary luxury. Every detail is meticulously planned to create an unforgettable tapestry of love and celebration.</p>
+<ul class="space-y-3 mb-8">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-tertiary-container text-sm mt-1" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span class="font-subheading-sm text-subheading-sm">Heritage Venue Sourcing &amp; Management</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-tertiary-container text-sm mt-1" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span class="font-subheading-sm text-subheading-sm">Bespoke Floral &amp; Architectural Decor</span>
+</li>
+</ul>
+<button class="bg-primary-container text-tertiary-container font-label-caps text-label-caps px-8 py-4 uppercase tracking-widest hover:bg-on-surface transition-colors mt-4 btn-shimmer">Request Consultation</button>
+</div>
+</div>
+</section>
+<!-- Signature Motif Divider -->
+<div class="max-w-container-max mx-auto px-margin-desktop flex justify-center mb-section-gap opacity-50 reveal-up">
+<div class="w-full max-w-md gold-divider relative flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary-container bg-surface px-4 absolute" style="font-variation-settings: 'FILL' 1;">local_florist</span>
+</div>
+</div>
+<!-- Service 2: Milestone Birthdays (Image Right) -->
+<section class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mb-section-gap">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter items-center reveal-up">
+<div class="order-1 space-y-6 md:pr-12">
+<div class="font-label-caps text-label-caps text-tertiary-container tracking-widest uppercase">Elegance in Every Epoch</div>
+<h2 class="font-headline-md text-headline-md text-primary">Milestone Birthdays</h2>
+<p class="font-body-rt text-body-rt text-on-surface-variant">Celebrate life's pivotal chapters with sophisticated flair. Whether it's an intimate gathering in a private courtyard or a lavish gala, we design environments that reflect the unique journey of the individual, ensuring the occasion is as monumental as the milestone itself.</p>
+<ul class="space-y-3 mb-8">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-tertiary-container text-sm mt-1" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span class="font-subheading-sm text-subheading-sm">Curated Entertainment &amp; Performances</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-tertiary-container text-sm mt-1" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span class="font-subheading-sm text-subheading-sm">Custom Culinary Experiences</span>
+</li>
+</ul>
+<button class="bg-primary-container text-tertiary-container font-label-caps text-label-caps px-8 py-4 uppercase tracking-widest hover:bg-on-surface transition-colors mt-4 btn-shimmer">Request Consultation</button>
+</div>
+<div class="order-2 relative p-4">
+<div class="absolute inset-0 border border-tertiary-container/30 -translate-x-4 translate-y-4 rounded-t-full"></div>
+<img class="w-full aspect-[4/5] object-cover jharokha-arch shadow-2xl shadow-primary-container/5 relative z-10 img-entrance" data-alt="An opulent private birthday dining setup inside a majestic palace courtyard. Featuring an impossibly long table adorned with tall antique gold candelabras, crystal glassware, and deep red velvet chairs. The lighting is soft ambient glow under an evening sky, evoking exclusive 5-star luxury and regal celebration." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmkVkPuCIBag_B_BVGhdwvJJia6quAD5sXd9MdnlCtIbVDLOpatKxxSt0VlksJ_FPK_mHNkeG4tGpFocdgNRe82kKKa8rrhDVVHkSs-W2hg-Zz5seghLS2eTuNeGYZHhMNfvKvRXiwjSy9dDSnY0MqOuTeKY_UFbe5SzW8AeKDzcRSXSoaw5C2tXpMTZgtpfOd7gAoDQchRHHvlpBm66lMD3gYbWBBkxFVO3fX5MZ4eCQ0JAkIET3eYg"/>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full mt-section-gap border-t border-tertiary-container/30 bg-surface-container-highest reveal-up">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-mobile md:px-margin-desktop py-16 max-w-container-max mx-auto">
+<div class="col-span-1 md:col-span-2 space-y-4">
+<div class="font-display-lg text-headline-md text-primary dark:text-tertiary-fixed-dim">AVIM Events</div>
+<p class="font-body-rt text-body-rt text-on-surface-variant max-w-sm">Crafting unforgettable experiences steeped in royal tradition and modern luxury.</p>
+</div>
+<div class="col-span-1 space-y-4">
+<h4 class="font-label-caps text-label-caps text-primary uppercase tracking-widest">Explore</h4>
+<div class="flex flex-col space-y-2">
+<a class="text-on-surface-variant font-body-rt text-body-rt hover:text-primary dark:hover:text-tertiary-fixed transition-colors" href="#">Venues</a>
+<a class="text-on-surface-variant font-body-rt text-body-rt hover:text-primary dark:hover:text-tertiary-fixed transition-colors" href="#">Gallery</a>
+</div>
+</div>
+<div class="col-span-1 space-y-4">
+<h4 class="font-label-caps text-label-caps text-primary uppercase tracking-widest">Connect</h4>
+<div class="flex flex-col space-y-2">
+<a class="text-on-surface-variant font-body-rt text-body-rt hover:text-primary dark:hover:text-tertiary-fixed transition-colors" href="#">Instagram</a>
+<a class="text-on-surface-variant font-body-rt text-body-rt hover:text-primary dark:hover:text-tertiary-fixed transition-colors" href="#">Contact</a>
+</div>
+</div>
+</div>
+<div class="border-t border-tertiary-container/10 px-margin-mobile md:px-margin-desktop py-6 text-center">
+<p class="font-body-rt text-body-rt text-on-surface-variant text-sm">© 2024 AVIM Events. Crafted for Royalty.</p>
+</div>
+</footer>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        const elementsToReveal = document.querySelectorAll('.reveal-up, .img-entrance');
+        elementsToReveal.forEach(el => observer.observe(el));
+    });
+</script>
+</body></html>

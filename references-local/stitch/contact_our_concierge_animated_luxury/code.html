@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Contact - AVIM Events</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&amp;family=Be+Vietnam+Pro:wght@400;600&amp;family=EB+Garamond:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-primary": "#ffb2b9",
+                        "error-container": "#ffdad6",
+                        "secondary-container": "#fed255",
+                        "surface-bright": "#fff8ef",
+                        "tertiary": "#735c10",
+                        "primary-fixed": "#ffdadc",
+                        "on-primary-fixed-variant": "#852034",
+                        "tertiary-container": "#c5a857",
+                        "background": "#fff8ef",
+                        "secondary-fixed-dim": "#ecc246",
+                        "on-secondary-fixed": "#241a00",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#241a00",
+                        "primary-container": "#6e0d25",
+                        "surface": "#fff8ef",
+                        "on-secondary-container": "#735a00",
+                        "on-primary-container": "#f77788",
+                        "on-surface": "#1e1b14",
+                        "tertiary-fixed-dim": "#e2c46f",
+                        "outline-variant": "#ddc0c1",
+                        "surface-tint": "#a4384a",
+                        "on-tertiary-fixed-variant": "#584400",
+                        "secondary-fixed": "#ffe08e",
+                        "on-primary-fixed": "#400010",
+                        "secondary": "#755b00",
+                        "on-tertiary-container": "#4f3d00",
+                        "inverse-surface": "#333028",
+                        "on-secondary-fixed-variant": "#584400",
+                        "surface-container-highest": "#e8e2d6",
+                        "outline": "#897173",
+                        "inverse-on-surface": "#f7f0e4",
+                        "surface-variant": "#e8e2d6",
+                        "surface-container-high": "#eee7dc",
+                        "primary": "#4b0014",
+                        "on-surface-variant": "#564243",
+                        "on-primary": "#ffffff",
+                        "surface-dim": "#e0d9ce",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-low": "#faf3e7",
+                        "on-error": "#ffffff",
+                        "primary-fixed-dim": "#ffb2b9",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "error": "#ba1a1a",
+                        "surface-container": "#f4ede1",
+                        "on-background": "#1e1b14",
+                        "tertiary-fixed": "#ffe08c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "margin-desktop": "64px",
+                        "margin-mobile": "20px",
+                        "unit": "8px",
+                        "container-max": "1280px",
+                        "section-gap": "120px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Playfair Display"],
+                        "display-lg-mobile": ["Playfair Display"],
+                        "label-caps": ["Be Vietnam Pro"],
+                        "subheading-sm": ["EB Garamond"],
+                        "headline-md": ["Playfair Display"],
+                        "body-rt": ["Be Vietnam Pro"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["64px", { "lineHeight": "72px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "display-lg-mobile": ["40px", { "lineHeight": "48px", "fontWeight": "700" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.15em", "fontWeight": "600" }],
+                        "subheading-sm": ["20px", { "lineHeight": "28px", "letterSpacing": "0.05em", "fontWeight": "400" }],
+                        "headline-md": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "body-rt": ["16px", { "lineHeight": "26px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #FAF3E7; } /* Forced Ivory background to override tailwind surface if needed for exact match to prompt */
+        .jharokha-arch {
+            border-top-left-radius: 50% 100%;
+            border-top-right-radius: 50% 100%;
+        }
+        .filigree-line {
+            height: 1px;
+            background-color: #C9A227; /* Antique Gold */
+            width: 100%;
+            display: block;
+        }
+        .input-floating-gold {
+            border: none;
+            border-bottom: 1px solid #C9A227;
+            background: transparent;
+            border-radius: 0;
+            padding-left: 0;
+            padding-right: 0;
+            box-shadow: none !important;
+        }
+        .input-floating-gold:focus {
+            border-bottom: 2px solid #6E0D25;
+            outline: none;
+            box-shadow: none;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-reveal {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-400 { animation-delay: 0.4s; }
+
+        .shimmer-gold {
+            position: relative;
+            overflow: hidden;
+        }
+        .shimmer-gold::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(201, 162, 39, 0.3), transparent);
+            transform: skewX(-20deg);
+            animation: shimmer 3s infinite;
+        }
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 200%; }
+        }
+
+        @keyframes entrancePulse {
+            0% { opacity: 0; transform: scale(0.95); }
+            50% { opacity: 1; transform: scale(1.02); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        .animate-entrance-pulse {
+            animation: entrancePulse 1s ease-out forwards;
+            opacity: 0;
+        }
+    </style>
+</head>
+<body class="antialiased text-on-surface">
+<!-- TopNavBar (Web) -->
+<nav class="hidden md:flex justify-between items-center px-margin-desktop py-4 max-w-container-max mx-auto bg-surface/80 backdrop-blur-md border-b border-tertiary-container/30 fixed top-0 w-full z-50">
+<div class="font-display-lg text-headline-md text-primary tracking-tighter">
+            AVIM Events
+        </div>
+<div class="flex items-center gap-8 font-label-caps text-label-caps">
+<a class="text-on-surface-variant hover:text-secondary-container transition-all duration-300" href="#">Home</a>
+<a class="text-on-surface-variant hover:text-secondary-container transition-all duration-300" href="#">About</a>
+<a class="text-on-surface-variant hover:text-secondary-container transition-all duration-300" href="#">Services</a>
+<a class="text-on-surface-variant hover:text-secondary-container transition-all duration-300" href="#">Gallery</a>
+<a class="text-on-surface-variant hover:text-secondary-container transition-all duration-300" href="#">Venues</a>
+<a class="text-primary font-bold border-b-2 border-secondary pb-1 scale-95 active:scale-90 transition-transform" href="#">Contact</a>
+</div>
+<button class="bg-primary-container text-tertiary-container font-label-caps text-label-caps px-6 py-3 hover:bg-primary transition-colors">
+            Plan Your Event
+        </button>
+</nav>
+<!-- SideNavBar (Mobile) -->
+<nav class="md:hidden fixed inset-y-0 right-0 w-80 z-[60] flex flex-col h-full py-8 border-l border-tertiary-container/50 bg-background shadow-2xl translate-x-full transition-transform duration-500 ease-in-out" id="mobile-nav">
+<div class="px-6 mb-8 flex justify-between items-center">
+<div class="font-display-lg text-headline-md text-primary">AVIM Events</div>
+<button class="text-primary" id="close-nav"><span class="material-symbols-outlined" data-icon="close">close</span></button>
+</div>
+<div class="flex-1 px-4 space-y-2">
+<a class="flex items-center gap-4 text-on-surface-variant px-6 py-3 hover:bg-surface-container-high transition-all font-subheading-sm text-subheading-sm" href="#"><span class="material-symbols-outlined" data-icon="home">home</span> Home</a>
+<a class="flex items-center gap-4 text-on-surface-variant px-6 py-3 hover:bg-surface-container-high transition-all font-subheading-sm text-subheading-sm" href="#"><span class="material-symbols-outlined" data-icon="info">info</span> About</a>
+<a class="flex items-center gap-4 text-on-surface-variant px-6 py-3 hover:bg-surface-container-high transition-all font-subheading-sm text-subheading-sm" href="#"><span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span> Services</a>
+<a class="flex items-center gap-4 text-on-surface-variant px-6 py-3 hover:bg-surface-container-high transition-all font-subheading-sm text-subheading-sm" href="#"><span class="material-symbols-outlined" data-icon="collections">collections</span> Gallery</a>
+<a class="flex items-center gap-4 text-on-surface-variant px-6 py-3 hover:bg-surface-container-high transition-all font-subheading-sm text-subheading-sm" href="#"><span class="material-symbols-outlined" data-icon="location_on">location_on</span> Venues</a>
+<a class="flex items-center gap-4 bg-secondary-container text-on-secondary-container rounded-full px-6 py-3 font-subheading-sm text-subheading-sm" href="#"><span class="material-symbols-outlined" data-icon="mail">mail</span> Contact</a>
+</div>
+</nav>
+<!-- Mobile Header Placeholder -->
+<header class="md:hidden flex justify-between items-center px-margin-mobile py-4 border-b border-tertiary-container/30 bg-surface/80 backdrop-blur-md fixed top-0 w-full z-50">
+<div class="font-display-lg-mobile text-headline-md text-primary">AVIM</div>
+<button class="text-primary" id="open-nav"><span class="material-symbols-outlined" data-icon="menu">menu</span></button>
+</header>
+<main class="pt-[100px] md:pt-[120px] pb-section-gap px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<!-- Hero Title -->
+<div class="text-center mb-16 md:mb-24 relative">
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-primary mb-6">Begin Your Journey</h1>
+<p class="font-subheading-sm text-subheading-sm text-on-surface-variant max-w-2xl mx-auto">
+                Connect with our royal concierges to curate an unforgettable experience. Your legacy begins with a single conversation.
+            </p>
+<div class="mt-8 flex justify-center">
+<span class="material-symbols-outlined text-tertiary-container" data-icon="local_florist">local_florist</span>
+</div>
+</div>
+<!-- Split Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter lg:gap-16">
+<!-- Left: Enquiry Form -->
+<div class="lg:col-span-7 bg-surface p-8 md:p-12 border border-[#6E0D25] relative animate-reveal">
+<!-- Decorative Corner -->
+<div class="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-[#C9A227] -translate-x-1 -translate-y-1"></div>
+<div class="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-[#C9A227] translate-x-1 translate-y-1"></div>
+<h2 class="font-headline-md text-headline-md text-primary mb-8">Royal Enquiry</h2>
+<form class="space-y-8 font-body-rt text-body-rt text-on-surface">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="relative">
+<input class="w-full input-floating-gold text-on-surface" id="name" placeholder="Full Name *" required="" type="text"/>
+</div>
+<div class="relative">
+<input class="w-full input-floating-gold text-on-surface" id="email" placeholder="Email Address *" required="" type="email"/>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="relative">
+<input class="w-full input-floating-gold text-on-surface" id="phone" placeholder="Phone Number" type="tel"/>
+</div>
+<div class="relative">
+<select class="w-full input-floating-gold text-on-surface text-opacity-80" id="event_type">
+<option disabled="" selected="" value="">Event Type</option>
+<option value="wedding">Royal Wedding</option>
+<option value="corporate">Corporate Gala</option>
+<option value="private">Private Celebration</option>
+</select>
+</div>
+</div>
+<div class="relative">
+<input class="w-full input-floating-gold text-on-surface text-opacity-80" id="date" type="date"/>
+<label class="absolute -top-4 left-0 text-xs text-on-surface-variant font-label-caps" for="date">Preferred Date</label>
+</div>
+<div class="relative pt-4">
+<textarea class="w-full input-floating-gold text-on-surface resize-none" id="message" placeholder="Share the vision for your event..." rows="4"></textarea>
+</div>
+<div class="pt-6">
+<button class="w-full md:w-auto px-12 py-4 bg-primary-container text-[#C9A227] font-label-caps text-label-caps tracking-widest hover:bg-primary transition-colors border border-transparent hover:border-[#C9A227] shimmer-gold" type="submit">
+                            SUBMIT ENQUIRY
+                        </button>
+</div>
+</form>
+</div>
+<!-- Right: Concierge Details & WhatsApp -->
+<div class="lg:col-span-5 flex flex-col justify-between mt-12 lg:mt-0">
+<div class="animate-reveal delay-200">
+<h3 class="font-headline-md text-headline-md text-primary mb-6">Concierge Details</h3>
+<div class="space-y-6 font-body-rt text-body-rt text-on-surface-variant">
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-[#C9A227] mt-1" data-icon="location_on" data-weight="fill">location_on</span>
+<div>
+<strong class="text-on-surface block mb-1">Headquarters</strong>
+                                The Royal Pavilion, Sector 4<br/>
+                                Udaipur, Rajasthan 313001<br/>
+                                India
+                            </div>
+</div>
+<div class="filigree-line my-6 opacity-30"></div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-[#C9A227] mt-1" data-icon="call" data-weight="fill">call</span>
+<div>
+<strong class="text-on-surface block mb-1">Direct Line</strong>
+                                +91 98765 43210<br/>
+<span class="text-sm">Available 9:00 AM - 8:00 PM IST</span>
+</div>
+</div>
+<div class="filigree-line my-6 opacity-30"></div>
+<div class="flex items-start gap-4">
+<span class="material-symbols-outlined text-[#C9A227] mt-1" data-icon="mail" data-weight="fill">mail</span>
+<div>
+<strong class="text-on-surface block mb-1">Electronic Mail</strong>
+                                concierge@avimevents.com
+                            </div>
+</div>
+</div>
+</div>
+<!-- Featured CTA -->
+<div class="mt-12 p-8 bg-surface-container border border-[#C9A227] text-center shadow-[0_4px_20px_rgba(110,13,37,0.05)] animate-entrance-pulse delay-400">
+<h4 class="font-subheading-sm text-subheading-sm text-primary mb-4">Instant Assistance</h4>
+<p class="font-body-rt text-body-rt text-on-surface-variant mb-6 text-sm">
+                        Prefer to message? Connect with our luxury planning team directly on WhatsApp for immediate responses.
+                    </p>
+<a class="inline-flex items-center justify-center gap-3 w-full py-4 bg-[#C9A227] text-primary-container font-label-caps text-label-caps hover:bg-tertiary-container transition-colors" href="#">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"></path></svg>
+                        CHAT ON WHATSAPP
+                    </a>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full mt-section-gap border-t border-tertiary-container/30 bg-surface-container-highest">
+<!-- Transition strip to match prompt requirement "Dark maroon footer transition" -->
+<div class="w-full h-2 bg-primary-container"></div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-desktop py-16 max-w-container-max mx-auto font-body-rt text-body-rt">
+<div class="md:col-span-1 mb-8 md:mb-0">
+<div class="font-display-lg text-headline-md text-primary mb-4">AVIM Events</div>
+<p class="text-on-surface-variant text-sm mb-6">Crafting Royal Experiences. Where tradition meets modern luxury hospitality.</p>
+<div class="text-on-surface-variant text-sm opacity-80">
+                    © 2024 AVIM Events. Crafted for Royalty.
+                </div>
+</div>
+<div class="md:col-span-1">
+<h4 class="font-subheading-sm text-subheading-sm text-primary mb-4">Social</h4>
+<ul class="space-y-3">
+<li><a class="text-on-surface-variant hover:text-primary transition-colors opacity-100 hover:opacity-80" href="#">Instagram</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors opacity-100 hover:opacity-80" href="#">LinkedIn</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors opacity-100 hover:opacity-80" href="#">Twitter</a></li>
+</ul>
+</div>
+<div class="md:col-span-1">
+<h4 class="font-subheading-sm text-subheading-sm text-primary mb-4">Legal</h4>
+<ul class="space-y-3">
+<li><a class="text-on-surface-variant hover:text-primary transition-colors opacity-100 hover:opacity-80" href="#">Privacy Policy</a></li>
+<li><a class="text-on-surface-variant hover:text-primary transition-colors opacity-100 hover:opacity-80" href="#">Terms of Service</a></li>
+</ul>
+</div>
+<div class="md:col-span-1 flex justify-center md:justify-end items-end opacity-20">
+<!-- Signature Motif -->
+<span class="material-symbols-outlined text-display-lg text-primary" data-icon="auto_awesome">auto_awesome</span>
+</div>
+</div>
+</footer>
+<script>
+        // Simple Mobile Nav Toggle
+        document.getElementById('open-nav')?.addEventListener('click', function() {
+            document.getElementById('mobile-nav').classList.remove('translate-x-full');
+        });
+        document.getElementById('close-nav')?.addEventListener('click', function() {
+            document.getElementById('mobile-nav').classList.add('translate-x-full');
+        });
+    </script>
+</body></html>
