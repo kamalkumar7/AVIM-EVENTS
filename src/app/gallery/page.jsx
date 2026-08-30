@@ -88,7 +88,7 @@ export default function GalleryPage() {
         </section>
 
         {/* Gallery Section */}
-        <section className="bg-primary text-on-primary py-20 px-6 md:px-16 relative overflow-hidden">
+        <section className="bg-surface-container-low text-on-surface py-20 px-6 md:px-16 relative overflow-hidden">
           <div className="max-w-[1280px] mx-auto relative z-10">
             {/* Filter Tabs */}
             <div className="flex flex-wrap justify-center gap-4 mb-16">
@@ -98,8 +98,8 @@ export default function GalleryPage() {
                   onClick={() => setActiveFilter(cat)}
                   className={`px-6 py-2 rounded-full border text-xs font-label-caps tracking-widest uppercase transition-all duration-300 ${
                     activeFilter === cat
-                      ? "border-gold bg-surface text-primary font-bold shadow-lg"
-                      : "border-tertiary-container/40 text-on-primary hover:border-gold"
+                      ? "border-primary bg-surface-container text-primary font-bold shadow-lg"
+                      : "border-primary/30 text-on-surface-variant hover:border-primary"
                   }`}
                 >
                   {cat}
@@ -118,12 +118,12 @@ export default function GalleryPage() {
                     className="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
                     style={{ backgroundImage: `url('${item.image}')` }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/95 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
                     <div>
-                      <span className="inline-block bg-primary-container text-tertiary-container px-3 py-1 text-[10px] font-label-caps tracking-widest mb-2 border border-tertiary-container/50 font-bold uppercase">
+                      <span className="inline-block bg-surface-container text-primary px-3 py-1 text-[10px] font-label-caps tracking-widest mb-2 border border-primary/40 font-bold uppercase">
                         {item.category}
                       </span>
-                      <h3 className="font-subheading-sm text-xl text-surface font-bold">
+                      <h3 className="font-subheading-sm text-xl text-on-surface font-bold">
                         {item.title}
                       </h3>
                     </div>

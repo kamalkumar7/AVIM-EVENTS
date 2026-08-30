@@ -1,55 +1,69 @@
 @import "tailwindcss";
 
 @theme {
-  --color-surface-container-high: #eee7dc;
-  --color-inverse-surface: #333028;
-  --color-tertiary-fixed: #ffe08c;
-  --color-on-primary-container: #f77788;
-  --color-tertiary-fixed-dim: #e2c46f;
-  --color-on-secondary-fixed-variant: #584400;
-  --color-surface-tint: #a4384a;
-  --color-background: #fff8ef;
-  --color-surface: #fff8ef;
-  --color-on-primary: #ffffff;
-  --color-surface-dim: #e0d9ce;
-  --color-on-secondary: #ffffff;
-  --color-outline: #897173;
-  --color-primary: #4b0014;
-  --color-error-container: #ffdad6;
-  --color-on-error: #ffffff;
-  --color-surface-variant: #e8e2d6;
-  --color-secondary-container: #fed255;
-  --color-secondary-fixed: #ffe08e;
-  --color-on-tertiary: #ffffff;
-  --color-on-tertiary-fixed-variant: #584400;
-  --color-primary-fixed: #ffdadc;
-  --color-surface-container-low: #faf3e7;
-  --color-primary-container: #6e0d25;
+  /* ── Backgrounds (dark luxury) ──────────────────────── */
+  --color-background: #080808;
+  --color-surface: #0f0f0f;
+  --color-surface-dim: #050505;
+  --color-surface-bright: #1a1a1a;
+  --color-surface-container-lowest: #000000;
+  --color-surface-container-low: #111111;
+  --color-surface-container: #141414;
+  --color-surface-container-high: #1a1a1a;
+  --color-surface-container-highest: #1e1e1e;
+  --color-surface-variant: #181818;
+
+  /* ── Text (off-white) ───────────────────────────────── */
+  --color-on-background: #f0ebe0;
+  --color-on-surface: #f0ebe0;
+  --color-on-surface-variant: #9a9080;
+  --color-inverse-surface: #f0ebe0;
+  --color-inverse-on-surface: #1e1b14;
+
+  /* ── Gold (primary accent) ──────────────────────────── */
+  --color-primary: #C9A227;
+  --color-primary-container: #C9A227;
+  --color-primary-fixed: #f5e6b0;
+  --color-primary-fixed-dim: #e2c46f;
+  --color-on-primary: #080808;
+  --color-on-primary-container: #080808;
+  --color-on-primary-fixed: #241a00;
+  --color-on-primary-fixed-variant: #584400;
+  --color-inverse-primary: #b8911f;
+
+  /* ── Secondary ──────────────────────────────────────── */
+  --color-secondary: #C9A227;
+  --color-secondary-container: #1a1a1a;
+  --color-secondary-fixed: #1e1e1e;
+  --color-secondary-fixed-dim: #141414;
+  --color-on-secondary: #080808;
+  --color-on-secondary-container: #C9A227;
+  --color-on-secondary-fixed: #f0ebe0;
+  --color-on-secondary-fixed-variant: #d4b84a;
+
+  /* ── Tertiary ────────────────────────────────────────── */
+  --color-tertiary: #C9A227;
+  --color-tertiary-container: #C9A227;
+  --color-tertiary-fixed: #080808;
+  --color-tertiary-fixed-dim: #b8911f;
+  --color-on-tertiary: #080808;
+  --color-on-tertiary-container: #080808;
   --color-on-tertiary-fixed: #241a00;
-  --color-surface-bright: #fff8ef;
-  --color-on-surface-variant: #564243;
-  --color-on-primary-fixed: #400010;
-  --color-inverse-primary: #ffb2b9;
-  --color-secondary: #755b00;
-  --color-on-primary-fixed-variant: #852034;
-  --color-surface-container: #f4ede1;
-  --color-on-error-container: #93000a;
-  --color-on-surface: #1e1b14;
-  --color-on-secondary-fixed: #241a00;
-  --color-inverse-on-surface: #f7f0e4;
-  --color-on-secondary-container: #735a00;
-  --color-primary-fixed-dim: #ffb2b9;
-  --color-error: #ba1a1a;
-  --color-tertiary: #735c10;
-  --color-surface-container-highest: #e8e2d6;
-  --color-surface-container-lowest: #ffffff;
-  --color-tertiary-container: #c5a857;
-  --color-on-background: #1e1b14;
-  --color-on-tertiary-container: #4f3d00;
-  --color-secondary-fixed-dim: #ecc246;
-  --color-outline-variant: #ddc0c1;
+  --color-on-tertiary-fixed-variant: #584400;
+
+  /* ── Error ──────────────────────────────────────────── */
+  --color-error: #cf6679;
+  --color-error-container: #3b0a13;
+  --color-on-error: #f0ebe0;
+  --color-on-error-container: #cf6679;
+
+  /* ── Misc ───────────────────────────────────────────── */
+  --color-outline: #3a3530;
+  --color-outline-variant: #2a2520;
+  --color-surface-tint: #C9A227;
   --color-gold: #C9A227;
 
+  /* ── Typography ─────────────────────────────────────── */
   --font-display-lg: 'Playfair Display', serif;
   --font-display-lg-mobile: 'Playfair Display', serif;
   --font-headline-md: 'Playfair Display', serif;
@@ -57,6 +71,7 @@
   --font-body-rt: 'Be Vietnam Pro', sans-serif;
   --font-label-caps: 'Be Vietnam Pro', sans-serif;
 
+  /* ── Spacing ────────────────────────────────────────── */
   --spacing-container-max: 1280px;
   --spacing-margin-mobile: 20px;
   --spacing-margin-desktop: 64px;
@@ -66,15 +81,17 @@
 }
 
 body {
-  background-color: var(--color-background, #fff8ef);
-  color: var(--color-on-background, #1e1b14);
+  background-color: var(--color-background, #080808);
+  color: var(--color-on-background, #f0ebe0);
   font-family: 'Be Vietnam Pro', sans-serif;
 }
 
+/* ── Shapes ─────────────────────────────────────────────── */
 .jharokha-arch {
   clip-path: path('M 0 50 C 0 20 20 0 50 0 L calc(100% - 50px) 0 C calc(100% - 20px) 0 100% 20 100% 50 L 100% 100% L 0 100% Z');
 }
 
+/* ── Decorative ─────────────────────────────────────────── */
 .filigree-border {
   border: 1px solid #C9A227;
 }
@@ -88,9 +105,10 @@ body {
 }
 
 .shadow-ambient-gold {
-  box-shadow: 0 10px 30px -10px rgba(110, 13, 37, 0.05), 0 4px 10px -5px rgba(201, 162, 39, 0.15);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6), 0 4px 10px -5px rgba(201, 162, 39, 0.25);
 }
 
+/* ── Scroll reveal ──────────────────────────────────────── */
 .scroll-reveal {
   opacity: 0;
   transform: translateY(40px);
@@ -102,6 +120,7 @@ body {
   transform: translateY(0);
 }
 
+/* ── Shimmer button ─────────────────────────────────────── */
 .shimmer-btn {
   position: relative;
   overflow: hidden;
@@ -114,7 +133,7 @@ body {
   left: -100%;
   width: 50%;
   height: 100%;
-  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.4), transparent);
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.25), transparent);
   transform: skewX(-20deg);
   animation: shimmer 3s infinite cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -123,21 +142,23 @@ body {
   100% { left: 200%; }
 }
 
+/* ── Hover lift ─────────────────────────────────────────── */
 .hover-lift {
   transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .hover-lift:hover {
   transform: translateY(-8px);
-  box-shadow: 0 20px 40px -10px rgba(110, 13, 37, 0.15);
+  box-shadow: 0 20px 40px -10px rgba(201, 162, 39, 0.2);
 }
 
+/* ── Service card overlays ──────────────────────────────── */
 .service-overlay {
   transition: background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .group:hover .service-overlay {
-  background-color: rgba(75, 0, 20, 0.5);
+  background-color: rgba(8, 8, 8, 0.55);
 }
 
 .service-text {
@@ -148,6 +169,7 @@ body {
   transform: scale(1.05);
 }
 
+/* ── Line draw ──────────────────────────────────────────── */
 .line-draw {
   width: 0;
   transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -157,7 +179,23 @@ body {
   width: 8rem;
 }
 
+/* ── Parallax ───────────────────────────────────────────── */
 .parallax-bg {
   will-change: transform;
 }
 
+/* ── Marquee ────────────────────────────────────────────── */
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}

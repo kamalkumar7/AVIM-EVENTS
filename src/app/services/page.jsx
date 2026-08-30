@@ -107,8 +107,8 @@ export default function ServicesPage() {
                 Milestone Celebrations
               </h2>
               <p className="font-body-rt text-base text-on-surface-variant leading-relaxed">
-                Celebrate life's pivotal chapters with sophisticated flair.
-                Whether it's an intimate gathering in a private courtyard or a
+                Celebrate life&apos;s pivotal chapters with sophisticated flair.
+                Whether it&apos;s an intimate gathering in a private courtyard or a
                 lavish gala, we design environments that reflect the unique
                 journey of the individual, ensuring the occasion is as monumental
                 as the milestone itself.
