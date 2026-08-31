@@ -80,7 +80,7 @@ export default function Footer({ config = {} }) {
 
       <div className="border-t border-white/[0.07] px-6 md:px-10 py-5 max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-3">
         <p className="font-inter text-xs text-white/30">{copyright}</p>
-        <p className="font-inter text-[10px] text-white/20 tracking-wide">Website designed, built and managed by Masriq NextTech Solutions</p>
+        {/* <p className="font-inter text-[10px] text-white/20 tracking-wide">Website designed, built and managed by Masriq NextTech Solutions</p> */}
       </div>
     </footer>
   );
