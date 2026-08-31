@@ -63,7 +63,7 @@ export default async function AdminDashboard() {
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
-        <p className="text-gray-500 text-sm mt-1">Welcome to the Guestversity content management panel.</p>
+        <p className="text-gray-500 text-sm mt-1">Welcome to the AVIM Events content management panel.</p>
       </div>
 
       {/* Inbox — show prominently if there are unread items */}

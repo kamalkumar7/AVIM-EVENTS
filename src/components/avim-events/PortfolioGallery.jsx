@@ -94,12 +94,12 @@ export default function PortfolioGallery({ items: propItems = [], config = {} })
             >
               {/* Image */}
               <img
-                src={item.imageUrl || "/images/guestversity/placeholder-portfolio.svg"}
+                src={item.imageUrl || "/images/avim-events/placeholder-portfolio.svg"}
                 alt={item.title}
                 loading="lazy"
                 className="absolute inset-0 w-full h-full object-cover transition-all duration-[900ms] group-hover:scale-110 group-hover:saturate-[1.2]"
                 onError={(e) => {
-                  e.currentTarget.src = "/images/guestversity/placeholder-portfolio.svg";
+                  e.currentTarget.src = "/images/avim-events/placeholder-portfolio.svg";
                 }}
               />
 
@@ -138,11 +138,11 @@ export default function PortfolioGallery({ items: propItems = [], config = {} })
             onClick={(e) => e.stopPropagation()}
           >
             <img
-              src={items[lightbox].imageUrl || "/images/guestversity/placeholder-portfolio.svg"}
+              src={items[lightbox].imageUrl || "/images/avim-events/placeholder-portfolio.svg"}
               alt={items[lightbox].title}
               className="w-full max-h-[70vh] object-contain"
               onError={(e) => {
-                e.currentTarget.src = "/images/guestversity/placeholder-portfolio.svg";
+                e.currentTarget.src = "/images/avim-events/placeholder-portfolio.svg";
               }}
             />
             <div className="p-5">

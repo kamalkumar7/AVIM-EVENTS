@@ -1,15 +1,15 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollAnimation from "@/components/ScrollAnimation";
-import WhatsAppWidget from "@/components/guestversity/WhatsAppWidget";
-import ScrollToTopBtn from "@/components/guestversity/ScrollToTopBtn";
-import GalleryGrid from "@/components/guestversity/GalleryGrid";
+import WhatsAppWidget from "@/components/avim-events/WhatsAppWidget";
+import ScrollToTopBtn from "@/components/avim-events/ScrollToTopBtn";
+import GalleryGrid from "@/components/avim-events/GalleryGrid";
 import prisma from "@/lib/prisma";
 
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Gallery | Guestversity Group",
+  title: "Gallery | AVIM Events",
   description:
     "Explore a curated collection of our most breathtaking events — from majestic royal weddings to sophisticated corporate galas.",
 };

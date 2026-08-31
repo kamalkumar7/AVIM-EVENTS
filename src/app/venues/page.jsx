@@ -2,14 +2,14 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollAnimation from "@/components/ScrollAnimation";
-import WhatsAppWidget from "@/components/guestversity/WhatsAppWidget";
-import ScrollToTopBtn from "@/components/guestversity/ScrollToTopBtn";
+import WhatsAppWidget from "@/components/avim-events/WhatsAppWidget";
+import ScrollToTopBtn from "@/components/avim-events/ScrollToTopBtn";
 import prisma from "@/lib/prisma";
 
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Venues | Guestversity Group",
+  title: "Venues | AVIM Events",
   description:
     "Discover our curated collection of palatial estates and elite venue partners, handpicked for royal celebrations and premium events.",
 };
@@ -104,11 +104,11 @@ export default async function VenuesPage() {
                 >
                   <div className="relative h-64 overflow-hidden">
                     <img
-                      src={venue.imageUrl || "/images/guestversity/placeholder-portfolio.svg"}
+                      src={venue.imageUrl || "/images/avim-events/placeholder-portfolio.svg"}
                       alt={venue.name}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       loading="lazy"
-                      onError={(e) => { e.currentTarget.src = "/images/guestversity/placeholder-portfolio.svg"; }}
+                      onError={(e) => { e.currentTarget.src = "/images/avim-events/placeholder-portfolio.svg"; }}
                     />
                     <div
                       className="absolute inset-0 pointer-events-none"
@@ -168,11 +168,11 @@ export default async function VenuesPage() {
                 >
                   <div className="relative h-52 overflow-hidden">
                     <img
-                      src={venue.imageUrl || "/images/guestversity/placeholder-portfolio.svg"}
+                      src={venue.imageUrl || "/images/avim-events/placeholder-portfolio.svg"}
                       alt={venue.name}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       loading="lazy"
-                      onError={(e) => { e.currentTarget.src = "/images/guestversity/placeholder-portfolio.svg"; }}
+                      onError={(e) => { e.currentTarget.src = "/images/avim-events/placeholder-portfolio.svg"; }}
                     />
                     <div
                       className="absolute inset-0 pointer-events-none"

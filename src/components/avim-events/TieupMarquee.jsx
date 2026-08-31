@@ -51,7 +51,7 @@ export default function TieupMarquee({ partners = [], config = {} }) {
                     alt={partner.name}
                     loading="lazy"
                     style={{ height: "104px", width: "auto", maxWidth: "140px", objectFit: "contain" }}
-                    onError={(e) => { e.currentTarget.src = "/images/guestversity/placeholder-logo.svg"; }}
+                    onError={(e) => { e.currentTarget.src = "/images/avim-events/placeholder-logo.svg"; }}
                   />
                 ) : (
                   <div className="flex items-center justify-center" style={{ height: "104px", width: "140px" }}>

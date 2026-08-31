@@ -3,14 +3,14 @@ import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollAnimation from "@/components/ScrollAnimation";
-import WhatsAppWidget from "@/components/guestversity/WhatsAppWidget";
-import ScrollToTopBtn from "@/components/guestversity/ScrollToTopBtn";
+import WhatsAppWidget from "@/components/avim-events/WhatsAppWidget";
+import ScrollToTopBtn from "@/components/avim-events/ScrollToTopBtn";
 import prisma from "@/lib/prisma";
 
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Services | Guestversity Group",
+  title: "Services | AVIM Events",
   description:
     "Luxury moments powered by operational mastery — Guest Hospitality, Logistics & Transportation, Tours N Travels, Production, and Designing N Printing.",
 };
@@ -92,7 +92,7 @@ export default async function ServicesPage() {
     title: card1?.title || "Guest Hospitality Management",
     desc: card1?.description || "VIP handling, on-ground hospitality teams, concierge-style coordination, help desks, welcome rituals, and a five-star guest experience.",
     bullets: card1?.bullets ? parseBullets(card1.bullets, DEFAULT_GUEST_HOSP_BULLETS) : DEFAULT_GUEST_HOSP_BULLETS,
-    imageUrl: card1?.imageUrl || "/images/guestversity/placeholder-portfolio.svg",
+    imageUrl: card1?.imageUrl || "/images/avim-events/placeholder-portfolio.svg",
   };
 
   const block2 = {
@@ -100,7 +100,7 @@ export default async function ServicesPage() {
     title: card2?.title || "Logistics & Transportation",
     desc: card2?.description || "Fleet management, routing, live coordination, VIP movement, and high-volume guest transfers — delivered with calm precision.",
     bullets: card2?.bullets ? parseBullets(card2.bullets, DEFAULT_LOGISTICS_BULLETS) : DEFAULT_LOGISTICS_BULLETS,
-    imageUrl: card2?.imageUrl || "/images/guestversity/placeholder-hero.svg",
+    imageUrl: card2?.imageUrl || "/images/avim-events/placeholder-hero.svg",
   };
 
   const moreServices = servicesMoreCards.length > 0
@@ -151,8 +151,8 @@ export default async function ServicesPage() {
             <div className="lg:col-span-5 flex justify-center lg:justify-end">
               <div className="w-56 h-56 sm:w-72 sm:h-72 relative opacity-90 flex items-center justify-center">
                 <Image
-                  src="/images/guestversity/logo.svg"
-                  alt="Guestversity Group"
+                  src="/images/avim-events/logo.svg"
+                  alt="AVIM Events"
                   width={288}
                   height={288}
                   className="object-contain"
@@ -195,7 +195,7 @@ export default async function ServicesPage() {
               </ul>
               <div className="flex gap-4 flex-wrap">
                 <Link href="/contact" className="gold-btn px-7 py-3 text-xs">Enquire Now</Link>
-                <Link href="/about" className="ghost-btn px-7 py-3 text-xs">Why Guestversity</Link>
+                <Link href="/about" className="ghost-btn px-7 py-3 text-xs">Why AVIM Events</Link>
               </div>
             </div>
             <div className="lg:col-span-6 reveal-right">

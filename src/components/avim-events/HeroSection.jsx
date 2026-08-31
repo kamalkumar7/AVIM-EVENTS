@@ -4,12 +4,12 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 
 const DEFAULT_IMAGES = [
-  "/images/guestversity/hero/hero-1.jpg",
-  "/images/guestversity/hero/hero-2.jpg",
-  "/images/guestversity/hero/hero-3.jpg",
-  "/images/guestversity/hero/hero-4.jpg",
-  "/images/guestversity/hero/hero-5.jpg",
-  "/images/guestversity/hero/hero-6.jpg",
+  "/images/avim-events/hero/hero-1.jpg",
+  "/images/avim-events/hero/hero-2.jpg",
+  "/images/avim-events/hero/hero-3.jpg",
+  "/images/avim-events/hero/hero-4.jpg",
+  "/images/avim-events/hero/hero-5.jpg",
+  "/images/avim-events/hero/hero-6.jpg",
 ];
 
 export default function HeroSection({ slides = [], config = {} }) {
@@ -36,7 +36,7 @@ export default function HeroSection({ slides = [], config = {} }) {
             key={i}
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{
-              backgroundImage: `url(${src}), url(/images/guestversity/placeholder-hero.svg)`,
+              backgroundImage: `url(${src}), url(/images/avim-events/placeholder-hero.svg)`,
               opacity: activeImg === i ? 0.16 : 0,
               transform: activeImg === i ? "scale(1.05)" : "scale(1)",
               transition:
@@ -129,7 +129,7 @@ export default function HeroSection({ slides = [], config = {} }) {
 
           {/* Subtext */}
           <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-[540px] font-inter">
-            {config.subtext || "Guestversity Group delivers Five-Star Guest Experiences, Precision Logistics, and Royal Wedding & Corporate Event Execution — bringing Guest Management, Travel, Designing, and Production under one Disciplined, 24/7 Hospitality Team."}
+            {config.subtext || "AVIM Events delivers Five-Star Guest Experiences, Precision Logistics, and Royal Wedding & Corporate Event Execution — bringing Guest Management, Travel, Designing, and Production under one Disciplined, 24/7 Hospitality Team."}
           </p>
 
           {/* CTAs */}
@@ -161,7 +161,7 @@ export default function HeroSection({ slides = [], config = {} }) {
             {/* Watermark */}
             <div
               className="absolute inset-0 bg-cover bg-center opacity-[0.14] pointer-events-none"
-              style={{ backgroundImage: "url(/images/guestversity/logo.svg)" }}
+              style={{ backgroundImage: "url(/images/avim-events/logo.svg)" }}
             />
 
             <div className="relative z-10">

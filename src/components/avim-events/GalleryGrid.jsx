@@ -3,12 +3,12 @@
 import { useState } from "react";
 
 const DEFAULT_GALLERY = [
-  { id: 1, category: "WEDDING", title: "The Royal Mandap", imageUrl: "/images/guestversity/placeholder-portfolio.svg" },
-  { id: 2, category: "CORPORATE", title: "Gala Dinner Setup", imageUrl: "/images/guestversity/placeholder-portfolio.svg" },
-  { id: 3, category: "SOCIAL", title: "Lounge Ambiance", imageUrl: "/images/guestversity/placeholder-portfolio.svg" },
-  { id: 4, category: "WEDDING", title: "Palace Illumination", imageUrl: "/images/guestversity/placeholder-portfolio.svg" },
-  { id: 5, category: "SOCIAL", title: "Exotic Florals", imageUrl: "/images/guestversity/placeholder-portfolio.svg" },
-  { id: 6, category: "WEDDING", title: "The Grand Entrance", imageUrl: "/images/guestversity/placeholder-portfolio.svg" },
+  { id: 1, category: "WEDDING", title: "The Royal Mandap", imageUrl: "/images/avim-events/placeholder-portfolio.svg" },
+  { id: 2, category: "CORPORATE", title: "Gala Dinner Setup", imageUrl: "/images/avim-events/placeholder-portfolio.svg" },
+  { id: 3, category: "SOCIAL", title: "Lounge Ambiance", imageUrl: "/images/avim-events/placeholder-portfolio.svg" },
+  { id: 4, category: "WEDDING", title: "Palace Illumination", imageUrl: "/images/avim-events/placeholder-portfolio.svg" },
+  { id: 5, category: "SOCIAL", title: "Exotic Florals", imageUrl: "/images/avim-events/placeholder-portfolio.svg" },
+  { id: 6, category: "WEDDING", title: "The Grand Entrance", imageUrl: "/images/avim-events/placeholder-portfolio.svg" },
 ];
 
 const CATEGORIES = ["ALL", "WEDDING", "CORPORATE", "SOCIAL"];
@@ -51,11 +51,11 @@ export default function GalleryGrid({ items: propItems = [] }) {
           >
             <div className="relative aspect-[4/3] overflow-hidden">
               <img
-                src={item.imageUrl || "/images/guestversity/placeholder-portfolio.svg"}
+                src={item.imageUrl || "/images/avim-events/placeholder-portfolio.svg"}
                 alt={item.title}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 loading="lazy"
-                onError={(e) => { e.currentTarget.src = "/images/guestversity/placeholder-portfolio.svg"; }}
+                onError={(e) => { e.currentTarget.src = "/images/avim-events/placeholder-portfolio.svg"; }}
               />
               <div
                 className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5"

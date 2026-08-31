@@ -3,17 +3,17 @@ import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollAnimation from "@/components/ScrollAnimation";
-import WhatsAppWidget from "@/components/guestversity/WhatsAppWidget";
-import ScrollToTopBtn from "@/components/guestversity/ScrollToTopBtn";
-import AboutStatsSection from "@/components/guestversity/AboutStatsSection";
+import WhatsAppWidget from "@/components/avim-events/WhatsAppWidget";
+import ScrollToTopBtn from "@/components/avim-events/ScrollToTopBtn";
+import AboutStatsSection from "@/components/avim-events/AboutStatsSection";
 import prisma from "@/lib/prisma";
 
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "About | Guestversity Group",
+  title: "About | AVIM Events",
   description:
-    "Guestversity Group is a Detailed Hospitality & Logistics Organisation delivering Guest Management, Travel, Production, and Wedding Coordination across India and internationally.",
+    "AVIM Events is a Detailed Hospitality & Logistics Organisation delivering Guest Management, Travel, Production, and Wedding Coordination across India and internationally.",
 };
 
 const DEFAULT_TEAM = [
@@ -26,7 +26,7 @@ const DEFAULT_TEAM = [
   { name: "Sabiq Ahmed Khan", role: "Operations Incharge", location: "Hospitality", description: "Manages Hospitality Operations and Team Deployment with Disciplined Checklists, Guest Assistance Protocols, and Service Quality Control.", initials: "SK" },
   { name: "Manish Singh", role: "Operations Incharge", location: "Hospitality", description: "Hospitality & Logistics Manager with 4+ years of Experience and over 50 successfully managed Events.", initials: "MS" },
   { name: "Khalid Khan", role: "Operations Incharge", location: "Hospitality", description: "Oversees Hospitality Execution and Live Issue Resolution, ensuring Five-Star Guest Standards across Touchpoints and Venue Teams.", initials: "KK" },
-  { name: "Asiya Arzoo", role: "Marketing Executive", location: "", description: "Leads Brand Presence and Communication with Premium Positioning, ensuring every Touchpoint reflects Guestversity's Luxury Standards.", initials: "AA" },
+  { name: "Asiya Arzoo", role: "Marketing Executive", location: "", description: "Leads Brand Presence and Communication with Premium Positioning, ensuring every Touchpoint reflects AVIM Events's Luxury Standards.", initials: "AA" },
 ];
 
 function cfgMap(configs) {
@@ -93,7 +93,7 @@ export default async function AboutPage() {
           <div className="max-w-7xl mx-auto px-6 md:px-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
             <div className="lg:col-span-7">
               <p className="text-gv-gold font-inter text-[10px] tracking-[0.3em] uppercase font-semibold mb-6">
-                {heroConfig.label || "ABOUT GUESTVERSITY"}
+                {heroConfig.label || "ABOUT AVIM EVENTS"}
               </p>
               <h1 className="font-fraunces text-4xl sm:text-5xl xl:text-6xl text-white leading-tight mb-8">
                 {heroConfig.heading ? (
@@ -109,8 +109,8 @@ export default async function AboutPage() {
             <div className="lg:col-span-5 flex justify-center lg:justify-end">
               <div className="w-56 h-56 sm:w-72 sm:h-72 relative opacity-90 flex items-center justify-center">
                 <Image
-                  src="/images/guestversity/logo.svg"
-                  alt="Guestversity Group"
+                  src="/images/avim-events/logo.svg"
+                  alt="AVIM Events"
                   width={288}
                   height={288}
                   className="object-contain"
@@ -137,7 +137,7 @@ export default async function AboutPage() {
                 }}
               >
                 <Image
-                  src={leadershipConfig.photo_url || "/images/guestversity/placeholder-hero.svg"}
+                  src={leadershipConfig.photo_url || "/images/avim-events/placeholder-hero.svg"}
                   alt={leadershipConfig.name || "Mohammed Tabraiz Saheb"}
                   fill
                   className="object-cover"
@@ -159,7 +159,7 @@ export default async function AboutPage() {
                 {leadershipConfig.role || "Founder & Managing Director"}
               </p>
               <p className="font-inter text-white/65 text-base leading-relaxed mb-8">
-                {leadershipConfig.desc || "Mohammed Tabraiz Saheb leads Guestversity Group with a Clear Vision to deliver Best Guest Management service in Logistics and Hospitality. Under his direction, the company has Built a Reputation for Planning, Coordination, Execution at large scale."}
+                {leadershipConfig.desc || "Mohammed Tabraiz Saheb leads AVIM Events with a Clear Vision to deliver Best Guest Management service in Logistics and Hospitality. Under his direction, the company has Built a Reputation for Planning, Coordination, Execution at large scale."}
               </p>
               <div className="glass-card-gv p-6" style={{ border: "1px solid rgba(255,255,255,0.1)" }}>
                 <p className="text-gv-gold font-inter text-[9px] tracking-[0.3em] uppercase font-semibold mb-3">

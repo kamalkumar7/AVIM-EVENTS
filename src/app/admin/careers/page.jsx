@@ -65,7 +65,7 @@ export default function CareersAdminPage() {
         </div>
         <div>
           <label className="block text-xs text-gray-400 mb-1.5 uppercase tracking-wider">Careers Email</label>
-          <input value={get("careers_email")} onChange={(e) => set("careers_email", e.target.value)} type="email" className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2.5 text-white text-sm focus:outline-none focus:border-amber-500" placeholder="careers@guestversitygroup.com" />
+          <input value={get("careers_email")} onChange={(e) => set("careers_email", e.target.value)} type="email" className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2.5 text-white text-sm focus:outline-none focus:border-amber-500" placeholder="careers@avim-eventsgroup.com" />
         </div>
         <ImageUpload label="Section Photo" folder="avim-events/careers" value={get("photo_url")} onChange={(url) => set("photo_url", url)} />
 

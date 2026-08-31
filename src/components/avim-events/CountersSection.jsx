@@ -96,7 +96,7 @@ export default function CountersSection({ stats = [], config = {} }) {
           {/* Footer */}
           <div className="flex flex-col sm:flex-row items-center justify-between mt-10 pt-8 border-t border-white/[0.07] gap-4 reveal">
             <span className="text-white/35 font-inter text-xs tracking-widest uppercase">
-              Guestversity Group &nbsp;•&nbsp; Hospitality &amp; Logistics
+              AVIM Events &nbsp;•&nbsp; Hospitality &amp; Logistics
             </span>
             <Link
               href="/contact"

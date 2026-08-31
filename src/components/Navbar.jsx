@@ -23,19 +23,11 @@ export default function Navbar({ config = {} }) {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
           <img
-            src="/images/guestversity/logo.svg"
-            alt="Guestversity Group"
+            src="/images/avim-events/logo.svg"
+            alt="AVIM Events"
             className="h-12 sm:h-14 w-auto"
             style={{ filter: "drop-shadow(0 0 8px rgba(212,175,55,0.4))" }}
           />
-          <div className="hidden sm:block">
-            <span className="font-fraunces text-white text-[15px] block leading-none">
-              Guestversity Group
-            </span>
-            <span className="font-inter text-white/60 text-[9px] tracking-[0.24em] uppercase">
-              {config.logo_tagline || "HOSPITALITY  •  LOGISTICS"}
-            </span>
-          </div>
         </Link>
 
         {/* Desktop nav */}

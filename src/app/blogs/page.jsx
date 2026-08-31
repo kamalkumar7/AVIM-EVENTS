@@ -5,7 +5,7 @@ import prisma from "@/lib/prisma";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Blog | Guestversity Group",
+  title: "Blog | AVIM Events",
   description: "Insights, stories, and expertise from the world of luxury hospitality and events.",
 };
 

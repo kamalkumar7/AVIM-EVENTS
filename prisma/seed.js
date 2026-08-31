@@ -7,9 +7,9 @@ async function main() {
   // ── HERO SLIDES ────────────────────────────────────────────────
   await prisma.heroSlide.createMany({
     data: [
-      { imageUrl: "/images/guestversity/hero-1.jpg", order: 1, active: true },
-      { imageUrl: "/images/guestversity/hero-2.jpg", order: 2, active: true },
-      { imageUrl: "/images/guestversity/hero-3.jpg", order: 3, active: true },
+      { imageUrl: "/images/avim-events/hero-1.jpg", order: 1, active: true },
+      { imageUrl: "/images/avim-events/hero-2.jpg", order: 2, active: true },
+      { imageUrl: "/images/avim-events/hero-3.jpg", order: 3, active: true },
     ],
     skipDuplicates: true,
   });
@@ -47,7 +47,7 @@ async function main() {
     data: [
       {
         author: "Arjun Mehta",
-        quote: "Guestversity handled our entire wedding guest logistics — 800 guests across 3 days. Every movement was silent, precise, and stress-free.",
+        quote: "AVIM Events handled our entire wedding guest logistics — 800 guests across 3 days. Every movement was silent, precise, and stress-free.",
         timeAgo: "2 months ago",
         order: 1,
         active: true,
@@ -127,7 +127,7 @@ async function main() {
     { section: "hero_section", key: "badge", value: "LUXURY HOSPITALITY & LOGISTICS" },
     { section: "hero_section", key: "headline_1", value: "Redefining Hospitality" },
     { section: "hero_section", key: "headline_2", value: "& Logistics Excellence" },
-    { section: "hero_section", key: "subtext", value: "Guestversity Group delivers Five-Star Guest Experiences, Precision Logistics, and Royal Wedding & Corporate Event Execution — bringing Guest Management, Travel, Designing, and Production under one Disciplined, 24/7 Hospitality Team." },
+    { section: "hero_section", key: "subtext", value: "AVIM Events delivers Five-Star Guest Experiences, Precision Logistics, and Royal Wedding & Corporate Event Execution — bringing Guest Management, Travel, Designing, and Production under one Disciplined, 24/7 Hospitality Team." },
     { section: "hero_section", key: "cta_primary", value: "Explore Services" },
     { section: "hero_section", key: "cta_secondary", value: "Our Story" },
     { section: "hero_section", key: "card_title", value: "Signature Execution" },
@@ -136,7 +136,7 @@ async function main() {
     // Home about
     { section: "home_about", key: "label", value: "ABOUT" },
     { section: "home_about", key: "heading", value: "Luxury Hospitality meets Disciplined Logistics." },
-    { section: "home_about", key: "body", value: "Guestversity Group is a detail-oriented organisation that implements operations and management for guest management, travel, designing, production, and wedding coordination across weddings and corporate events." },
+    { section: "home_about", key: "body", value: "AVIM Events is a detail-oriented organisation that implements operations and management for guest management, travel, designing, production, and wedding coordination across weddings and corporate events." },
     { section: "home_about", key: "btn_primary", value: "Talk to us" },
     { section: "home_about", key: "btn_secondary", value: "Learn more" },
 
@@ -183,7 +183,7 @@ async function main() {
     { section: "portfolio_section", key: "subtitle", value: "Moments We've Crafted." },
 
     // About hero
-    { section: "about_hero", key: "label", value: "ABOUT GUESTVERSITY" },
+    { section: "about_hero", key: "label", value: "ABOUT AVIM EVENTS" },
     { section: "about_hero", key: "heading", value: "We are a Detailed Hospitality & Logistics Organisation" },
     { section: "about_hero", key: "body", value: "We are a Detailed Hospitality & Logistics Organisation that implements Operations and Management for Guest Management, Travel, Designing, Production, and Wedding Coordination for Weddings and Corporate Events — where Comfort, Timing, and Discretion define the experience." },
 
@@ -191,7 +191,7 @@ async function main() {
     { section: "about_leadership", key: "label", value: "LEADERSHIP" },
     { section: "about_leadership", key: "name", value: "Mohammed Tabraiz Saheb" },
     { section: "about_leadership", key: "title", value: "Founder & Managing Director" },
-    { section: "about_leadership", key: "body", value: "Mohammed Tabraiz Saheb leads Guestversity Group with a Clear Vision to deliver Best Guest Management service in Logistics and Hospitality. Under his direction, the company has Built a Reputation for Planning, Coordination, Execution at large scale." },
+    { section: "about_leadership", key: "body", value: "Mohammed Tabraiz Saheb leads AVIM Events with a Clear Vision to deliver Best Guest Management service in Logistics and Hospitality. Under his direction, the company has Built a Reputation for Planning, Coordination, Execution at large scale." },
     { section: "about_leadership", key: "vision_label", value: "Our Vision" },
     { section: "about_leadership", key: "vision_quote", value: "To Care for Every Guest, once they arrive and leave with unforgettable Happy Memories." },
     { section: "about_leadership", key: "photo_url", value: "/images/leadership.jpg" },
@@ -233,10 +233,10 @@ async function main() {
     // Careers section
     { section: "careers_section", key: "label", value: "CAREERS" },
     { section: "careers_section", key: "heading", value: "Join the Legacy. Build the Future." },
-    { section: "careers_section", key: "body_1", value: "Guestversity Group is where Luxury Hospitality meets Operational Excellence. If you're driven by detail, calm under Pressure, and obsessed with Premium Experiences — your next chapter starts here." },
+    { section: "careers_section", key: "body_1", value: "AVIM Events is where Luxury Hospitality meets Operational Excellence. If you're driven by detail, calm under Pressure, and obsessed with Premium Experiences — your next chapter starts here." },
     { section: "careers_section", key: "body_2", value: "Work Alongside teams that execute Royal Weddings, High-Profile Corporate Events, and large-scale Guest movement with Composure, Precision, and Class." },
     { section: "careers_section", key: "quote", value: "Where Hospitality Meets Opportunity." },
-    { section: "careers_section", key: "careers_email", value: "careers@guestversitygroup.com" },
+    { section: "careers_section", key: "careers_email", value: "careers@avim-eventsgroup.com" },
     { section: "careers_section", key: "job_roles", value: "Hospitality Executive\nGuest Coordination Lead\nLogistics Operations\nWedding / Events Executive\nField Supervisor\nGuest Relations / Concierge\nOperations Coordinator\nEvent Logistics Coordinator\nOther" },
     { section: "careers_section", key: "photo_url", value: "/images/career_1.jpg" },
 
@@ -246,7 +246,7 @@ async function main() {
     { section: "contact_info", key: "address", value: "11-B, 2nd Cross, Shampura Main Rd, RT Nagar Post, Kaval Bairasandra, Bengaluru, Karnataka 560032" },
     { section: "contact_info", key: "phone_1", value: "+91 89510 97078" },
     { section: "contact_info", key: "phone_2", value: "+91 89517 97078" },
-    { section: "contact_info", key: "email", value: "info@guestversity.com" },
+    { section: "contact_info", key: "email", value: "info@avim-events.com" },
     { section: "contact_info", key: "hours", value: "Mon - Sat: 9:00 AM - 6:00 PM" },
     { section: "contact_info", key: "whatsapp_number", value: "918951097078" },
 
@@ -265,16 +265,16 @@ async function main() {
     // Footer
     { section: "footer", key: "tagline", value: "Luxury hospitality and logistics execution for weddings, corporate events, tours & travel — with premium standards and precise operations." },
     { section: "footer", key: "address", value: "11-B, 2nd Cross, Shampura Main Rd, RT Nagar Post, Kaval Bairasandra, Bengaluru, Karnataka 560032" },
-    { section: "footer", key: "email", value: "info@guestversity.com" },
+    { section: "footer", key: "email", value: "info@avim-events.com" },
     { section: "footer", key: "phone_1", value: "+91 89510 97078" },
     { section: "footer", key: "phone_2", value: "+91 89517 97078" },
-    { section: "footer", key: "instagram_url", value: "https://www.instagram.com/guestversitygroup/" },
-    { section: "footer", key: "linkedin_url", value: "https://www.linkedin.com/company/guestversity-group/" },
-    { section: "footer", key: "facebook_url", value: "https://www.facebook.com/Guestversitygroup" },
-    { section: "footer", key: "copyright", value: "© 2026 Guestversity Group. All rights reserved." },
+    { section: "footer", key: "instagram_url", value: "https://www.instagram.com/avim-eventsgroup/" },
+    { section: "footer", key: "linkedin_url", value: "https://www.linkedin.com/company/avim-events-group/" },
+    { section: "footer", key: "facebook_url", value: "https://www.facebook.com/AVIM Eventsgroup" },
+    { section: "footer", key: "copyright", value: "© 2026 AVIM Events. All rights reserved." },
 
     // Site meta
-    { section: "site_meta", key: "site_title", value: "Guestversity Group" },
+    { section: "site_meta", key: "site_title", value: "AVIM Events" },
     { section: "site_meta", key: "meta_description", value: "Luxury Hospitality & Logistics for Weddings and Corporate Events" },
   ];
 
