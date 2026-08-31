@@ -6,7 +6,7 @@ export default function ContactSection({ config = {} }) {
   const address = config.address || "11-B, 2nd Cross, Shampura Main Rd, RT Nagar Post, Kaval Bairasandra, Bengaluru, Karnataka 560032";
   const phone1 = config.phone_1 || "+91 89510 97078";
   const phone2 = config.phone_2 || "+91 89517 97078";
-  const email = config.email || "info@guestversity.com";
+  const email = config.email || "info@avim-events.com";
   const waPhone = (config.whatsapp_number || phone1).replace(/\D/g, "");
 
   const [form, setForm] = useState({

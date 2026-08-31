@@ -1,17 +1,17 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollAnimation from "@/components/ScrollAnimation";
-import WhatsAppWidget from "@/components/guestversity/WhatsAppWidget";
-import ScrollToTopBtn from "@/components/guestversity/ScrollToTopBtn";
-import ContactSection from "@/components/guestversity/ContactSection";
+import WhatsAppWidget from "@/components/avim-events/WhatsAppWidget";
+import ScrollToTopBtn from "@/components/avim-events/ScrollToTopBtn";
+import ContactSection from "@/components/avim-events/ContactSection";
 import prisma from "@/lib/prisma";
 
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Contact | Guestversity Group",
+  title: "Contact | AVIM Events",
   description:
-    "Get in touch with Guestversity Group for weddings, corporate events, guest management, and luxury hospitality services.",
+    "Get in touch with AVIM Events for weddings, corporate events, guest management, and luxury hospitality services.",
 };
 
 function cfgMap(configs) {

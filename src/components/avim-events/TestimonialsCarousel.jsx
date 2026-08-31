@@ -43,7 +43,7 @@ const DEFAULT_TESTIMONIALS = [
     author: "Mukund Korapati",
     time: "1 year ago",
     quote:
-      "Incredible experience working with Guestversity. Seamless handling of guests from arrival to departure — truly world-class.",
+      "Incredible experience working with AVIM Events. Seamless handling of guests from arrival to departure — truly world-class.",
   },
   {
     author: "Monna Rizvi",

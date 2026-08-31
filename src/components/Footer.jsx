@@ -4,17 +4,17 @@ const year = new Date().getFullYear();
 
 export default function Footer({ config = {} }) {
   const socials = [
-    { name: "Instagram", href: config.instagram_url || "https://www.instagram.com/guestversitygroup/" },
-    { name: "LinkedIn", href: config.linkedin_url || "https://www.linkedin.com/company/guestversity-group/" },
-    { name: "Facebook", href: config.facebook_url || "https://www.facebook.com/Guestversitygroup" },
+    { name: "Instagram", href: config.instagram_url || "https://www.instagram.com/avim-eventsgroup/" },
+    { name: "LinkedIn", href: config.linkedin_url || "https://www.linkedin.com/company/avim-events-group/" },
+    { name: "Facebook", href: config.facebook_url || "https://www.facebook.com/AVIM Eventsgroup" },
   ];
 
   const phone1 = config.phone_1 || "+91 89510 97078";
   const phone2 = config.phone_2 || "+91 89517 97078";
-  const email = config.email || "info@guestversity.com";
+  const email = config.email || "info@avim-events.com";
   const address = config.address || "11-B, 2nd Cross, Shampura Main Rd, RT Nagar Post, Kaval Bairasandra, Bengaluru, Karnataka 560032";
   const tagline = config.tagline || "Luxury hospitality and logistics execution for weddings, corporate events, tours & travel — with premium standards and precise operations.";
-  const copyright = config.copyright || `© ${year} Guestversity Group. All rights reserved.`;
+  const copyright = config.copyright || `© ${year} AVIM Events. All rights reserved.`;
 
   return (
     <footer className="border-t border-white/10 bg-black/30">
@@ -22,7 +22,7 @@ export default function Footer({ config = {} }) {
 
         {/* Brand */}
         <div className="sm:col-span-2 lg:col-span-1">
-          <h2 className="font-fraunces text-xl text-white mb-3">Guestversity Group</h2>
+          <h2 className="font-fraunces text-xl text-white mb-3">AVIM Events</h2>
           <p className="font-inter text-sm text-white/50 leading-relaxed mb-5 max-w-xs">
             {tagline}
           </p>
@@ -49,7 +49,7 @@ export default function Footer({ config = {} }) {
         <div>
           <h3 className="font-inter text-[10px] text-gv-gold tracking-[0.25em] uppercase font-semibold mb-5">SERVICES</h3>
           <ul className="space-y-3 font-inter text-sm">
-            {[["Hospitality", "/services"], ["Logistics", "/services"], ["Weddings", "/services"], ["EventMate-AI", "/eventmate"]].map(([name, href]) => (
+            {[["Hospitality", "/services"], ["Logistics", "/services"], ["Weddings", "/services"]].map(([name, href]) => (
               <li key={name}><Link href={href} className="text-white/50 hover:text-gv-gold transition-colors">{name}</Link></li>
             ))}
           </ul>

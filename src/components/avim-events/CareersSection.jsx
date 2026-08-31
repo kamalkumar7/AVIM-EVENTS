@@ -25,8 +25,8 @@ export default function CareersSection({ config = {} }) {
   const jobRoles = config.job_roles
     ? config.job_roles.split("\n").filter(Boolean)
     : DEFAULT_JOB_ROLES;
-  const careersEmail = config.careers_email || "careers@guestversitygroup.com";
-  const photoUrl = config.photo_url || "/images/guestversity/careers/career-1.jpg";
+  const careersEmail = config.careers_email || "careers@avim-eventsgroup.com";
+  const photoUrl = config.photo_url || "/images/avim-events/careers/career-1.jpg";
 
   const [form, setForm] = useState({ name: "", email: "", phone: "", role: "" });
   const [submitted, setSubmitted] = useState(false);
@@ -58,7 +58,7 @@ export default function CareersSection({ config = {} }) {
           </h2>
 
           <p className="text-white/60 font-inter text-base leading-relaxed mb-5">
-            {config.body_1 || "Guestversity Group is where Luxury Hospitality meets Operational Excellence. If you're driven by detail, calm under Pressure, and obsessed with Premium Experiences — your next chapter starts here."}
+            {config.body_1 || "AVIM Events is where Luxury Hospitality meets Operational Excellence. If you're driven by detail, calm under Pressure, and obsessed with Premium Experiences — your next chapter starts here."}
           </p>
           <p className="text-white/60 font-inter text-base leading-relaxed mb-8">
             {config.body_2 || "Work Alongside teams that execute Royal Weddings, High-Profile Corporate Events, and large-scale Guest movement with Composure, Precision, and Class."}
@@ -88,7 +88,7 @@ export default function CareersSection({ config = {} }) {
             <div className="absolute -top-10 -right-10 w-48 h-48 rounded-full pointer-events-none" style={{ background: "radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 70%)", filter: "blur(30px)" }} />
             <div className="relative z-10">
               <div className="flex items-center gap-3 mb-4">
-                <span className="text-gv-gold font-inter text-[9px] tracking-[0.2em] uppercase font-semibold border border-gv-gold/30 rounded-full px-3 py-1">CAREERS AT GUESTVERSITY</span>
+                <span className="text-gv-gold font-inter text-[9px] tracking-[0.2em] uppercase font-semibold border border-gv-gold/30 rounded-full px-3 py-1">CAREERS AT AVIM EVENTS</span>
                 <span className="text-white/30 font-inter text-[9px] tracking-[0.2em] uppercase">PREMIUM TEAM</span>
               </div>
               <h3 className="font-fraunces text-lg text-white/90 mb-2">SIGNATURE CULTURE</h3>
@@ -105,7 +105,7 @@ export default function CareersSection({ config = {} }) {
                 </div>
               </div>
               <div className="rounded-xl overflow-hidden" style={{ height: "180px" }}>
-                <img src={photoUrl} alt="Guestversity team at a premium event" className="w-full h-full object-cover" loading="lazy" onError={(e) => { e.currentTarget.src = "/images/guestversity/placeholder-portfolio.svg"; }} />
+                <img src={photoUrl} alt="AVIM Events team at a premium event" className="w-full h-full object-cover" loading="lazy" onError={(e) => { e.currentTarget.src = "/images/avim-events/placeholder-portfolio.svg"; }} />
               </div>
             </div>
             <div className="absolute bottom-4 right-4 w-10 h-10 border border-gv-gold/30 rounded-sm pointer-events-none" style={{ transform: "rotate(15deg)" }} />
@@ -143,7 +143,7 @@ export default function CareersSection({ config = {} }) {
 
             <div className="border-t border-white/[0.06] mt-6 pt-5 text-center space-y-1">
               <p className="text-white/25 font-inter text-[10px] tracking-widest uppercase">Premium hiring • High standards • Calm execution</p>
-              <p className="text-gv-gold font-inter text-[10px] tracking-[0.2em] uppercase font-semibold">GUESTVERSITY GROUP</p>
+              <p className="text-gv-gold font-inter text-[10px] tracking-[0.2em] uppercase font-semibold">AVIM EVENTS</p>
             </div>
           </div>
         </div>

@@ -1,15 +1,15 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollAnimation from "@/components/ScrollAnimation";
-import HeroSection from "@/components/guestversity/HeroSection";
-import TieupMarquee from "@/components/guestversity/TieupMarquee";
-import PropertiesSection from "@/components/guestversity/PropertiesSection";
-import CareersSection from "@/components/guestversity/CareersSection";
-import CountersSection from "@/components/guestversity/CountersSection";
-import TestimonialsCarousel from "@/components/guestversity/TestimonialsCarousel";
-import PortfolioGallery from "@/components/guestversity/PortfolioGallery";
-import WhatsAppWidget from "@/components/guestversity/WhatsAppWidget";
-import ScrollToTopBtn from "@/components/guestversity/ScrollToTopBtn";
+import HeroSection from "@/components/avim-events/HeroSection";
+import TieupMarquee from "@/components/avim-events/TieupMarquee";
+import PropertiesSection from "@/components/avim-events/PropertiesSection";
+import CareersSection from "@/components/avim-events/CareersSection";
+import CountersSection from "@/components/avim-events/CountersSection";
+import TestimonialsCarousel from "@/components/avim-events/TestimonialsCarousel";
+import PortfolioGallery from "@/components/avim-events/PortfolioGallery";
+import WhatsAppWidget from "@/components/avim-events/WhatsAppWidget";
+import ScrollToTopBtn from "@/components/avim-events/ScrollToTopBtn";
 import Link from "next/link";
 import prisma from "@/lib/prisma";
 
@@ -103,7 +103,7 @@ export default async function Home() {
             <div className="lg:col-span-7 reveal-right">
               <div className="glass-card-gv p-7 sm:p-10">
                 <p className="font-inter text-white/65 text-base leading-relaxed mb-8">
-                  {about.body || "Guestversity Group is a detail-oriented organisation that implements operations and management for guest management, travel, designing, production, and wedding coordination across weddings and corporate events."}
+                  {about.body || "AVIM Events is a detail-oriented organisation that implements operations and management for guest management, travel, designing, production, and wedding coordination across weddings and corporate events."}
                 </p>
                 <div className="flex gap-4 flex-wrap">
                   <Link href="/about" className="ghost-btn px-6 py-2.5 text-xs">{about.btn_secondary || "Learn more"}</Link>

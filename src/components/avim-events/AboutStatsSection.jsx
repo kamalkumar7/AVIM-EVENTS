@@ -48,12 +48,6 @@ const DEFAULT_MILESTONES = [
     desc: "Large-Audience Guest and Logistics Operations delivered with Sharp Coordination, Controlled Access, and a Premium On-Ground Finish.",
     dominant: false,
   },
-  {
-    title: "EventMate-AI Official Launch & Collaboration",
-    badge: "India",
-    desc: "A Flagship Innovation Milestone bringing Technology and On-Ground Hospitality Execution together – designed for scale and Authority.",
-    dominant: false,
-  },
 ];
 
 function easeOutCubic(t) {

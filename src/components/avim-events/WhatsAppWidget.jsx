@@ -10,7 +10,7 @@ export default function WhatsAppWidget({ phone = "918951097078" }) {
 
   function sendMessage() {
     const encoded = encodeURIComponent(
-      message.trim() || "Hi Guestversity Group…"
+      message.trim() || "Hi AVIM Events…"
     );
     window.open(`https://wa.me/${waNumber}?text=${encoded}`, "_blank", "noopener,noreferrer");
     setOpen(false);
@@ -28,7 +28,7 @@ export default function WhatsAppWidget({ phone = "918951097078" }) {
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-[#25D366]" />
-              <span className="text-white font-inter text-sm font-semibold">Guestversity Group</span>
+              <span className="text-white font-inter text-sm font-semibold">AVIM Events</span>
             </div>
             <button
               onClick={() => setOpen(false)}
@@ -44,7 +44,7 @@ export default function WhatsAppWidget({ phone = "918951097078" }) {
           <textarea
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            placeholder="Hi Guestversity Group…"
+            placeholder="Hi AVIM Events…"
             rows={3}
             className="w-full bg-white/[0.05] border border-white/10 rounded-lg px-3 py-2.5 text-white placeholder:text-white/25 font-inter text-sm resize-none focus:outline-none focus:border-gv-gold/40 transition-colors mb-3"
           />
