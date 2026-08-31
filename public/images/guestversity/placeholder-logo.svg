@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="200" viewBox="0 0 400 200">
+  <rect width="400" height="200" fill="#0A0A0C" rx="8"/>
+  <rect x="2" y="2" width="396" height="196" fill="none" stroke="#D4AF37" stroke-opacity="0.3" rx="7"/>
+  <text x="200" y="95" text-anchor="middle" fill="#D4AF37" opacity="0.6" font-size="13" font-family="serif" letter-spacing="3">LOGO</text>
+  <text x="200" y="115" text-anchor="middle" fill="#ffffff" opacity="0.25" font-size="10" font-family="sans-serif">Replace with partner logo</text>
+</svg>

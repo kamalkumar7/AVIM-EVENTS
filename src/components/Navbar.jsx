@@ -4,96 +4,117 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+const navLinks = [
+  { name: "Home",        href: "/" },
+  { name: "About",       href: "/about" },
+  { name: "EventMate‑AI", href: "/eventmate" },
+  { name: "Services",    href: "/services" },
+  { name: "Blogs",       href: "/blogs" },
+  { name: "Contact",     href: "/contact" },
+];
+
 export default function Navbar() {
   const pathname = usePathname();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
-    { name: "Services", href: "/services" },
-    { name: "Gallery", href: "/gallery" },
-    { name: "Venues", href: "/venues" },
-    { name: "Contact", href: "/contact" },
-  ];
+  const [open, setOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 w-full z-50 glass-nav">
-      <div className="flex justify-between items-center px-6 md:px-16 py-4 max-w-[1280px] mx-auto">
-        <Link
-          href="/"
-          className="font-display-lg text-2xl md:text-3xl text-primary tracking-tighter cursor-pointer font-bold"
-        >
-          AVIM Events
+    <nav className="fixed top-0 w-full z-50 bg-black/35 backdrop-blur-xl border-b border-white/10">
+      <div className="flex justify-between items-center px-6 md:px-10 py-3.5 max-w-7xl mx-auto">
+
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
+          <img
+            src="/images/guestversity/logo.svg"
+            alt="Guestversity Group"
+            className="h-12 sm:h-14 w-auto"
+            style={{ filter: "drop-shadow(0 0 8px rgba(212,175,55,0.4))" }}
+          />
+          <div className="hidden sm:block">
+            <span className="font-fraunces text-white text-[15px] block leading-none">
+              Guestversity Group
+            </span>
+            <span className="font-inter text-white/60 text-[9px] tracking-[0.24em] uppercase">
+              HOSPITALITY &nbsp;•&nbsp; LOGISTICS
+            </span>
+          </div>
         </Link>
 
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-8 font-label-caps text-xs tracking-widest uppercase">
+        {/* Desktop nav */}
+        <div className="hidden lg:flex items-center gap-7 font-inter text-[13px]">
           {navLinks.map((link) => {
-            const isActive = pathname === link.href;
+            const active = pathname === link.href;
             return (
               <Link
                 key={link.name}
                 href={link.href}
-                className={
-                  isActive
-                    ? "text-primary font-bold border-b-2 border-secondary pb-1 transition-all"
-                    : "text-on-surface-variant hover:text-primary transition-colors pb-1"
-                }
+                className={`relative pb-0.5 transition-colors duration-200 nav-link-gv ${
+                  active ? "text-gv-gold" : "text-white/70 hover:text-white"
+                }`}
               >
                 {link.name}
+                {active && (
+                  <span className="absolute bottom-0 left-0 right-0 h-px bg-gv-gold" />
+                )}
               </Link>
             );
           })}
         </div>
 
-        {/* Desktop CTA Button */}
+        {/* Desktop CTA */}
         <Link
           href="/contact"
-          className="hidden md:inline-flex bg-primary-container text-tertiary-fixed font-label-caps text-xs uppercase px-6 py-3 rounded scale-95 active:scale-90 transition-transform shimmer-btn font-semibold"
+          className="hidden lg:inline-flex gold-btn px-6 py-2.5 text-xs"
         >
-          Plan Your Event
+          Enquire
         </Link>
 
-        {/* Mobile Hamburger Button */}
+        {/* Mobile hamburger */}
         <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden text-primary p-2 focus:outline-none"
-          aria-label="Toggle Navigation Menu"
+          onClick={() => setOpen((o) => !o)}
+          aria-label="Toggle navigation menu"
+          aria-expanded={open}
+          className="lg:hidden flex flex-col justify-center gap-1.5 w-8 h-8 focus:outline-none"
         >
-          <span className="material-symbols-outlined text-3xl">
-            {mobileMenuOpen ? "close" : "menu"}
-          </span>
+          <span className="block h-px w-6 bg-white transition-transform duration-200" />
+          <span
+            className="block h-px bg-gv-gold transition-transform duration-200"
+            style={{ width: "1rem" }}
+          />
         </button>
       </div>
 
-      {/* Mobile Menu Dropdown */}
-      {mobileMenuOpen && (
-        <div className="md:hidden glass-panel mt-2 mx-4 px-6 py-4 flex flex-col gap-4 font-label-caps text-xs tracking-widest uppercase">
-          {navLinks.map((link) => {
-            const isActive = pathname === link.href;
-            return (
-              <Link
-                key={link.name}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className={
-                  isActive
-                    ? "text-primary font-bold border-l-4 border-secondary pl-3 py-1"
-                    : "text-on-surface-variant hover:text-primary pl-3 py-1 transition-colors"
-                }
-              >
-                {link.name}
-              </Link>
-            );
-          })}
-          <Link
-            href="/contact"
-            onClick={() => setMobileMenuOpen(false)}
-            className="mt-2 text-center bg-primary-container text-tertiary-fixed font-label-caps text-xs uppercase px-6 py-3 rounded shimmer-btn font-semibold"
-          >
-            Plan Your Event
-          </Link>
+      {/* Mobile dropdown */}
+      {open && (
+        <div
+          className="lg:hidden mx-4 mb-3 rounded-2xl border border-white/10 bg-black/40 backdrop-blur-xl overflow-hidden"
+          style={{ animation: "heroLineReveal 240ms cubic-bezier(.2,.8,.2,1) forwards" }}
+        >
+          <div className="flex flex-col px-5 py-5 gap-4">
+            {navLinks.map((link) => {
+              const active = pathname === link.href;
+              return (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setOpen(false)}
+                  className={`font-inter text-sm py-1 border-l-2 pl-3 transition-colors ${
+                    active
+                      ? "text-gv-gold border-gv-gold"
+                      : "text-white/70 border-transparent hover:text-white hover:border-white/20"
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
+            <Link
+              href="/contact"
+              onClick={() => setOpen(false)}
+              className="gold-btn text-center py-3 mt-2 text-xs"
+            >
+              Enquire Now
+            </Link>
+          </div>
         </div>
       )}
     </nav>
