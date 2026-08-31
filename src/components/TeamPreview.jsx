@@ -63,7 +63,7 @@ export default function TeamPreview() {
                 animation: `slideInUp 0.6s ease-out ${index * 0.1}s both`,
               }}
             >
-              <div className="relative overflow-hidden border border-primary/20 mb-4 aspect-square">
+              <div className="relative overflow-hidden glass-panel mb-4 aspect-square">
                 <img
                   src={member.image}
                   alt={member.name}

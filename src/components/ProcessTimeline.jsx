@@ -105,7 +105,7 @@ export default function ProcessTimeline() {
         </div>
 
         {/* Active Step Details */}
-        <div className="bg-surface-container-low border border-primary/20 p-10 md:p-12">
+        <div className="glass-panel p-10 md:p-12">
           <div className="flex items-start gap-6">
             <span className="text-5xl text-primary/30">{steps[activeStep].icon}</span>
             <div className="flex-1">

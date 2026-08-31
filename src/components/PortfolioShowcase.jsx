@@ -68,7 +68,7 @@ export default function PortfolioShowcase() {
                 animation: `slideInUp 0.6s ease-out ${index * 0.1}s both`,
               }}
             >
-              <div className="relative h-72 md:h-96 overflow-hidden border border-primary/20 bg-surface-container-low">
+              <div className="relative h-72 md:h-96 overflow-hidden glass-panel">
                 <img
                   src={item.image}
                   alt={item.title}

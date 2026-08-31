@@ -82,8 +82,32 @@
 
 body {
   background-color: var(--color-background, #080808);
+  /* A subtle luxury mesh gradient for glassmorphism */
+  background-image: 
+    radial-gradient(circle at 15% 50%, rgba(201, 162, 39, 0.08), transparent 25%),
+    radial-gradient(circle at 85% 30%, rgba(201, 162, 39, 0.05), transparent 25%),
+    linear-gradient(to bottom right, #080808, #111);
+  background-attachment: fixed;
   color: var(--color-on-background, #f0ebe0);
   font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+/* ── Glassmorphism Utilities ────────────────────────────── */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  border-radius: 1rem;
+}
+
+.glass-nav {
+  background: rgba(8, 8, 8, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(201, 162, 39, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
 }
 
 /* ── Shapes ─────────────────────────────────────────────── */

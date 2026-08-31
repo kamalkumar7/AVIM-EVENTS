@@ -54,7 +54,7 @@ export default function FAQSection() {
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className="border border-primary/20 overflow-hidden hover:border-primary/40 transition-colors"
+              className="glass-panel overflow-hidden hover:border-primary/40 transition-colors"
             >
               <button
                 className="w-full px-8 py-6 flex items-start justify-between gap-4 text-left hover:bg-surface-container-low/50 transition-colors"

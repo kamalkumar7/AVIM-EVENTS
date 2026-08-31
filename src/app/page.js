@@ -91,7 +91,7 @@ const floatingTags = [
 
 export default function Home() {
   return (
-    <div className="bg-background text-on-background font-body-rt antialiased relative min-h-screen">
+    <div className="text-on-background font-body-rt antialiased relative min-h-screen">
       <ScrollAnimation />
       <Navbar />
 
@@ -215,7 +215,7 @@ export default function Home() {
             ].map((f) => (
               <div
                 key={f.title}
-                className="border border-primary/20 p-8 hover:border-primary/50 transition-colors hover-lift"
+                className="glass-panel p-8 hover:border-primary/50 transition-colors hover-lift"
               >
                 <span className="text-primary text-xl block mb-4">{f.icon}</span>
                 <h3 className="font-headline-md text-xl text-on-background font-bold mb-3">
@@ -250,7 +250,7 @@ export default function Home() {
               {services.map((s) => (
                 <div
                   key={s.title}
-                  className="border border-primary/20 p-8 hover:border-primary/55 transition-all duration-500 hover-lift bg-surface-container-low group"
+                  className="glass-panel p-8 hover:border-primary/55 transition-all duration-500 hover-lift group"
                 >
                   <h3 className="font-headline-md text-xl text-on-background font-bold mb-3">
                     {s.title}
@@ -306,7 +306,7 @@ export default function Home() {
               {stats.map((s) => (
                 <div
                   key={s.label}
-                  className="text-center border border-primary/15 py-12 px-6 hover:border-primary/40 transition-colors"
+                  className="text-center glass-panel py-12 px-6 hover:border-primary/40 transition-colors"
                 >
                   <span className="font-display-lg text-4xl md:text-5xl text-primary font-bold block mb-3">
                     {s.number}
@@ -332,7 +332,7 @@ export default function Home() {
               {testimonials.map((t) => (
                 <div
                   key={t.author}
-                  className="border border-primary/20 p-10 hover:border-primary/40 transition-colors"
+                  className="glass-panel p-10 hover:border-primary/40 transition-colors"
                 >
                   <span className="font-display-lg text-5xl text-primary/25 leading-none block mb-4">
                     &ldquo;
@@ -377,8 +377,8 @@ export default function Home() {
         <div className="h-px bg-gradient-to-r from-transparent via-primary/25 to-transparent mx-6 md:mx-16 max-w-[1280px] md:mx-auto" />
 
         {/* ── CTA Banner ────────────────────────────────────── */}
-        <section className="py-28 px-6 md:px-16 text-center bg-surface-container-low scroll-reveal">
-          <div className="max-w-3xl mx-auto">
+        <section className="py-28 px-6 md:px-16 text-center scroll-reveal">
+          <div className="max-w-4xl mx-auto glass-panel p-16">
             <h2 className="font-display-lg text-3xl md:text-5xl text-on-background font-bold mb-6 leading-tight">
               Ready to Deliver a Royal Experience?
             </h2>

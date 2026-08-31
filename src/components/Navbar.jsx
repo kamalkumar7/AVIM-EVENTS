@@ -18,7 +18,7 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md border-b border-tertiary-container/30">
+    <nav className="fixed top-0 w-full z-50 glass-nav">
       <div className="flex justify-between items-center px-6 md:px-16 py-4 max-w-[1280px] mx-auto">
         <Link
           href="/"
@@ -69,7 +69,7 @@ export default function Navbar() {
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-surface border-b border-tertiary-container/30 px-6 py-4 flex flex-col gap-4 font-label-caps text-xs tracking-widest uppercase shadow-lg">
+        <div className="md:hidden glass-panel mt-2 mx-4 px-6 py-4 flex flex-col gap-4 font-label-caps text-xs tracking-widest uppercase">
           {navLinks.map((link) => {
             const isActive = pathname === link.href;
             return (

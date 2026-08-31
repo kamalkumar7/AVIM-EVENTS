@@ -32,7 +32,7 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
         />
       </head>
-      <body className="bg-background text-on-background font-body-rt antialiased relative min-h-screen flex flex-col">
+      <body className="text-on-background font-body-rt antialiased relative min-h-screen flex flex-col">
         {children}
       </body>
     </html>
