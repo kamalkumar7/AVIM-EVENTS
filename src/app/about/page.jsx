@@ -1,200 +1,282 @@
 import Link from "next/link";
+import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollAnimation from "@/components/ScrollAnimation";
+import WhatsAppWidget from "@/components/guestversity/WhatsAppWidget";
+import ScrollToTopBtn from "@/components/guestversity/ScrollToTopBtn";
+import AboutStatsSection from "@/components/guestversity/AboutStatsSection";
+import prisma from "@/lib/prisma";
+
+export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "About Us | AVIM Events",
+  title: "About | Guestversity Group",
   description:
-    "Rooted in centuries of royal Indian heritage, AVIM Events translates the hospitality of Rajputana courts into modern, bespoke celebrations.",
+    "Guestversity Group is a Detailed Hospitality & Logistics Organisation delivering Guest Management, Travel, Production, and Wedding Coordination across India and internationally.",
 };
 
-export default function AboutPage() {
+const DEFAULT_TEAM = [
+  { name: "Saqueeb Ahmed", role: "Branch Head", location: "Bangalore", description: "Leads Premium Hospitality Teams and On-Ground Guest Experience Operations with composed Coordination and Luxury-First Standards.", initials: "SA" },
+  { name: "Syed Azhar", role: "Branch Head", location: "Hyderabad", description: "Coordinates High-Volume Transfers with calm, Five-Star Guest Handling and Time-Bound Execution across Venues and Routes.", initials: "SZ" },
+  { name: "Raj Gowda", role: "Branch Head", location: "Goa", description: "Driving flawless Guest Experiences through Smart Hospitality Planning, seamless Logistics, and hands-on On-Ground Coordination.", initials: "RG" },
+  { name: "Mohammad Thoufiq", role: "Branch Head", location: "Mysore", description: "Delivers Royal Hospitality Execution aligned with Palace-Style Venues, Guest Routing Plans, and Live Command-Center Coordination.", initials: "MT" },
+  { name: "Anil S R", role: "Managing Partner", location: "Travel", description: "Leads Premium Travel Execution for Events, Coordinating Movement Logistics with Precision Scheduling and Guest-First Service.", initials: "AS" },
+  { name: "Armaan Shariff", role: "Project Incharge", location: "Production", description: "Drives Production Timelines, Vendor Coordination, and Execution Flow to deliver Premium Stagecraft and Seamless Show Operations.", initials: "AR" },
+  { name: "Sabiq Ahmed Khan", role: "Operations Incharge", location: "Hospitality", description: "Manages Hospitality Operations and Team Deployment with Disciplined Checklists, Guest Assistance Protocols, and Service Quality Control.", initials: "SK" },
+  { name: "Manish Singh", role: "Operations Incharge", location: "Hospitality", description: "Hospitality & Logistics Manager with 4+ years of Experience and over 50 successfully managed Events.", initials: "MS" },
+  { name: "Khalid Khan", role: "Operations Incharge", location: "Hospitality", description: "Oversees Hospitality Execution and Live Issue Resolution, ensuring Five-Star Guest Standards across Touchpoints and Venue Teams.", initials: "KK" },
+  { name: "Asiya Arzoo", role: "Marketing Executive", location: "", description: "Leads Brand Presence and Communication with Premium Positioning, ensuring every Touchpoint reflects Guestversity's Luxury Standards.", initials: "AA" },
+];
+
+function cfgMap(configs) {
+  const m = {};
+  configs.forEach((c) => { m[c.key] = c.value; });
+  return m;
+}
+
+export default async function AboutPage() {
+  const [
+    teamMembers,
+    aboutHeroConfigs,
+    aboutLeadershipConfigs,
+    aboutTeamConfigs,
+    aboutStats,
+    milestones,
+    navbarConfigs,
+    footerConfigs,
+    contactConfigs,
+  ] = await Promise.all([
+    prisma.teamMember.findMany({ where: { active: true }, orderBy: { order: "asc" } }),
+    prisma.siteConfig.findMany({ where: { section: "about_hero" } }),
+    prisma.siteConfig.findMany({ where: { section: "about_leadership" } }),
+    prisma.siteConfig.findMany({ where: { section: "about_team" } }),
+    prisma.counterStat.findMany({ where: { active: true, section: "about" }, orderBy: { order: "asc" } }),
+    prisma.milestone.findMany({ where: { active: true }, orderBy: { order: "asc" } }),
+    prisma.siteConfig.findMany({ where: { section: "navbar" } }),
+    prisma.siteConfig.findMany({ where: { section: "footer" } }),
+    prisma.siteConfig.findMany({ where: { section: "contact_info" } }),
+  ]);
+
+  const heroConfig = cfgMap(aboutHeroConfigs);
+  const leadershipConfig = cfgMap(aboutLeadershipConfigs);
+  const teamConfig = cfgMap(aboutTeamConfigs);
+  const navbar = cfgMap(navbarConfigs);
+  const footer = cfgMap(footerConfigs);
+  const contact = cfgMap(contactConfigs);
+
+  const displayTeam = teamMembers.length > 0 ? teamMembers : DEFAULT_TEAM;
+  const waPhone = navbar.whatsapp_number || contact.whatsapp_number || "918951097078";
+
   return (
-    <div className="bg-background text-on-background font-body-rt antialiased relative min-h-screen flex flex-col">
+    <div className="antialiased relative min-h-screen" style={{ backgroundColor: "#050505", color: "#f0ebe0" }}>
       <ScrollAnimation />
-      <Navbar />
+      <Navbar config={navbar} />
 
-      <main className="flex-grow pt-24 md:pt-32 pb-24">
-        {/* Section 1: Hero Banner */}
-        <section className="max-w-[1280px] mx-auto px-6 md:px-16 mb-24 scroll-reveal">
+      <main>
+
+        {/* ── HERO ── */}
+        <section
+          className="relative pt-36 pb-24 sm:pt-44 sm:pb-32 overflow-hidden"
+          style={{
+            background:
+              "radial-gradient(ellipse at 70% 40%, rgba(212,175,55,0.12) 0%, transparent 55%), linear-gradient(to bottom, #060606, #050505)",
+          }}
+        >
           <div
-            className="relative w-full h-[500px] md:h-[700px] flex items-center justify-center overflow-hidden rounded-lg"
-            style={{ border: "1px solid #C9A227" }}
-          >
-            <div
-              className="absolute inset-0 bg-cover bg-center"
-              style={{
-                backgroundImage:
-                  "url('https://lh3.googleusercontent.com/aida-public/AB6AXuDioUEpQ4fF4WuJVA-kuD2uFGoIpdkmS4Uqsjc_kR6rRWXz-5MGA6Y3D1Gd0T-L88sKKNHXtjzLc_-20BnmaxMCpYX_uyH-qSQuj8UobYTa8nRassJ1cHNxNx8Hf0tHFTNxQOIrdvZyn4VVrQKIyg75v3vgTQcy8oBq7_ELOrOXe5r4B30zJJLKAT3O3DLw0JVCG_SGI6_qhjKeNScosX5rBifdchtgA0KM389JVup5H_L91GUuxy01JA')",
-              }}
-            />
-            <div className="absolute inset-0 bg-black/40" />
-            <div className="relative z-10 text-center px-4">
-              <h1 className="font-display-lg text-4xl md:text-6xl text-white mb-6 drop-shadow-lg font-bold">
-                Our Legacy of Grandeur
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background: "radial-gradient(ellipse at 65% 55%, rgba(212,175,55,0.08) 0%, transparent 50%)",
+              opacity: 0.6,
+            }}
+          />
+          <div className="max-w-7xl mx-auto px-6 md:px-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+            <div className="lg:col-span-7">
+              <p className="text-gv-gold font-inter text-[10px] tracking-[0.3em] uppercase font-semibold mb-6">
+                {heroConfig.label || "ABOUT GUESTVERSITY"}
+              </p>
+              <h1 className="font-fraunces text-4xl sm:text-5xl xl:text-6xl text-white leading-tight mb-8">
+                {heroConfig.heading ? (
+                  heroConfig.heading
+                ) : (
+                  <>Crafting royal guest journeys with <span className="text-gradient-gold">precision.</span></>
+                )}
               </h1>
-              <div className="w-20 h-[1px] bg-gold mx-auto" />
-            </div>
-          </div>
-        </section>
-
-        {/* Section 2: The AVIM Story */}
-        <section className="max-w-[1280px] mx-auto px-6 md:px-16 mb-24 scroll-reveal">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center">
-            <div className="order-2 md:order-1 space-y-8">
-              <h2 className="font-display-lg text-3xl md:text-4xl text-primary font-bold">
-                The AVIM Story
-              </h2>
-              <p className="font-subheading-sm text-xl text-on-surface-variant leading-relaxed">
-                Rooted in centuries of royal Indian heritage, AVIM Events was born
-                from a desire to translate the unparalleled hospitality of the
-                Rajputana courts into modern, bespoke celebrations. We do not
-                merely plan events; we architect legacies.
+              <p className="font-inter text-white/60 text-base sm:text-lg leading-relaxed max-w-xl">
+                {heroConfig.subtext || "We are a Detailed Hospitality & Logistics Organisation that implements Operations and Management for Guest Management, Travel, Designing, Production, and Wedding Coordination for Weddings and Corporate Events — where Comfort, Timing, and Discretion define the experience."}
               </p>
-              <p className="font-body-rt text-base text-on-surface-variant leading-relaxed">
-                Our founders, drawing upon generations of curating state banquets
-                and royal weddings, established a methodology where precision
-                meets poetry. Every fabric selected, every floral arrangement
-                designed, and every culinary masterpiece presented is steeped in
-                a tradition that honors the luxury of detail. We invite you to
-                experience hospitality where you are treated not just as a guest,
-                but as royalty.
-              </p>
-              <Link
-                href="/contact"
-                className="inline-block font-label-caps text-xs text-primary border-b border-tertiary-container pb-1 hover:text-secondary transition-colors uppercase tracking-widest font-semibold"
-              >
-                Meet The Visionaries →
-              </Link>
             </div>
-            <div className="order-1 md:order-2 relative flex justify-center">
-              <div className="w-full max-w-md aspect-[3/4] relative p-2 border border-tertiary-container/50 shadow-ambient-gold bg-surface rounded-t-[50%] rounded-b-md hover:-translate-y-2 transition-transform duration-500">
-                <img
-                  className="w-full h-full object-cover rounded-t-[50%] rounded-b-sm"
-                  alt="AVIM Founders"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEPB3qxrLeXnB4lsmpYt0YxzzO7RQbodIAY1FuZI0QgA1y5qA_ntCNA5dtAybP-sRhd0KcaxUp0wyDrqcEEPUOpk7j6somrpuFE5KRZdFkS3Eoqh72nwGmrpm6YoLNRFtArTZX295HCXYnIVB7y49Bw99hPEP_iTCvqG95607SDdRKEbZjM0qV6_tnSJUeSHtgTM90uChdUTmlOo_1mTOcNZxV8eN5j8Zu1k1HCm3yl6LCcjL6K891WQ"
+            <div className="lg:col-span-5 flex justify-center lg:justify-end">
+              <div className="w-56 h-56 sm:w-72 sm:h-72 relative opacity-90 flex items-center justify-center">
+                <Image
+                  src="/images/guestversity/logo.svg"
+                  alt="Guestversity Group"
+                  width={288}
+                  height={288}
+                  className="object-contain"
+                  priority
                 />
               </div>
             </div>
           </div>
         </section>
 
-        {/* Signature Motif Divider */}
-        <div className="max-w-[1280px] mx-auto px-6 md:px-16 mb-24 flex justify-center items-center opacity-70 scroll-reveal">
-          <div className="w-1/3 h-[1px] bg-gradient-to-r from-transparent to-[#C9A227]" />
-          <span className="material-symbols-outlined mx-4 text-tertiary-container">
-            local_florist
-          </span>
-          <div className="w-1/3 h-[1px] bg-gradient-to-l from-transparent to-[#C9A227]" />
-        </div>
+        <div className="h-px bg-gradient-to-r from-transparent via-gv-gold/20 to-transparent" />
 
-        {/* Section 3: Our Philosophy */}
-        <section className="max-w-[1280px] mx-auto px-6 md:px-16 mb-24 bg-surface-container-low py-16 rounded-xl shadow-ambient-gold border border-gold relative overflow-hidden scroll-reveal">
-          <div className="text-center mb-16 relative z-10">
-            <h2 className="font-display-lg text-3xl md:text-4xl text-primary mb-4 font-bold">
-              Our Philosophy
-            </h2>
-            <div className="w-20 h-[1px] bg-gold mx-auto" />
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10 px-4 md:px-8">
-            <div className="bg-surface p-8 text-center border border-gold shadow-ambient-gold flex flex-col items-center hover:-translate-y-2 transition-transform duration-300 rounded-lg">
-              <div className="w-16 h-16 rounded-full border border-tertiary-container flex items-center justify-center mb-6 text-tertiary-container">
-                <span className="material-symbols-outlined text-3xl">
-                  diamond
-                </span>
+        {/* ── LEADERSHIP ── */}
+        <section className="py-20 sm:py-28 section-theme-black" id="leadership">
+          <div className="max-w-7xl mx-auto px-6 md:px-10 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            <div className="lg:col-span-5 order-2 lg:order-1 reveal-left">
+              <div
+                className="glass-card-gv relative overflow-hidden aspect-[4/5] max-w-sm mx-auto lg:mx-0"
+                style={{
+                  border: "1px solid rgba(212,175,55,0.25)",
+                  boxShadow: "0 20px 60px rgba(0,0,0,0.7), 0 0 40px rgba(212,175,55,0.08)",
+                  background:
+                    "radial-gradient(ellipse at 50% 80%, rgba(212,175,55,0.12) 0%, transparent 55%), rgba(255,255,255,0.03)",
+                }}
+              >
+                <Image
+                  src={leadershipConfig.photo_url || "/images/guestversity/placeholder-hero.svg"}
+                  alt={leadershipConfig.name || "Mohammed Tabraiz Saheb"}
+                  fill
+                  className="object-cover"
+                />
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{ background: "linear-gradient(to top, rgba(5,5,5,0.5) 0%, transparent 50%)" }}
+                />
               </div>
-              <h3 className="font-subheading-sm text-xl text-primary font-bold mb-4">
-                Exclusivity
-              </h3>
-              <p className="font-body-rt text-base text-on-surface-variant">
-                We curate environments that are definitively yours. Each event
-                is a singular masterpiece, never replicated, offering a sanctum
-                of privacy and unparalleled luxury.
-              </p>
             </div>
-
-            <div className="bg-surface p-8 text-center border border-gold shadow-ambient-gold flex flex-col items-center hover:-translate-y-2 transition-transform duration-300 rounded-lg">
-              <div className="w-16 h-16 rounded-full border border-tertiary-container flex items-center justify-center mb-6 text-tertiary-container">
-                <span className="material-symbols-outlined text-3xl">
-                  architecture
-                </span>
-              </div>
-              <h3 className="font-subheading-sm text-xl text-primary font-bold mb-4">
-                Precision
-              </h3>
-              <p className="font-body-rt text-base text-on-surface-variant">
-                Flawless execution is our baseline. Behind the grand vistas lies
-                an invisible architecture of meticulous planning, ensuring every
-                moment unfolds with seamless grace.
+            <div className="lg:col-span-7 order-1 lg:order-2 reveal-right">
+              <p className="text-gv-gold font-inter text-[10px] tracking-[0.3em] uppercase font-semibold mb-5">
+                {leadershipConfig.label || "LEADERSHIP"}
               </p>
-            </div>
-
-            <div className="bg-surface p-8 text-center border border-gold shadow-ambient-gold flex flex-col items-center hover:-translate-y-2 transition-transform duration-300 rounded-lg">
-              <div className="w-16 h-16 rounded-full border border-tertiary-container flex items-center justify-center mb-6 text-tertiary-container">
-                <span className="material-symbols-outlined text-3xl">
-                  history_edu
-                </span>
-              </div>
-              <h3 className="font-subheading-sm text-xl text-primary font-bold mb-4">
-                Heritage
-              </h3>
-              <p className="font-body-rt text-base text-on-surface-variant">
-                We honor the aesthetic and cultural depth of our origins.
-                Traditional motifs, artisanal craftsmanship, and time-honored
-                rituals are seamlessly integrated into contemporary contexts.
+              <h2 className="font-fraunces text-3xl sm:text-4xl text-white mb-2 leading-snug">
+                {leadershipConfig.name || "Mohammed Tabraiz Saheb"}
+              </h2>
+              <p className="font-inter text-sm text-white/50 italic mb-6 tracking-wide">
+                {leadershipConfig.role || "Founder & Managing Director"}
               </p>
+              <p className="font-inter text-white/65 text-base leading-relaxed mb-8">
+                {leadershipConfig.desc || "Mohammed Tabraiz Saheb leads Guestversity Group with a Clear Vision to deliver Best Guest Management service in Logistics and Hospitality. Under his direction, the company has Built a Reputation for Planning, Coordination, Execution at large scale."}
+              </p>
+              <div className="glass-card-gv p-6" style={{ border: "1px solid rgba(255,255,255,0.1)" }}>
+                <p className="text-gv-gold font-inter text-[9px] tracking-[0.3em] uppercase font-semibold mb-3">
+                  VISION STATEMENT
+                </p>
+                <blockquote className="font-fraunces text-white/85 text-lg leading-relaxed">
+                  &ldquo;{leadershipConfig.vision || "To Care for Every Guest, once they arrive and leave with unforgettable Happy Memories."}&rdquo;
+                </blockquote>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Section 4: Trusted Partners */}
-        <section className="max-w-[1280px] mx-auto px-6 md:px-16 text-center scroll-reveal">
-          <h2 className="font-display-lg text-3xl md:text-4xl text-primary mb-4 font-bold">
-            Trusted Partners
-          </h2>
-          <div className="w-20 h-[1px] bg-gold mx-auto mb-8" />
-          <p className="font-subheading-sm text-xl text-on-surface-variant max-w-2xl mx-auto mb-12">
-            Our venues and collaborations are vetted with the highest scrutiny,
-            ensuring that our partners align perfectly with the AVIM standard
-            of uncompromising luxury.
-          </p>
-          <div className="flex flex-wrap justify-center gap-x-12 gap-y-8 font-label-caps text-xs text-on-surface-variant uppercase tracking-widest font-semibold">
-            <div className="flex items-center gap-2 hover:text-primary transition-colors">
-              <span className="material-symbols-outlined text-tertiary-container text-sm">
-                star
-              </span>
-              Taj Hotels & Palaces
+        <div className="h-px bg-gradient-to-r from-transparent via-gv-gold/20 to-transparent" />
+
+        {/* ── TEAM ── */}
+        <section className="py-20 sm:py-28 section-theme-charcoal" id="team">
+          <div className="max-w-7xl mx-auto px-6 md:px-10">
+            <div className="text-center mb-14 reveal">
+              <p className="text-gv-gold font-inter text-[10px] tracking-[0.3em] uppercase font-semibold mb-4">
+                {teamConfig.label || "TEAM"}
+              </p>
+              <h2 className="font-fraunces text-3xl sm:text-4xl text-white mb-3">
+                {teamConfig.heading || "Leadership & Execution Team"}
+              </h2>
+              <p className="font-inter text-white/45 text-sm">
+                {teamConfig.subtext || "Luxury standards. Operational precision. Regional strength."}
+              </p>
+              <div
+                className="mx-auto mt-5"
+                style={{
+                  height: "1px",
+                  width: "140px",
+                  background: "linear-gradient(to right, transparent, rgba(212,175,55,.65), transparent)",
+                }}
+              />
             </div>
-            <div className="flex items-center gap-2 hover:text-primary transition-colors">
-              <span className="material-symbols-outlined text-tertiary-container text-sm">
-                star
-              </span>
-              The Oberoi Group
-            </div>
-            <div className="flex items-center gap-2 hover:text-primary transition-colors">
-              <span className="material-symbols-outlined text-tertiary-container text-sm">
-                star
-              </span>
-              Leela Palaces
-            </div>
-            <div className="flex items-center gap-2 hover:text-primary transition-colors">
-              <span className="material-symbols-outlined text-tertiary-container text-sm">
-                star
-              </span>
-              ITC Luxury Collection
-            </div>
-            <div className="flex items-center gap-2 hover:text-primary transition-colors">
-              <span className="material-symbols-outlined text-tertiary-container text-sm">
-                star
-              </span>
-              Rambagh Palace
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+              {displayTeam.map((member) => (
+                <div
+                  key={member.name}
+                  className="glass-card-gv p-6 group hover:border-gv-gold/40 hover:-translate-y-2 transition-all duration-500 reveal flex flex-col items-center text-center"
+                  style={{ borderTop: "1px solid transparent" }}
+                >
+                  <div
+                    className="w-full h-px mb-5 -mt-6 rounded-t-[1.25rem]"
+                    style={{
+                      background: "linear-gradient(to right, transparent, rgba(212,175,55,0.65), transparent)",
+                    }}
+                  />
+                  <div
+                    className="w-16 h-16 rounded-full flex items-center justify-center mb-4 font-fraunces text-lg transition-transform duration-300 group-hover:scale-105"
+                    style={{
+                      background: "radial-gradient(circle, rgba(212,175,55,0.18) 0%, rgba(212,175,55,0.05) 100%)",
+                      border: "1px solid rgba(212,175,55,0.3)",
+                      color: "#D4AF37",
+                    }}
+                  >
+                    {member.initials || member.name?.split(" ").map((n) => n[0]).join("").slice(0, 2)}
+                  </div>
+                  <h3 className="font-fraunces text-base text-white mb-1">{member.name}</h3>
+                  <p className="font-inter text-[11px] text-gv-gold tracking-wide mb-1">{member.role}</p>
+                  {member.location && (
+                    <p className="font-inter text-[10px] text-white/35 tracking-widest uppercase mb-3">
+                      {member.location}
+                    </p>
+                  )}
+                  <p className="font-inter text-xs text-white/50 leading-relaxed opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-400">
+                    {member.description || member.desc}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
+
+        <div className="h-px bg-gradient-to-r from-transparent via-gv-gold/20 to-transparent" />
+
+        <AboutStatsSection stats={aboutStats} milestones={milestones} />
+
+        <div className="h-px bg-gradient-to-r from-transparent via-gv-gold/20 to-transparent" />
+
+        {/* ── CTA ── */}
+        <section className="py-20 sm:py-28 section-theme-navy" id="cta">
+          <div className="max-w-3xl mx-auto px-6 text-center">
+            <div
+              className="glass-card-gv p-10 sm:p-16"
+              style={{
+                border: "1px solid rgba(212,175,55,0.25)",
+                boxShadow: "0 0 60px rgba(212,175,55,0.08), 0 20px 50px rgba(0,0,0,0.5)",
+              }}
+            >
+              <p className="text-gv-gold font-inter text-[10px] tracking-[0.3em] uppercase font-semibold mb-4 reveal">
+                NEXT STEP
+              </p>
+              <h2 className="font-fraunces text-3xl sm:text-4xl xl:text-5xl text-white leading-tight mb-6 reveal">
+                Let&apos;s design a flawless guest journey.
+              </h2>
+              <p className="font-inter text-white/55 text-base sm:text-lg mb-10 leading-relaxed reveal reveal-delay">
+                We&apos;ll align on timelines, VIP handling, transport, staffing, and service standards.
+              </p>
+              <Link
+                href="/contact"
+                className="gold-btn glow-pulse inline-block px-12 py-4 text-sm reveal reveal-delay2"
+              >
+                Enquire Now
+              </Link>
+            </div>
+          </div>
+        </section>
+
       </main>
 
-      <Footer />
+      <Footer config={footer} />
+      <WhatsAppWidget phone={waPhone} />
+      <ScrollToTopBtn />
     </div>
   );
 }

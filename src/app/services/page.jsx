@@ -1,207 +1,406 @@
 import Link from "next/link";
+import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollAnimation from "@/components/ScrollAnimation";
+import WhatsAppWidget from "@/components/guestversity/WhatsAppWidget";
+import ScrollToTopBtn from "@/components/guestversity/ScrollToTopBtn";
+import prisma from "@/lib/prisma";
+
+export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Bespoke Services | AVIM Events",
+  title: "Services | Guestversity Group",
   description:
-    "Explore AVIM Events' luxury services: Royal Weddings, Milestone Birthdays, Brand Launches, and Exclusive Anniversaries.",
+    "Luxury moments powered by operational mastery — Guest Hospitality, Logistics & Transportation, Tours N Travels, Production, and Designing N Printing.",
 };
 
-export default function ServicesPage() {
+const DEFAULT_GUEST_HOSP_BULLETS = [
+  "RSVP support including e-invites, telecalling, follow-ups, and ticket/ID collection",
+  "Flight and surface travel bookings coordinated for guests and families",
+  "Airport, railway, and bus station reception with welcome hampers and assisted transfers",
+  "Coordination with travel agencies and cab drivers for smooth arrivals and departures",
+  "Registration desks, helpdesks, and guidance at the venue throughout the event",
+  "Gift and hamper packing, luggage assistance, and venue-to-venue shuttling for guests",
+];
+
+const DEFAULT_LOGISTICS_BULLETS = [
+  "Airport transfers with buffer planning",
+  "City movement and venue shuttles",
+  "Driver briefing, control-room updates",
+  "Contingencies for delays and reroutes",
+];
+
+const DEFAULT_MORE_SERVICES = [
+  { badge: "◆", title: "Logistics & Hospitality", description: "RSVP management, welcome hampers, arrivals and departures, venue registration, helpdesks, and on-ground Production Execution Team support for smooth coordination of events." },
+  { badge: "◇", title: "Tours N Travels", description: "Vehicles for wedding and corporate requirements, curated fleets, trained chauffeurs, and routing for guest, family, and VIP movements." },
+  { badge: "⬒", title: "Designing N Printing", description: "Invites, event branding, signages, collaterals, and creative prints — where creativity starts and is finished with the best possible result." },
+];
+
+function cfgMap(configs) {
+  const m = {};
+  configs.forEach((c) => { m[c.key] = c.value; });
+  return m;
+}
+
+function parseBullets(raw, fallback) {
+  try {
+    const parsed = JSON.parse(raw);
+    if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+  } catch {}
+  return fallback;
+}
+
+export default async function ServicesPage() {
+  const [
+    servicesMainCards,
+    servicesMoreCards,
+    heroConfigs,
+    parallaxConfigs,
+    moreHeaderConfigs,
+    ctaConfigs,
+    navbarConfigs,
+    footerConfigs,
+    contactConfigs,
+  ] = await Promise.all([
+    prisma.serviceCard.findMany({ where: { active: true, section: "services_main" }, orderBy: { order: "asc" } }),
+    prisma.serviceCard.findMany({ where: { active: true, section: "services_more" }, orderBy: { order: "asc" } }),
+    prisma.siteConfig.findMany({ where: { section: "services_hero" } }),
+    prisma.siteConfig.findMany({ where: { section: "services_parallax" } }),
+    prisma.siteConfig.findMany({ where: { section: "services_more" } }),
+    prisma.siteConfig.findMany({ where: { section: "services_cta" } }),
+    prisma.siteConfig.findMany({ where: { section: "navbar" } }),
+    prisma.siteConfig.findMany({ where: { section: "footer" } }),
+    prisma.siteConfig.findMany({ where: { section: "contact_info" } }),
+  ]);
+
+  const hero = cfgMap(heroConfigs);
+  const parallax = cfgMap(parallaxConfigs);
+  const moreHeader = cfgMap(moreHeaderConfigs);
+  const cta = cfgMap(ctaConfigs);
+  const navbar = cfgMap(navbarConfigs);
+  const footer = cfgMap(footerConfigs);
+  const contact = cfgMap(contactConfigs);
+
+  const waPhone = navbar.whatsapp_number || contact.whatsapp_number || "918951097078";
+
+  const card1 = servicesMainCards[0];
+  const card2 = servicesMainCards[1];
+
+  const block1 = {
+    badge: card1?.badge || "✦ GUEST HOSPITALITY",
+    title: card1?.title || "Guest Hospitality Management",
+    desc: card1?.description || "VIP handling, on-ground hospitality teams, concierge-style coordination, help desks, welcome rituals, and a five-star guest experience.",
+    bullets: card1?.bullets ? parseBullets(card1.bullets, DEFAULT_GUEST_HOSP_BULLETS) : DEFAULT_GUEST_HOSP_BULLETS,
+    imageUrl: card1?.imageUrl || "/images/guestversity/placeholder-portfolio.svg",
+  };
+
+  const block2 = {
+    badge: card2?.badge || "⬚ LOGISTICS",
+    title: card2?.title || "Logistics & Transportation",
+    desc: card2?.description || "Fleet management, routing, live coordination, VIP movement, and high-volume guest transfers — delivered with calm precision.",
+    bullets: card2?.bullets ? parseBullets(card2.bullets, DEFAULT_LOGISTICS_BULLETS) : DEFAULT_LOGISTICS_BULLETS,
+    imageUrl: card2?.imageUrl || "/images/guestversity/placeholder-hero.svg",
+  };
+
+  const moreServices = servicesMoreCards.length > 0
+    ? servicesMoreCards.map((s) => ({ badge: s.badge || s.icon || "◆", title: s.title, description: s.description }))
+    : DEFAULT_MORE_SERVICES;
+
   return (
-    <div className="bg-background text-on-background font-body-rt antialiased relative min-h-screen flex flex-col">
+    <div
+      className="antialiased relative min-h-screen"
+      style={{ backgroundColor: "#050505", color: "#f0ebe0" }}
+    >
       <ScrollAnimation />
-      <Navbar />
+      <Navbar config={navbar} />
 
-      <main className="flex-grow pt-24 md:pt-32 pb-24">
-        {/* Hero Section */}
-        <section className="max-w-[1280px] mx-auto px-6 md:px-16 mb-24 text-center relative scroll-reveal">
-          <h1 className="font-display-lg text-4xl md:text-6xl text-primary mb-6 pt-8 md:pt-16 font-bold">
-            Bespoke Event Services
-          </h1>
-          <p className="font-subheading-sm text-xl text-on-surface-variant max-w-2xl mx-auto mb-12">
-            Crafting unparalleled experiences steeped in royal grandeur and
-            executed with flawless modern precision.
-          </p>
-          <div className="flex justify-center items-center gap-4">
-            <div className="h-px w-16 bg-tertiary-container" />
-            <span className="material-symbols-outlined text-tertiary-container">
-              flare
-            </span>
-            <div className="h-px w-16 bg-tertiary-container" />
+      <main>
+
+        {/* ── HERO ── */}
+        <section
+          className="relative pt-36 pb-24 sm:pt-44 sm:pb-32 overflow-hidden"
+          style={{
+            background:
+              "radial-gradient(ellipse at 70% 40%, rgba(212,175,55,0.12) 0%, transparent 55%), linear-gradient(to bottom, #060606, #050505)",
+          }}
+        >
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background: "radial-gradient(ellipse at 65% 55%, rgba(212,175,55,0.08) 0%, transparent 50%)",
+              opacity: 0.6,
+            }}
+          />
+          <div className="max-w-7xl mx-auto px-6 md:px-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+            <div className="lg:col-span-7">
+              <p className="text-gv-gold font-inter text-[10px] tracking-[0.3em] uppercase font-semibold mb-6">
+                {hero.label || "SERVICES"}
+              </p>
+              <h1 className="font-fraunces text-4xl sm:text-5xl xl:text-6xl text-white leading-tight mb-8">
+                {hero.heading ? (
+                  hero.heading
+                ) : (
+                  <>Luxury moments, powered by <span className="text-gradient-gold">operational mastery.</span></>
+                )}
+              </h1>
+              <p className="font-inter text-white/60 text-base sm:text-lg leading-relaxed max-w-xl">
+                {hero.subtext || "Our services are designed to feel effortless for guests — powered by four specialised sectors: Logistics & Hospitality, Tours N Travels, Production Execution Team, and Designing N Printing, all running on precise logistics discipline."}
+              </p>
+            </div>
+            <div className="lg:col-span-5 flex justify-center lg:justify-end">
+              <div className="w-56 h-56 sm:w-72 sm:h-72 relative opacity-90 flex items-center justify-center">
+                <Image
+                  src="/images/guestversity/logo.svg"
+                  alt="Guestversity Group"
+                  width={288}
+                  height={288}
+                  className="object-contain"
+                  priority
+                />
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* Service 1: Royal Weddings */}
-        <section className="max-w-[1280px] mx-auto px-6 md:px-16 mb-24 scroll-reveal">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div className="order-2 md:order-1 relative p-4">
-              <div className="absolute inset-0 border border-tertiary-container/30 translate-x-4 translate-y-4 rounded-t-full" />
-              <img
-                className="w-full aspect-[4/5] object-cover jharokha-arch shadow-2xl relative z-10 rounded-t-full"
-                alt="Royal Weddings"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2v1T09JTO08bm468VaR_8Vq1kBs1-f6a9IQ8ZB6TgK1YjbdZr1p3CGAmDknPwSbYcoF_KNuZuvTQeRq9wVKcnTQ5q4kGWLGCuXrIiVioCoPuiITVVS4SPnYSmEoYCdX-zYAsy8jqFXvX3ytIuOsEwiOYAPnY8G7n9_7MpJbWaQulXe6iYdqzlLcy6u4XX_RRVDrBRZZIXoRAsoijq3WbzTI6Pbtz6og7I5uU-_caJm2A3vQiKkgkHSw"
-              />
-            </div>
-            <div className="order-1 md:order-2 space-y-6 md:pl-12">
-              <div className="font-label-caps text-xs text-tertiary-container tracking-widest uppercase font-semibold">
-                The Pinnacle of Grandeur
-              </div>
-              <h2 className="font-headline-md text-3xl md:text-4xl text-primary font-bold">
-                Royal Weddings
+        <div className="h-px bg-gradient-to-r from-transparent via-gv-gold/20 to-transparent" />
+
+        {/* ── SERVICE BLOCK 1: GUEST HOSPITALITY ── */}
+        <section className="py-20 sm:py-28 section-theme-black" id="guest-hospitality">
+          <div className="max-w-7xl mx-auto px-6 md:px-10 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            <div className="lg:col-span-6 reveal-left">
+              <span
+                className="inline-flex items-center gap-2 font-inter text-[10px] tracking-[0.25em] uppercase px-3 py-1.5 rounded-full mb-6"
+                style={{
+                  border: "1px solid rgba(212,175,55,0.4)",
+                  color: "rgba(212,175,55,0.9)",
+                  background: "rgba(212,175,55,0.05)",
+                }}
+              >
+                {block1.badge}
+              </span>
+              <h2 className="font-fraunces text-3xl sm:text-4xl text-white mb-5 leading-snug">
+                {block1.title}
               </h2>
-              <p className="font-body-rt text-base text-on-surface-variant leading-relaxed">
-                Experience a union celebrated with the opulence of royalty. From
-                securing heritage palaces to curating menus fit for kings, our
-                wedding services blend timeless traditions with contemporary
-                luxury. Every detail is meticulously planned to create an
-                unforgettable tapestry of love and celebration.
+              <p className="font-inter text-white/60 text-base leading-relaxed mb-7">
+                {block1.desc}
               </p>
               <ul className="space-y-3 mb-8">
-                <li className="flex items-start gap-3">
-                  <span className="material-symbols-outlined text-tertiary-container text-sm mt-1">
-                    stars
-                  </span>
-                  <span className="font-subheading-sm text-lg">
-                    Heritage Venue Sourcing & Management
-                  </span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="material-symbols-outlined text-tertiary-container text-sm mt-1">
-                    stars
-                  </span>
-                  <span className="font-subheading-sm text-lg">
-                    Bespoke Floral & Architectural Decor
-                  </span>
-                </li>
+                {block1.bullets.map((b) => (
+                  <li key={b} className="flex items-start gap-3">
+                    <span className="shrink-0 mt-1.5 w-1.5 h-1.5 rounded-full" style={{ background: "#D4AF37" }} />
+                    <span className="font-inter text-sm text-white/55 leading-relaxed">{b}</span>
+                  </li>
+                ))}
               </ul>
-              <Link
-                href="/contact"
-                className="inline-block bg-primary-container text-tertiary-fixed font-label-caps text-xs uppercase tracking-widest px-8 py-4 rounded hover:bg-primary transition-colors shimmer-btn font-semibold"
+              <div className="flex gap-4 flex-wrap">
+                <Link href="/contact" className="gold-btn px-7 py-3 text-xs">Enquire Now</Link>
+                <Link href="/about" className="ghost-btn px-7 py-3 text-xs">Why Guestversity</Link>
+              </div>
+            </div>
+            <div className="lg:col-span-6 reveal-right">
+              <div
+                className="glass-card-gv relative overflow-hidden aspect-[4/3] w-full"
+                style={{
+                  border: "1px solid rgba(212,175,55,0.2)",
+                  background:
+                    "radial-gradient(ellipse at 50% 80%, rgba(212,175,55,0.1) 0%, transparent 55%), rgba(255,255,255,0.03)",
+                }}
               >
-                Request Consultation
-              </Link>
+                <Image
+                  src={block1.imageUrl}
+                  alt={block1.title}
+                  fill
+                  className="object-cover"
+                />
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, rgba(5,5,5,0.3) 0%, transparent 60%), linear-gradient(to top, rgba(5,5,5,0.6) 0%, transparent 50%)",
+                  }}
+                />
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Signature Motif Divider */}
-        <div className="max-w-[1280px] mx-auto px-6 md:px-16 flex justify-center mb-24 opacity-50 scroll-reveal">
-          <div className="w-full max-w-md h-[1px] bg-gold relative flex items-center justify-center">
-            <span className="material-symbols-outlined text-tertiary-container bg-background px-4 absolute">
-              local_florist
-            </span>
-          </div>
-        </div>
+        <div className="h-px bg-gradient-to-r from-transparent via-gv-gold/20 to-transparent" />
 
-        {/* Service 2: Milestone Birthdays */}
-        <section className="max-w-[1280px] mx-auto px-6 md:px-16 mb-24 scroll-reveal">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div className="order-1 space-y-6 md:pr-12">
-              <div className="font-label-caps text-xs text-tertiary-container tracking-widest uppercase font-semibold">
-                Elegance in Every Epoch
+        {/* ── SERVICE BLOCK 2: LOGISTICS ── */}
+        <section className="py-20 sm:py-28 section-theme-charcoal" id="logistics">
+          <div className="max-w-7xl mx-auto px-6 md:px-10 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            <div className="lg:col-span-6 order-2 lg:order-1 reveal-left">
+              <div
+                className="glass-card-gv relative overflow-hidden aspect-[4/3] w-full"
+                style={{
+                  border: "1px solid rgba(212,175,55,0.2)",
+                  background:
+                    "radial-gradient(ellipse at 50% 20%, rgba(212,175,55,0.1) 0%, transparent 55%), rgba(255,255,255,0.03)",
+                }}
+              >
+                <Image
+                  src={block2.imageUrl}
+                  alt={block2.title}
+                  fill
+                  className="object-cover"
+                />
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{ background: "linear-gradient(to top, rgba(5,5,5,0.6) 0%, transparent 50%)" }}
+                />
               </div>
-              <h2 className="font-headline-md text-3xl md:text-4xl text-primary font-bold">
-                Milestone Celebrations
+            </div>
+            <div className="lg:col-span-6 order-1 lg:order-2 reveal-right">
+              <span
+                className="inline-flex items-center gap-2 font-inter text-[10px] tracking-[0.25em] uppercase px-3 py-1.5 rounded-full mb-6"
+                style={{
+                  border: "1px solid rgba(212,175,55,0.4)",
+                  color: "rgba(212,175,55,0.9)",
+                  background: "rgba(212,175,55,0.05)",
+                }}
+              >
+                {block2.badge}
+              </span>
+              <h2 className="font-fraunces text-3xl sm:text-4xl text-white mb-5 leading-snug">
+                {block2.title}
               </h2>
-              <p className="font-body-rt text-base text-on-surface-variant leading-relaxed">
-                Celebrate life's pivotal chapters with sophisticated flair.
-                Whether it's an intimate gathering in a private courtyard or a
-                lavish gala, we design environments that reflect the unique
-                journey of the individual, ensuring the occasion is as monumental
-                as the milestone itself.
+              <p className="font-inter text-white/60 text-base leading-relaxed mb-7">
+                {block2.desc}
               </p>
               <ul className="space-y-3 mb-8">
-                <li className="flex items-start gap-3">
-                  <span className="material-symbols-outlined text-tertiary-container text-sm mt-1">
-                    stars
-                  </span>
-                  <span className="font-subheading-sm text-lg">
-                    Curated Entertainment & Performances
-                  </span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="material-symbols-outlined text-tertiary-container text-sm mt-1">
-                    stars
-                  </span>
-                  <span className="font-subheading-sm text-lg">
-                    Custom Culinary Experiences
-                  </span>
-                </li>
+                {block2.bullets.map((b) => (
+                  <li key={b} className="flex items-start gap-3">
+                    <span className="shrink-0 mt-1.5 w-1.5 h-1.5 rounded-full" style={{ background: "#D4AF37" }} />
+                    <span className="font-inter text-sm text-white/55 leading-relaxed">{b}</span>
+                  </li>
+                ))}
               </ul>
-              <Link
-                href="/contact"
-                className="inline-block bg-primary-container text-tertiary-fixed font-label-caps text-xs uppercase tracking-widest px-8 py-4 rounded hover:bg-primary transition-colors shimmer-btn font-semibold"
-              >
-                Request Consultation
-              </Link>
-            </div>
-            <div className="order-2 relative p-4">
-              <div className="absolute inset-0 border border-tertiary-container/30 -translate-x-4 translate-y-4 rounded-t-full" />
-              <img
-                className="w-full aspect-[4/5] object-cover jharokha-arch shadow-2xl relative z-10 rounded-t-full"
-                alt="Milestone Celebrations"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmkVkPuCIBag_B_BVGhdwvJJia6quAD5sXd9MdnlCtIbVDLOpatKxxSt0VlksJ_FPK_mHNkeG4tGpFocdgNRe82kKKa8rrhDVVHkSs-W2hg-Zz5seghLS2eTuNeGYZHhMNfvKvRXiwjSy9dDSnY0MqOuTeKY_UFbe5SzW8AeKDzcRSXSoaw5C2tXpMTZgtpfOd7gAoDQchRHHvlpBm66lMD3gYbWBBkxFVO3fX5MZ4eCQ0JAkIET3eYg"
-              />
+              <Link href="/contact" className="gold-btn px-7 py-3 text-xs">Enquire Now</Link>
             </div>
           </div>
         </section>
 
-        {/* Service 3: Corporate Galas & Brand Launches */}
-        <section className="max-w-[1280px] mx-auto px-6 md:px-16 mb-24 scroll-reveal">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div className="order-2 md:order-1 relative p-4">
-              <div className="absolute inset-0 border border-tertiary-container/30 translate-x-4 translate-y-4 rounded-t-full" />
-              <img
-                className="w-full aspect-[4/5] object-cover jharokha-arch shadow-2xl relative z-10 rounded-t-full"
-                alt="Brand Launches"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1qMKFzUJkWlGievMPDCcZMJ-AHc864sYXqzN4bjWCOHmQPwoio5AE8yiCqzrLe8Y9o7J_AbblsDQLM9RKRpnq0DgT2wT2VHrjlj60LYaS932OWS650i4n-PnjLuxQ4wl7hzaG7ZyBgIv49Iu6aRhuzreNG144HIfGpWeuO1fKns2oiVrFDwCgzkSOrtqbr2ynFQcr0rwfREy0s63RR-XiibNUqA69jnjlralkFu5X3iGclkwfaie4Og"
-              />
-            </div>
-            <div className="order-1 md:order-2 space-y-6 md:pl-12">
-              <div className="font-label-caps text-xs text-tertiary-container tracking-widest uppercase font-semibold">
-                High-Impact Prestige
-              </div>
-              <h2 className="font-headline-md text-3xl md:text-4xl text-primary font-bold">
-                Brand Launches & Galas
-              </h2>
-              <p className="font-body-rt text-base text-on-surface-variant leading-relaxed">
-                Elevate your brand with dramatic stagecraft, bespoke luxury lighting,
-                and high-profile guest hospitality. We transform corporate gatherings
-                into memorable brand milestones that command prestige and reverence.
+        <div className="h-px bg-gradient-to-r from-transparent via-gv-gold/20 to-transparent" />
+
+        {/* ── PARALLAX BANNER ── */}
+        <section
+          className="py-24 sm:py-32 relative overflow-hidden"
+          style={{
+            background:
+              "radial-gradient(ellipse at 20% 50%, rgba(212,175,55,0.12) 0%, transparent 50%), radial-gradient(ellipse at 80% 50%, rgba(12,31,63,0.6) 0%, transparent 50%), linear-gradient(to right, #060606, #070d1c, #060606)",
+          }}
+        >
+          <div
+            className="absolute inset-0 pointer-events-none opacity-10"
+            style={{
+              backgroundImage:
+                "linear-gradient(rgba(212,175,55,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(212,175,55,0.3) 1px, transparent 1px)",
+              backgroundSize: "80px 80px",
+            }}
+          />
+          <div className="max-w-7xl mx-auto px-6 md:px-10 relative z-10">
+            <div className="max-w-3xl">
+              <p className="text-gv-gold font-inter text-[10px] tracking-[0.3em] uppercase font-semibold mb-6 reveal">
+                {parallax.label || "COMMAND-CENTER APPROACH"}
               </p>
-              <ul className="space-y-3 mb-8">
-                <li className="flex items-start gap-3">
-                  <span className="material-symbols-outlined text-tertiary-container text-sm mt-1">
-                    stars
-                  </span>
-                  <span className="font-subheading-sm text-lg">
-                    State-of-the-Art Stagecraft & Production
-                  </span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="material-symbols-outlined text-tertiary-container text-sm mt-1">
-                    stars
-                  </span>
-                  <span className="font-subheading-sm text-lg">
-                    VIP & Luxury Hospitality Management
-                  </span>
-                </li>
-              </ul>
-              <Link
-                href="/contact"
-                className="inline-block bg-primary-container text-tertiary-fixed font-label-caps text-xs uppercase tracking-widest px-8 py-4 rounded hover:bg-primary transition-colors shimmer-btn font-semibold"
-              >
-                Request Consultation
-              </Link>
+              <h2 className="font-fraunces text-4xl sm:text-5xl xl:text-6xl text-white leading-tight mb-6 reveal">
+                {parallax.heading ? (
+                  parallax.heading
+                ) : (
+                  <>When timelines tighten,{" "}<br className="hidden sm:block" />we get <span className="text-gradient-gold">sharper.</span></>
+                )}
+              </h2>
+              <p className="font-inter text-white/55 text-base sm:text-lg leading-relaxed mb-10 reveal reveal-delay">
+                {parallax.subtext || "A calm luxury surface — backed by a command-center approach underneath."}
+              </p>
+              <div className="flex gap-4 flex-wrap reveal reveal-delay2">
+                <Link href="/contact" className="gold-btn glow-pulse px-8 py-3.5 text-xs">
+                  {parallax.btn_primary || "Build a plan"}
+                </Link>
+                <Link href="/about" className="ghost-btn px-8 py-3.5 text-xs">
+                  {parallax.btn_secondary || "Read insights"}
+                </Link>
+              </div>
             </div>
           </div>
         </section>
+
+        <div className="h-px bg-gradient-to-r from-transparent via-gv-gold/20 to-transparent" />
+
+        {/* ── MORE SERVICES GRID ── */}
+        <section className="py-20 sm:py-28 section-theme-black" id="more-services">
+          <div className="max-w-7xl mx-auto px-6 md:px-10">
+            <div className="text-center mb-14 reveal">
+              <p className="text-gv-gold font-inter text-[10px] tracking-[0.3em] uppercase font-semibold mb-4">
+                {moreHeader.label || "MORE SERVICES"}
+              </p>
+              <h2 className="font-fraunces text-3xl sm:text-4xl text-white">
+                {moreHeader.heading || "Full-spectrum execution, every time."}
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+              {moreServices.map((s, i) => (
+                <div
+                  key={s.title}
+                  className={`glass-card-gv p-8 hover:border-gv-gold/40 hover:-translate-y-2 transition-all duration-500 group reveal${i === 1 ? " reveal-delay" : i === 2 ? " reveal-delay2" : ""}`}
+                >
+                  <span className="text-gv-gold text-xl block mb-5">{s.badge}</span>
+                  <h3 className="font-fraunces text-xl text-white mb-3 group-hover:text-gv-gold transition-colors duration-300">
+                    {s.title}
+                  </h3>
+                  <p className="font-inter text-sm text-white/55 leading-relaxed mb-7">{s.description}</p>
+                  <Link
+                    href="/contact"
+                    className="font-inter text-[11px] text-gv-gold tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  >
+                    Enquire now →
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <div className="h-px bg-gradient-to-r from-transparent via-gv-gold/20 to-transparent" />
+
+        {/* ── PROPOSAL CTA ── */}
+        <section className="py-20 sm:py-28 section-theme-navy" id="proposal">
+          <div className="max-w-7xl mx-auto px-6 md:px-10">
+            <div
+              className="glass-card-gv p-10 sm:p-14 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10"
+              style={{
+                border: "1px solid rgba(212,175,55,0.25)",
+                boxShadow: "0 0 60px rgba(212,175,55,0.08), 0 20px 50px rgba(0,0,0,0.5)",
+                background: "linear-gradient(135deg, rgba(212,175,55,0.05) 0%, rgba(255,255,255,0.02) 100%)",
+              }}
+            >
+              <div className="reveal">
+                <p className="text-gv-gold font-inter text-[10px] tracking-[0.3em] uppercase font-semibold mb-4">
+                  {cta.label || "PROPOSAL"}
+                </p>
+                <h2 className="font-fraunces text-3xl sm:text-4xl text-white mb-4 leading-snug max-w-lg">
+                  {cta.heading || "Need an end-to-end plan?"}
+                </h2>
+                <p className="font-inter text-white/55 text-base leading-relaxed max-w-md">
+                  {cta.subtext || "Tell us your city, dates, and guest volume — we'll respond with a polished execution blueprint."}
+                </p>
+              </div>
+              <div className="shrink-0 reveal reveal-delay">
+                <Link href="/contact" className="gold-btn glow-pulse inline-block px-12 py-4 text-sm">
+                  {cta.btn_text || "Enquire"}
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
       </main>
 
-      <Footer />
+      <Footer config={footer} />
+      <WhatsAppWidget phone={waPhone} />
+      <ScrollToTopBtn />
     </div>
   );
 }

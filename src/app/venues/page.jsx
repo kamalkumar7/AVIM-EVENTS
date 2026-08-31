@@ -2,193 +2,218 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollAnimation from "@/components/ScrollAnimation";
+import WhatsAppWidget from "@/components/guestversity/WhatsAppWidget";
+import ScrollToTopBtn from "@/components/guestversity/ScrollToTopBtn";
+import prisma from "@/lib/prisma";
+
+export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Premier Venues | AVIM Events",
+  title: "Venues | Guestversity Group",
   description:
-    "Discover our curated collection of palatial estates and elite 5-star & 4-star venue partners across India.",
+    "Discover our curated collection of palatial estates and elite venue partners, handpicked for royal celebrations and premium events.",
 };
 
-const palatialVenues = [
-  {
-    id: 1,
-    name: "Taj Palace",
-    location: "New Delhi, India",
-    tag: "Featured",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuBvr0gLdUTZGrSGlC5vGBFkGkp_6Fr6j9b_mlZIMWgnNTMnzQL2U0ypzUj4tFBPYq4bTluYvA4YhpCBli1r0eHAhxbSJvsl9JxBDoARacJOMQt3pKxAuye1DWh7SO6KCgR-HKJTZ6Basj6o76iI6Dx3wc1dCrRpsa9q_6kuFDgVhkG4_qLGgAfbvvsREJeX5N7P-UoU1vtaxHbnAVPczBEVyuF81GPpakFEewcwJqjgGMybVnx9bHh3VA",
-  },
-  {
-    id: 2,
-    name: "The Oberoi Udaivilas",
-    location: "Udaipur, India",
-    tag: null,
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuBTGr9Um_tJVmn5fsmLDktHUo1OBZanbCxGScrsDAOS36MQbij368D19XY5o87WCxVIpWB1Ftrbd05L9DhbimxZcz5s7hPvjVhLlZYkhw94LT6P4qU8nm6s8r6bIZYnxdbBkgOWO-59olvdKaWERKTWy7KHSz0RKRmANTdJoWTdZwqJQ6RXpq2D0cxNC7N4fG9MAER1kEyeFG7608BuddSnzMQ30I_igWNhfEHkiDU_gWZy4sq12rXn0w",
-  },
+const DEFAULT_PALATIAL = [
+  { id: 1, name: "Taj Palace", location: "New Delhi, India", tag: "Featured", imageUrl: null },
+  { id: 2, name: "The Oberoi Udaivilas", location: "Udaipur, India", tag: null, imageUrl: null },
 ];
 
-const eliteCollections = [
-  {
-    id: 3,
-    name: "Marriott International",
-    location: "Jaipur, India",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuDP5pNbw7l655d6gGj1I-giisddJvDIYzQJXzwArBTJcvHgDcsym4vsXYRjA9_AXBRiuxQdUVCpgiEj_D9ZC4ABLLqpMA6-95aHOcp_GfsrHI_1wyyqRl5KgwypQpIjSrJtmnflS22HYLuiT04RoeaMgVfZbGH7gy9rr3MmIVojFVWBWLJXywvjvaTVtsEhem-LAIFjJV8UmqMglalPO-BwQ1ZDZAtajmM_IZIejZOzbI51zmm6wVKgpQ",
-  },
-  {
-    id: 4,
-    name: "ITC Rajputana",
-    location: "Jaipur, India",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuAfYfS99OJkPwaEGpoqjfkgLhYHI-11cysogZRdo2uD7hrMNWnejvQHrN4mZbovLj3_0HlV2hC8c-jssr25DtyrwRoAWTaRBiqH02PURNdG6Iz0lPlX299MX804xzIlWKzg7K2GFfTnWN8dhFYB5gOPxJML26za7NTdNDBzqm1YQajzcB3SgxhPEzk8sNUXZz2BcliYBn7dW8mesotNpV3ZGDL1rQ1d0vKqq8mRookEVlDzNF6XIAvzAw",
-  },
-  {
-    id: 5,
-    name: "Hyatt Regency",
-    location: "Mumbai, India",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuAfR6h7F7dNkM3wKGSUA_VrZ3t_qejcWDJ1V3rPR1Un4HQlDjbatZUBYeeF7p_7u4bY12gqXg19J4sSEJFkeaLTPIZ1yAPlCGhr-dxOpfOkUIiR4T5yqJQs9wMmVTYLiPzuGKwWxzRglbc1Pva7lxd7BnjSVnA8cjwtlb_LWi-xA3bwu97kZmNjfg9iMLhtbu8aYbRwo-g6oYSVS6-RnCbu1DrOTWGYCZdP7MgVriqRA1GTJFDnot3gNQ",
-  },
+const DEFAULT_ELITE = [
+  { id: 3, name: "Marriott International", location: "Jaipur, India", tag: null, imageUrl: null },
+  { id: 4, name: "ITC Rajputana", location: "Jaipur, India", tag: null, imageUrl: null },
+  { id: 5, name: "Hyatt Regency", location: "Mumbai, India", tag: null, imageUrl: null },
 ];
 
-export default function VenuesPage() {
+function cfgMap(configs) {
+  const m = {};
+  configs.forEach((c) => { m[c.key] = c.value; });
+  return m;
+}
+
+export default async function VenuesPage() {
+  const [palatialVenues, eliteVenues, venueConfigs, navbarConfigs, footerConfigs, contactConfigs] = await Promise.all([
+    prisma.venueCard.findMany({ where: { active: true, tier: "palatial" }, orderBy: { order: "asc" } }),
+    prisma.venueCard.findMany({ where: { active: true, tier: "elite" }, orderBy: { order: "asc" } }),
+    prisma.siteConfig.findMany({ where: { section: "venues_page" } }),
+    prisma.siteConfig.findMany({ where: { section: "navbar" } }),
+    prisma.siteConfig.findMany({ where: { section: "footer" } }),
+    prisma.siteConfig.findMany({ where: { section: "contact_info" } }),
+  ]);
+
+  const venueConfig = cfgMap(venueConfigs);
+  const navbar = cfgMap(navbarConfigs);
+  const footer = cfgMap(footerConfigs);
+  const contact = cfgMap(contactConfigs);
+
+  const waPhone = navbar.whatsapp_number || contact.whatsapp_number || "918951097078";
+
+  const displayPalatial = palatialVenues.length > 0 ? palatialVenues : DEFAULT_PALATIAL;
+  const displayElite = eliteVenues.length > 0 ? eliteVenues : DEFAULT_ELITE;
+
   return (
-    <div className="bg-background text-on-background font-body-rt antialiased min-h-screen flex flex-col relative">
+    <div
+      className="antialiased relative min-h-screen"
+      style={{ backgroundColor: "#050505", color: "#f0ebe0" }}
+    >
       <ScrollAnimation />
-      <Navbar />
+      <Navbar config={navbar} />
 
-      <main className="flex-grow pt-24 md:pt-32 pb-24">
-        {/* Header */}
-        <header className="pt-8 pb-16 px-6 md:px-16 max-w-[1280px] mx-auto text-center scroll-reveal">
-          <h1 className="font-display-lg text-4xl md:text-6xl text-primary mb-6 font-bold">
-            Exquisite Settings
-          </h1>
-          <p className="font-subheading-sm text-xl text-on-surface-variant max-w-2xl mx-auto mb-10">
-            Discover our curated collection of palatial estates and elite venue
-            partners, handpicked to serve as the perfect canvas for your royal
-            celebration.
-          </p>
-          <div className="flex justify-center items-center gap-4">
-            <div className="w-16 h-[1px] bg-tertiary-container" />
-            <span className="material-symbols-outlined text-tertiary-container">
-              star
-            </span>
-            <div className="w-16 h-[1px] bg-tertiary-container" />
+      <main>
+        {/* ── HERO ── */}
+        <section
+          className="relative pt-36 pb-16 sm:pt-44 sm:pb-20 overflow-hidden"
+          style={{
+            background:
+              "radial-gradient(ellipse at 60% 40%, rgba(212,175,55,0.1) 0%, transparent 55%), linear-gradient(to bottom, #060606, #050505)",
+          }}
+        >
+          <div className="max-w-7xl mx-auto px-6 md:px-10 text-center relative z-10">
+            <p className="text-gv-gold font-inter text-[10px] tracking-[0.3em] uppercase font-semibold mb-6">
+              {venueConfig.label || "VENUES"}
+            </p>
+            <h1 className="font-fraunces text-4xl sm:text-5xl xl:text-6xl text-white leading-tight mb-6">
+              {venueConfig.heading || "Exquisite Settings"}
+            </h1>
+            <p className="font-inter text-white/55 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
+              {venueConfig.subtext || "Discover our curated collection of palatial estates and elite venue partners, handpicked to serve as the perfect canvas for your royal celebration."}
+            </p>
           </div>
-        </header>
+        </section>
 
-        {/* Section 1: Palatial 5-Star Partners */}
-        <section className="mb-24 px-6 md:px-16 max-w-[1280px] mx-auto scroll-reveal">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-12 border-b border-tertiary-container/30 pb-4">
-            <div>
-              <h2 className="font-headline-md text-3xl text-primary mb-2 font-bold">
-                Palatial 5-Star Partners
-              </h2>
-              <p className="font-subheading-sm text-lg text-on-surface-variant">
-                Unparalleled luxury and heritage.
+        <div className="h-px bg-gradient-to-r from-transparent via-gv-gold/20 to-transparent" />
+
+        {/* ── PALATIAL VENUES ── */}
+        <section className="py-20 sm:py-28 section-theme-black">
+          <div className="max-w-7xl mx-auto px-6 md:px-10">
+            <div className="mb-12 reveal">
+              <p className="text-gv-gold font-inter text-[10px] tracking-[0.3em] uppercase font-semibold mb-3">
+                {venueConfig.palatial_label || "PALATIAL 5-STAR PARTNERS"}
               </p>
+              <h2 className="font-fraunces text-2xl sm:text-3xl text-white">
+                {venueConfig.palatial_heading || "Unparalleled luxury and heritage."}
+              </h2>
+              <div className="mt-4 h-px w-24" style={{ background: "linear-gradient(to right, rgba(212,175,55,0.6), transparent)" }} />
             </div>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {palatialVenues.map((venue) => (
-              <article
-                key={venue.id}
-                className="bg-surface border border-gold shadow-ambient-gold flex flex-col group cursor-pointer hover:-translate-y-2 transition-all duration-500 rounded-lg overflow-hidden"
-              >
-                <div className="relative w-full h-80 jharokha-arch overflow-hidden p-4">
-                  <img
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 rounded-t-[50%]"
-                    alt={venue.name}
-                    src={venue.image}
-                  />
-                  {venue.tag && (
-                    <div className="absolute top-6 right-6 bg-primary-container text-tertiary-fixed font-label-caps text-xs px-3 py-1 rounded font-bold uppercase">
-                      {venue.tag}
-                    </div>
-                  )}
-                </div>
-                <div className="p-8 flex flex-col flex-grow">
-                  <h3 className="font-headline-md text-2xl text-primary mb-2 font-bold">
-                    {venue.name}
-                  </h3>
-                  <p className="font-subheading-sm text-base text-on-surface-variant mb-6 flex items-center gap-2">
-                    <span className="material-symbols-outlined text-tertiary-container text-sm">
-                      location_on
-                    </span>
-                    {venue.location}
-                  </p>
-                  <div className="mt-auto pt-6 border-t border-tertiary-container/30 flex justify-between items-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {displayPalatial.map((venue) => (
+                <article
+                  key={venue.id}
+                  className="glass-card-gv overflow-hidden group hover:-translate-y-2 transition-all duration-500 hover:border-gv-gold/40 reveal"
+                >
+                  <div className="relative h-64 overflow-hidden">
+                    <img
+                      src={venue.imageUrl || "/images/guestversity/placeholder-portfolio.svg"}
+                      alt={venue.name}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      loading="lazy"
+                      onError={(e) => { e.currentTarget.src = "/images/guestversity/placeholder-portfolio.svg"; }}
+                    />
+                    <div
+                      className="absolute inset-0 pointer-events-none"
+                      style={{ background: "linear-gradient(to top, rgba(5,5,5,0.7) 0%, transparent 50%)" }}
+                    />
+                    {venue.tag && (
+                      <span
+                        className="absolute top-4 right-4 font-inter text-[9px] tracking-[0.2em] uppercase px-2.5 py-1 rounded-full"
+                        style={{
+                          background: "rgba(212,175,55,0.15)",
+                          border: "1px solid rgba(212,175,55,0.5)",
+                          color: "#D4AF37",
+                        }}
+                      >
+                        {venue.tag}
+                      </span>
+                    )}
+                  </div>
+                  <div className="p-6">
+                    <h3 className="font-fraunces text-xl text-white mb-1 group-hover:text-gv-gold transition-colors">
+                      {venue.name}
+                    </h3>
+                    <p className="font-inter text-xs text-white/45 mb-5">{venue.location}</p>
                     <Link
                       href="/contact"
-                      className="font-label-caps text-xs text-tertiary-container uppercase tracking-widest font-semibold group-hover:text-primary transition-colors"
+                      className="font-inter text-[11px] text-gv-gold tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     >
-                      Inquire Venue Details
+                      Enquire about this venue →
                     </Link>
-                    <span className="material-symbols-outlined text-tertiary-container group-hover:translate-x-2 transition-transform">
-                      arrow_forward
-                    </span>
                   </div>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        {/* Section 2: Elite 4-Star Collections */}
-        <section className="mb-24 px-6 md:px-16 max-w-[1280px] mx-auto scroll-reveal">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-12 border-b border-tertiary-container/30 pb-4">
-            <div>
-              <h2 className="font-headline-md text-3xl text-primary mb-2 font-bold">
-                Elite Collections
-              </h2>
-              <p className="font-subheading-sm text-lg text-on-surface-variant">
-                Contemporary elegance and refined service.
-              </p>
+                </article>
+              ))}
             </div>
           </div>
+        </section>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {eliteCollections.map((venue) => (
-              <article
-                key={venue.id}
-                className="bg-surface border border-tertiary-container/30 group cursor-pointer p-4 hover:-translate-y-2 transition-all duration-500 rounded-lg shadow-md"
-              >
-                <div className="w-full h-64 overflow-hidden mb-6 relative rounded">
-                  <img
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    alt={venue.name}
-                    src={venue.image}
-                  />
-                </div>
-                <h3 className="font-headline-md text-xl font-bold text-primary mb-2">
-                  {venue.name}
-                </h3>
-                <p className="font-subheading-sm text-sm text-on-surface-variant mb-4 flex items-center gap-2">
-                  <span className="material-symbols-outlined text-tertiary-container text-sm">
-                    location_on
-                  </span>
-                  {venue.location}
-                </p>
-                <div className="flex justify-between items-center border-t border-tertiary-container/20 pt-4">
-                  <Link
-                    href="/contact"
-                    className="font-label-caps text-xs text-tertiary-container uppercase tracking-widest font-semibold group-hover:text-primary transition-colors"
-                  >
-                    Inquire Venue Details
-                  </Link>
-                  <span className="material-symbols-outlined text-tertiary-container text-sm group-hover:translate-x-1 transition-transform">
-                    arrow_forward
-                  </span>
-                </div>
-              </article>
-            ))}
+        <div className="h-px bg-gradient-to-r from-transparent via-gv-gold/20 to-transparent" />
+
+        {/* ── ELITE VENUES ── */}
+        <section className="py-20 sm:py-28 section-theme-charcoal">
+          <div className="max-w-7xl mx-auto px-6 md:px-10">
+            <div className="mb-12 reveal">
+              <p className="text-gv-gold font-inter text-[10px] tracking-[0.3em] uppercase font-semibold mb-3">
+                {venueConfig.elite_label || "ELITE COLLECTIONS"}
+              </p>
+              <h2 className="font-fraunces text-2xl sm:text-3xl text-white">
+                {venueConfig.elite_heading || "Contemporary elegance and refined service."}
+              </h2>
+              <div className="mt-4 h-px w-24" style={{ background: "linear-gradient(to right, rgba(212,175,55,0.6), transparent)" }} />
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {displayElite.map((venue) => (
+                <article
+                  key={venue.id}
+                  className="glass-card-gv overflow-hidden group hover:-translate-y-2 transition-all duration-500 hover:border-gv-gold/40 reveal"
+                >
+                  <div className="relative h-52 overflow-hidden">
+                    <img
+                      src={venue.imageUrl || "/images/guestversity/placeholder-portfolio.svg"}
+                      alt={venue.name}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      loading="lazy"
+                      onError={(e) => { e.currentTarget.src = "/images/guestversity/placeholder-portfolio.svg"; }}
+                    />
+                    <div
+                      className="absolute inset-0 pointer-events-none"
+                      style={{ background: "linear-gradient(to top, rgba(5,5,5,0.6) 0%, transparent 50%)" }}
+                    />
+                    {venue.tag && (
+                      <span
+                        className="absolute top-4 right-4 font-inter text-[9px] tracking-[0.2em] uppercase px-2.5 py-1 rounded-full"
+                        style={{
+                          background: "rgba(212,175,55,0.15)",
+                          border: "1px solid rgba(212,175,55,0.5)",
+                          color: "#D4AF37",
+                        }}
+                      >
+                        {venue.tag}
+                      </span>
+                    )}
+                  </div>
+                  <div className="p-5">
+                    <h3 className="font-fraunces text-lg text-white mb-1 group-hover:text-gv-gold transition-colors">
+                      {venue.name}
+                    </h3>
+                    <p className="font-inter text-xs text-white/45 mb-4">{venue.location}</p>
+                    <Link
+                      href="/contact"
+                      className="font-inter text-[11px] text-gv-gold tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    >
+                      Enquire →
+                    </Link>
+                  </div>
+                </article>
+              ))}
+            </div>
           </div>
         </section>
+
       </main>
 
-      <Footer />
+      <Footer config={footer} />
+      <WhatsAppWidget phone={waPhone} />
+      <ScrollToTopBtn />
     </div>
   );
 }

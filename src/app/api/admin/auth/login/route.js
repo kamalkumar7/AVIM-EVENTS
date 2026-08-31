@@ -1,0 +1,18 @@
+import { NextResponse } from "next/server";
+import { getSession } from "@/lib/session";
+
+export async function POST(req) {
+  const { username, password } = await req.json();
+
+  if (
+    username === process.env.ADMIN_USERNAME &&
+    password === process.env.ADMIN_PASSWORD
+  ) {
+    const session = await getSession();
+    session.isAdmin = true;
+    await session.save();
+    return NextResponse.json({ ok: true });
+  }
+
+  return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
+}

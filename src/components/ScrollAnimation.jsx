@@ -9,8 +9,8 @@ export default function ScrollAnimation() {
   useEffect(() => {
     const observerOptions = {
       root: null,
-      rootMargin: "0px",
-      threshold: 0.1,
+      rootMargin: "0px 0px -10% 0px",
+      threshold: 0.12,
     };
 
     const observer = new IntersectionObserver((entries, obs) => {
@@ -22,7 +22,9 @@ export default function ScrollAnimation() {
       });
     }, observerOptions);
 
-    const elements = document.querySelectorAll(".scroll-reveal, .line-draw");
+    const elements = document.querySelectorAll(
+      ".scroll-reveal, .line-draw, .reveal, .reveal-left, .reveal-right"
+    );
     elements.forEach((el) => observer.observe(el));
 
     return () => {
