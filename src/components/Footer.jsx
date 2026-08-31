@@ -49,7 +49,7 @@ export default function Footer({ config = {} }) {
         <div>
           <h3 className="font-inter text-[10px] text-gv-gold tracking-[0.25em] uppercase font-semibold mb-5">SERVICES</h3>
           <ul className="space-y-3 font-inter text-sm">
-            {[["Hospitality", "/services"], ["Logistics", "/services"], ["Weddings", "/services"], ["EventMate-AI", "/eventmate"]].map(([name, href]) => (
+            {[["Hospitality", "/services"], ["Logistics", "/services"], ["Weddings", "/services"]].map(([name, href]) => (
               <li key={name}><Link href={href} className="text-white/50 hover:text-gv-gold transition-colors">{name}</Link></li>
             ))}
           </ul>
