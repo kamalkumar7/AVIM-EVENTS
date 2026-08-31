@@ -2,6 +2,11 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollAnimation from "@/components/ScrollAnimation";
+import HeroAnimation from "@/components/HeroAnimation";
+import PortfolioShowcase from "@/components/PortfolioShowcase";
+import ProcessTimeline from "@/components/ProcessTimeline";
+import TeamPreview from "@/components/TeamPreview";
+import FAQSection from "@/components/FAQSection";
 
 const services = [
   {
@@ -91,17 +96,19 @@ export default function Home() {
       <Navbar />
 
       <main>
-        {/* ── Hero ─────────────────────────────────────────── */}
+        {/* ── Hero with Animation ────────────────────────────── */}
         <section
           className="relative h-screen flex items-center justify-center overflow-hidden"
           id="home"
         >
+          <HeroAnimation />
+
           <div className="absolute inset-0 z-0">
             <div
               className="w-full h-full bg-cover bg-center parallax-bg"
               style={{
                 backgroundImage:
-                  "url('https://lh3.googleusercontent.com/aida-public/AB6AXuBS27Bp9YuzAblMi3iAbY9TN-lV4CbahWMOPT3Kj4BGXdmrP9Hehu9PBhZHZONAQS0ArYQU1LUdpLEqoo-yfpbHIO-YReYcrX-u4CvmhnqABNx_JEUL2yYyJDFPfH2r2YyNk_PI5xU_2Rs5eN4_SBAPgqeVCgc0SpZk-lBGvcs45u5AIgkOvhDi9NTm7NkTWDqb7NcMYuJz_aKP2QPMvRtZ6vXghTbtq236NG2ZHd5z__OiQ0lg8KZb5Q')",
+                  "url('https://images.unsplash.com/photo-1519167758481-83f19106c7a3?w=1920&q=80')",
               }}
             />
             <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/55 to-background/90" />
@@ -111,7 +118,7 @@ export default function Home() {
           {floatingTags.map((tag) => (
             <span
               key={tag.text}
-              className={`absolute ${tag.pos} ${tag.rotate} hidden lg:block font-label-caps text-[10px] tracking-[0.25em] text-on-surface-variant/40 border border-primary/15 px-3 py-1.5`}
+              className={`absolute ${tag.pos} ${tag.rotate} hidden lg:block font-label-caps text-[10px] tracking-[0.25em] text-on-surface-variant/40 border border-primary/15 px-3 py-1.5 animate-float-slow`}
             >
               {tag.text}
             </span>
@@ -119,18 +126,18 @@ export default function Home() {
 
           {/* Hero content */}
           <div className="relative z-10 text-center px-6 md:px-16 mx-auto max-w-4xl flex flex-col items-center scroll-reveal">
-            <p className="font-label-caps text-[10px] tracking-[0.35em] text-primary uppercase mb-6">
+            <p className="font-label-caps text-[10px] tracking-[0.35em] text-primary uppercase mb-6 animate-fade-in">
               Hospitality &nbsp;·&nbsp; Events &nbsp;·&nbsp; India
             </p>
-            <h1 className="font-display-lg text-4xl md:text-6xl lg:text-7xl text-on-background font-bold leading-tight mb-6">
+            <h1 className="font-display-lg text-4xl md:text-6xl lg:text-7xl text-on-background font-bold leading-tight mb-6 animate-slide-up">
               Crafting Regal Celebrations Across India
             </h1>
-            <p className="font-subheading-sm text-xl md:text-2xl text-on-surface-variant mb-10 max-w-2xl leading-relaxed">
+            <p className="font-subheading-sm text-xl md:text-2xl text-on-surface-variant mb-10 max-w-2xl leading-relaxed animate-slide-up animation-delay-200">
               Luxury event management for weddings, milestones, and brand
               launches — where every detail reflects the prestige of our
               clientele.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-4 animate-slide-up animation-delay-300">
               <Link
                 href="/contact"
                 className="bg-primary text-on-primary font-label-caps text-xs uppercase tracking-widest px-10 py-4 shimmer-btn font-semibold hover:opacity-90 transition-opacity"
@@ -147,7 +154,7 @@ export default function Home() {
           </div>
 
           {/* Scroll indicator */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10">
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10 animate-bounce">
             <span className="font-label-caps text-[9px] tracking-[0.3em] text-on-surface-variant/40 uppercase">
               Scroll
             </span>
@@ -346,6 +353,28 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        <div className="h-px bg-gradient-to-r from-transparent via-primary/25 to-transparent mx-6 md:mx-16 max-w-[1280px] md:mx-auto" />
+
+        {/* ── Portfolio Showcase ────────────────────────────── */}
+        <PortfolioShowcase />
+
+        <div className="h-px bg-gradient-to-r from-transparent via-primary/25 to-transparent mx-6 md:mx-16 max-w-[1280px] md:mx-auto" />
+
+        {/* ── Process Timeline ──────────────────────────────── */}
+        <ProcessTimeline />
+
+        <div className="h-px bg-gradient-to-r from-transparent via-primary/25 to-transparent mx-6 md:mx-16 max-w-[1280px] md:mx-auto" />
+
+        {/* ── Team Preview ──────────────────────────────────– */}
+        <TeamPreview />
+
+        <div className="h-px bg-gradient-to-r from-transparent via-primary/25 to-transparent mx-6 md:mx-16 max-w-[1280px] md:mx-auto" />
+
+        {/* ── FAQ Section ───────────────────────────────────── */}
+        <FAQSection />
+
+        <div className="h-px bg-gradient-to-r from-transparent via-primary/25 to-transparent mx-6 md:mx-16 max-w-[1280px] md:mx-auto" />
 
         {/* ── CTA Banner ────────────────────────────────────── */}
         <section className="py-28 px-6 md:px-16 text-center bg-surface-container-low scroll-reveal">
