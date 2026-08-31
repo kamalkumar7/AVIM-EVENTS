@@ -13,7 +13,7 @@ const navLinks = [
   { name: "Contact",     href: "/contact" },
 ];
 
-export default function Navbar() {
+export default function Navbar({ config = {} }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
@@ -34,7 +34,7 @@ export default function Navbar() {
               Guestversity Group
             </span>
             <span className="font-inter text-white/60 text-[9px] tracking-[0.24em] uppercase">
-              HOSPITALITY &nbsp;•&nbsp; LOGISTICS
+              {config.logo_tagline || "HOSPITALITY  •  LOGISTICS"}
             </span>
           </div>
         </Link>
@@ -65,7 +65,7 @@ export default function Navbar() {
           href="/contact"
           className="hidden lg:inline-flex gold-btn px-6 py-2.5 text-xs"
         >
-          Enquire
+          {config.cta_text || "Enquire"}
         </Link>
 
         {/* Mobile hamburger */}

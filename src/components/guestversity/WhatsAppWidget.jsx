@@ -2,15 +2,17 @@
 
 import { useState } from "react";
 
-export default function WhatsAppWidget() {
+export default function WhatsAppWidget({ phone = "918951097078" }) {
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
+
+  const waNumber = phone.replace(/\D/g, "");
 
   function sendMessage() {
     const encoded = encodeURIComponent(
       message.trim() || "Hi Guestversity Group…"
     );
-    window.open(`https://wa.me/918951097078?text=${encoded}`, "_blank", "noopener,noreferrer");
+    window.open(`https://wa.me/${waNumber}?text=${encoded}`, "_blank", "noopener,noreferrer");
     setOpen(false);
     setMessage("");
   }

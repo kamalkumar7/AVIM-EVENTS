@@ -2,16 +2,16 @@
 
 import { useState, useEffect, useRef } from "react";
 
-const stats = [
-  { end: 1500, suffix: "+",  label: "Total Events Managed" },
-  { end: 12,   suffix: "+",  label: "Years of Experience" },
-  { end: 27,   suffix: "+",  label: "Cities Covered Pan India & Internationally" },
-  { end: 500,  suffix: "+",  label: "Luxury Weddings Managed" },
-  { end: 60,   suffix: "+",  label: "Corporate Collaborations" },
-  { end: 24,   suffix: "/7", label: "Command-center Support" },
+const DEFAULT_STATS = [
+  { end: 1500, suffix: "+", label: "Total Events Managed" },
+  { end: 12, suffix: "+", label: "Years of Experience" },
+  { end: 27, suffix: "+", label: "Cities Covered Pan India & Internationally" },
+  { end: 500, suffix: "+", label: "Luxury Weddings Managed" },
+  { end: 60, suffix: "+", label: "Corporate Collaborations" },
+  { end: 24, suffix: "/7", label: "Command-center Support" },
 ];
 
-const milestones = [
+const DEFAULT_MILESTONES = [
   {
     title: "Narendra Modi Event – GKVK",
     badge: "India",
@@ -22,31 +22,37 @@ const milestones = [
     title: "Dubai Work – Palazzo Versace",
     badge: "Dubai",
     desc: "High-Profile International Engagement delivered with Luxury-Grade Hospitality Standards, Discreet VIP Handling, and Composed Execution.",
+    dominant: false,
   },
   {
     title: "Oman Engagement",
     badge: "Oman",
     desc: "Cross-Border Guest Operations, Airport-to-Venue Routing, and On-Ground Hospitality Choreography aligned to International Expectations.",
+    dominant: false,
   },
   {
     title: "Sri Lanka High-Level Event",
     badge: "Sri Lanka",
     desc: "A High-Level Platform managed with Disciplined Timelines, Stakeholder Protocol, and Premium Guest Experience Control.",
+    dominant: false,
   },
   {
     title: "EX CM Engagement",
     badge: "India",
     desc: "Protocol-Sensitive Engagement delivered with Quiet Reliability, Coordinated Movement Planning, and Zero Disruption Operations.",
+    dominant: false,
   },
   {
     title: "Indian National Congress Event",
     badge: "India",
     desc: "Large-Audience Guest and Logistics Operations delivered with Sharp Coordination, Controlled Access, and a Premium On-Ground Finish.",
+    dominant: false,
   },
   {
     title: "EventMate-AI Official Launch & Collaboration",
     badge: "India",
     desc: "A Flagship Innovation Milestone bringing Technology and On-Ground Hospitality Execution together – designed for scale and Authority.",
+    dominant: false,
   },
 ];
 
@@ -91,7 +97,20 @@ function AnimatedCounter({ end, suffix }) {
   );
 }
 
-export default function AboutStatsSection() {
+export default function AboutStatsSection({ stats: propStats = [], milestones: propMilestones = [] }) {
+  const stats = propStats.length > 0
+    ? propStats.map((s) => ({ end: Number(s.value) || 0, suffix: s.suffix || "+", label: s.label }))
+    : DEFAULT_STATS;
+
+  const milestones = propMilestones.length > 0
+    ? propMilestones.map((m) => ({
+        title: m.title,
+        badge: m.badge || m.location || "",
+        desc: m.description || "",
+        dominant: m.featured || false,
+      }))
+    : DEFAULT_MILESTONES;
+
   return (
     <>
       {/* ── Stats ── */}
@@ -134,7 +153,7 @@ export default function AboutStatsSection() {
               GLOBAL ACHIEVEMENTS
             </p>
             <h2 className="font-fraunces text-3xl sm:text-4xl text-white mb-3">
-              Global Milestones & Prestigious Engagements
+              Global Milestones &amp; Prestigious Engagements
             </h2>
             <p className="font-inter text-white/50 text-sm max-w-lg mx-auto">
               Trusted across nations, institutions, and high-profile platforms.
@@ -154,9 +173,7 @@ export default function AboutStatsSection() {
               <div
                 key={m.title}
                 className={`glass-card-gv flex flex-col sm:flex-row items-start gap-6 p-7 sm:p-10 hover:border-gv-gold/40 transition-all duration-500 reveal ${
-                  m.dominant
-                    ? "border-gv-gold/30"
-                    : ""
+                  m.dominant ? "border-gv-gold/30" : ""
                 }`}
                 style={
                   m.dominant
@@ -169,46 +186,30 @@ export default function AboutStatsSection() {
                     : {}
                 }
               >
-                {/* Index / badge column */}
                 <div className="shrink-0 flex flex-col items-center gap-2">
-                  <span
-                    className="font-fraunces text-2xl text-gradient-gold"
-                    style={{ lineHeight: 1 }}
-                  >
+                  <span className="font-fraunces text-2xl text-gradient-gold" style={{ lineHeight: 1 }}>
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <span
                     className="font-inter text-[9px] tracking-[0.2em] uppercase px-2 py-0.5 rounded-full"
-                    style={{
-                      border: "1px solid rgba(212,175,55,0.35)",
-                      color: "rgba(212,175,55,0.8)",
-                    }}
+                    style={{ border: "1px solid rgba(212,175,55,0.35)", color: "rgba(212,175,55,0.8)" }}
                   >
                     {m.badge}
                   </span>
                 </div>
 
-                {/* Vertical divider */}
                 <div
                   className="hidden sm:block w-px self-stretch shrink-0"
                   style={{
-                    background:
-                      "linear-gradient(to bottom, transparent, rgba(212,175,55,0.3), transparent)",
+                    background: "linear-gradient(to bottom, transparent, rgba(212,175,55,0.3), transparent)",
                   }}
                 />
 
-                {/* Content */}
                 <div>
-                  <h3
-                    className={`font-fraunces mb-2 text-white ${
-                      m.dominant ? "text-xl sm:text-2xl" : "text-lg"
-                    }`}
-                  >
+                  <h3 className={`font-fraunces mb-2 text-white ${m.dominant ? "text-xl sm:text-2xl" : "text-lg"}`}>
                     {m.title}
                   </h3>
-                  <p className="font-inter text-sm text-white/55 leading-relaxed">
-                    {m.desc}
-                  </p>
+                  <p className="font-inter text-sm text-white/55 leading-relaxed">{m.desc}</p>
                 </div>
               </div>
             ))}

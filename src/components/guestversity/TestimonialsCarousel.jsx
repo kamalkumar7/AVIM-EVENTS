@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 
-const testimonials = [
+const DEFAULT_TESTIMONIALS = [
   {
     author: "Prashobh Jayachandran",
     time: "2 months ago",
@@ -77,7 +77,11 @@ const testimonials = [
   },
 ];
 
-export default function TestimonialsCarousel() {
+export default function TestimonialsCarousel({ testimonials: propTestimonials = [], config = {} }) {
+  const testimonials = propTestimonials.length > 0
+    ? propTestimonials.map((t) => ({ author: t.author, time: t.timeAgo, quote: t.quote }))
+    : DEFAULT_TESTIMONIALS;
+
   const [index, setIndex] = useState(0);
   const timerRef = useRef(null);
   const startX = useRef(null);
@@ -125,13 +129,10 @@ export default function TestimonialsCarousel() {
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12 reveal">
           <div>
             <p className="text-gv-gold font-inter text-[10px] tracking-[0.3em] uppercase font-semibold mb-3">
-              TESTIMONIALS
+              {config.label || "TESTIMONIALS"}
             </p>
             <h2 className="font-fraunces text-3xl sm:text-4xl text-white leading-tight max-w-xl">
-              CLIENT REVIEWS —{" "}
-              <em className="text-white/60 font-normal text-2xl sm:text-3xl">
-                Here&apos;s what our clients has to say about us
-              </em>
+              {config.heading || "CLIENT REVIEWS — Here's what our clients have to say about us"}
             </h2>
           </div>
           {/* Prev / Next */}

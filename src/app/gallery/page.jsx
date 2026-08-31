@@ -1,141 +1,84 @@
-"use client";
-
-import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollAnimation from "@/components/ScrollAnimation";
+import WhatsAppWidget from "@/components/guestversity/WhatsAppWidget";
+import ScrollToTopBtn from "@/components/guestversity/ScrollToTopBtn";
+import GalleryGrid from "@/components/guestversity/GalleryGrid";
+import prisma from "@/lib/prisma";
 
-const galleryItems = [
-  {
-    id: 1,
-    category: "WEDDING",
-    title: "The Royal Mandap",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuDa_pGtCo36-qdvHJuiBXWXZscTFPfFuGenslb29UJbe8f50evZMZm9fKjMtMASungonD3_DJEGHW8l8JCTl0_nQkZrizyO18dSt8GgY5B5gEK8lrkkmufZYGHClMUeOJcX2S7uIRXuSRwPx5ESxpqz396EMqoEVmi1-Ndyc3EdDDwoe5ZpLNWzD3tvCcH6T_0_nTDrmaIayrZwYc5uEdS5ck-CSF8x2Qihd0HmdTaqkAYmyJbDIeR6_w",
-    hClass: "h-96",
-  },
-  {
-    id: 2,
-    category: "CORPORATE",
-    title: "Gala Dinner Setup",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuBTWfBDYGyStoDnusUV4s-y6je2d1HVUQczQk09mpYkWqgOtklkSsMZ8c5y4V6pth8oQx_CD029JdZtxiaaOyRYJHe8WfGwmrkabcwxpQG2bZvw6TymlLiHTMpb8w1n2ImwKl_uBPkUDAXb6QXqjFXkBcwirzchfNUL1It15qK3tKCvxVLQEVrVhFQi-f_sxZ2ZuCaWz0MZfTmGYSjLOwFVhhML7R_sgiHE_OH2wqktvNKgvZonqS8Xiw",
-    hClass: "h-64",
-  },
-  {
-    id: 3,
-    category: "SOCIAL",
-    title: "Lounge Ambiance",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuAU1ZbqfnvGyOq-h2l8ou0Ka_H5jJhqWLZCPAUMkbOqPkXRBdHmNcQZWQJZE23lDhuOWuNq-uDtQT40rcb66XmczxWQUD4sPRGKCS5CaJDoiYQFJiBztyL6g7Uns6BvB9hDrUc-SPD711oh9fI3hBIXQVqeTIoOGMCLFviMPwAwW3GguLk_e-dujEdtOYUxb3HbAXZhM5rIfbhONz8DerMDxQvZlkhpzq5Ei4e5-qoCICnEC2KijI17jA",
-    hClass: "h-64",
-  },
-  {
-    id: 4,
-    category: "WEDDING",
-    title: "Palace Illumination",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuCSNG-EjALXCPLWVdKlK37e_JHMpsPcJZfkdYhB9hWGAx5nsrTDVV54M0JanPVEpclFhQzenHBtINbdTdWeGLNgwvSX296PwHDMizqBuB8Y8d1GfINRgEXGZoPXvYDHLXlutwQvmqEBX_xOvuj9we46n8vj12yEHIggKmqH4XtqFp3rsdLIhFsg3SKw2mW2VYctxNwaOrnvwhlnksjTRGoy8O2f-6pc4S8Fat5hCViEqbTxTRAKvrpJPQ",
-    hClass: "h-96",
-  },
-  {
-    id: 5,
-    category: "SOCIAL",
-    title: "Exotic Florals",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuC3kGEiL-rkIUy8RL2vGzcuC756VRxFQUmr4wPUhB7r_xty7pZzDzprzixfNy-ZNLOQyMjOwX4F2VnYcI93rHkM_9WGNXBcOSr5cgKxM1dZ3NYZq6eWRja8Subwbyvp5hliOSV2TWNtk4QKZdUgZGexw5CEl5s1sX_RnabYM3FuWci3KilfeNoepHeMb_ykywjaQMvjFxqBv6lxZcnuzxZtV0yssnV21mdKC-GqML6IgKbWAxG3lXgmVg",
-    hClass: "h-96",
-  },
-  {
-    id: 6,
-    category: "WEDDING",
-    title: "The Grand Entrance",
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuBfer-7XiBZGaonvfDrZDt6YMuIRT55XYs5fwI4MmoMXKojHmQcOiR2M8hrUK2g7Mw3aYdWAuWZg9ZaCRtS05byZPuKbsqRwBV5jNbFC6qYK9cwkabUhPzJEfwdQiG5P5YpCvc2PiDMMR4aOF6VsmIvejJomUcqkWHMyAlBYYQ511rP0pSeMoZ9exsFdhqCxGy1jDaaSqdioWqEBt9csiqWPJlhayKBxeHNORndlOldyhyTWksH1Pq9nA",
-    hClass: "h-64",
-  },
-];
+export const dynamic = "force-dynamic";
 
-export default function GalleryPage() {
-  const [activeFilter, setActiveFilter] = useState("ALL");
+export const metadata = {
+  title: "Gallery | Guestversity Group",
+  description:
+    "Explore a curated collection of our most breathtaking events — from majestic royal weddings to sophisticated corporate galas.",
+};
 
-  const categories = ["ALL", "WEDDINGS", "CORPORATE", "SOCIAL"];
+function cfgMap(configs) {
+  const m = {};
+  configs.forEach((c) => { m[c.key] = c.value; });
+  return m;
+}
 
-  const filteredItems =
-    activeFilter === "ALL"
-      ? galleryItems
-      : galleryItems.filter(
-          (item) => item.category === activeFilter.replace("S", "")
-        );
+export default async function GalleryPage() {
+  const [galleryItems, galleryConfigs, navbarConfigs, footerConfigs, contactConfigs] = await Promise.all([
+    prisma.galleryItem.findMany({ where: { active: true }, orderBy: { order: "asc" } }),
+    prisma.siteConfig.findMany({ where: { section: "gallery_page" } }),
+    prisma.siteConfig.findMany({ where: { section: "navbar" } }),
+    prisma.siteConfig.findMany({ where: { section: "footer" } }),
+    prisma.siteConfig.findMany({ where: { section: "contact_info" } }),
+  ]);
+
+  const galleryConfig = cfgMap(galleryConfigs);
+  const navbar = cfgMap(navbarConfigs);
+  const footer = cfgMap(footerConfigs);
+  const contact = cfgMap(contactConfigs);
+
+  const waPhone = navbar.whatsapp_number || contact.whatsapp_number || "918951097078";
 
   return (
-    <div className="bg-background text-on-background font-body-rt antialiased min-h-screen flex flex-col relative">
+    <div
+      className="antialiased relative min-h-screen"
+      style={{ backgroundColor: "#050505", color: "#f0ebe0" }}
+    >
       <ScrollAnimation />
-      <Navbar />
+      <Navbar config={navbar} />
 
-      <main className="flex-1 pt-24 md:pt-32 pb-24">
-        {/* Hero Section */}
-        <section className="max-w-[1280px] mx-auto px-6 md:px-16 mb-16 text-center relative scroll-reveal">
-          <h1 className="font-display-lg text-4xl md:text-6xl text-primary mb-6 relative inline-block font-bold">
-            A Tapestry of Celebrations
-            <span className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-24 h-[1px] bg-tertiary-container" />
-          </h1>
-          <p className="font-subheading-sm text-xl text-on-surface-variant max-w-2xl mx-auto mt-8 leading-relaxed">
-            Explore a curated collection of our most breathtaking events. From
-            majestic royal weddings to sophisticated corporate galas, every
-            frame captures the essence of impeccable hospitality.
-          </p>
+      <main>
+        {/* ── HERO ── */}
+        <section
+          className="relative pt-36 pb-16 sm:pt-44 sm:pb-20 overflow-hidden"
+          style={{
+            background:
+              "radial-gradient(ellipse at 60% 40%, rgba(212,175,55,0.1) 0%, transparent 55%), linear-gradient(to bottom, #060606, #050505)",
+          }}
+        >
+          <div className="max-w-7xl mx-auto px-6 md:px-10 text-center relative z-10">
+            <p className="text-gv-gold font-inter text-[10px] tracking-[0.3em] uppercase font-semibold mb-6">
+              {galleryConfig.label || "GALLERY"}
+            </p>
+            <h1 className="font-fraunces text-4xl sm:text-5xl xl:text-6xl text-white leading-tight mb-6">
+              {galleryConfig.heading || "A Tapestry of Celebrations"}
+            </h1>
+            <p className="font-inter text-white/55 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto">
+              {galleryConfig.subtext || "Explore a curated collection of our most breathtaking events. From majestic royal weddings to sophisticated corporate galas, every frame captures the essence of impeccable hospitality."}
+            </p>
+          </div>
         </section>
 
-        {/* Gallery Section */}
-        <section className="bg-surface-container-low text-on-surface py-20 px-6 md:px-16 relative overflow-hidden">
-          <div className="max-w-[1280px] mx-auto relative z-10">
-            {/* Filter Tabs */}
-            <div className="flex flex-wrap justify-center gap-4 mb-16">
-              {categories.map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setActiveFilter(cat)}
-                  className={`px-6 py-2 rounded-full border text-xs font-label-caps tracking-widest uppercase transition-all duration-300 ${
-                    activeFilter === cat
-                      ? "border-primary bg-surface-container text-primary font-bold shadow-lg"
-                      : "border-primary/30 text-on-surface-variant hover:border-primary"
-                  }`}
-                >
-                  {cat}
-                </button>
-              ))}
-            </div>
+        <div className="h-px bg-gradient-to-r from-transparent via-gv-gold/20 to-transparent" />
 
-            {/* Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {filteredItems.map((item) => (
-                <div
-                  key={item.id}
-                  className={`relative group overflow-hidden border border-gold rounded-lg ${item.hClass} shadow-xl`}
-                >
-                  <div
-                    className="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-                    style={{ backgroundImage: `url('${item.image}')` }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/95 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                    <div>
-                      <span className="inline-block bg-surface-container text-primary px-3 py-1 text-[10px] font-label-caps tracking-widest mb-2 border border-primary/40 font-bold uppercase">
-                        {item.category}
-                      </span>
-                      <h3 className="font-subheading-sm text-xl text-on-surface font-bold">
-                        {item.title}
-                      </h3>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+        {/* ── GALLERY GRID ── */}
+        <section className="py-20 sm:py-28 section-theme-black">
+          <div className="max-w-7xl mx-auto px-6 md:px-10">
+            <GalleryGrid items={galleryItems} />
           </div>
         </section>
       </main>
 
-      <Footer />
+      <Footer config={footer} />
+      <WhatsAppWidget phone={waPhone} />
+      <ScrollToTopBtn />
     </div>
   );
 }

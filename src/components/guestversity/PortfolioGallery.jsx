@@ -2,22 +2,32 @@
 
 import { useState, useEffect, useCallback } from "react";
 
-const items = [
-  { cat: "AWARDS",          title: "Best Hospitality Service Award",  sub: "The Grand Indian Wedding Race • National recognition",   file: "awards-1.jpg",         col: "col-span-7", row: "row-span-2" },
-  { cat: "CORPORATE",       title: "CXO Cocktails & Conversations",    sub: "Run-of-show • VIP protocols • Stage-managed moments",    file: "corporate-1.jpg",      col: "col-span-5", row: "row-span-1" },
-  { cat: "HOSPITALITY",     title: "White‑Glove Check‑Ins",           sub: "Concierge welcome • Escorting • Guest-first touchpoints", file: "hospitality-1.jpg",    col: "col-span-3", row: "row-span-1" },
-  { cat: "OPS",             title: "On‑Ground Command",               sub: "Shift briefings • Queue control • Last‑mile decisions",   file: "ops-1.jpg",            col: "col-span-2", row: "row-span-1" },
-  { cat: "DESTINATION",     title: "Sunset Destination Mandap",       sub: "Beachside layouts • Guest routing • Wind‑proof detailing", file: "destination-1.jpg",   col: "col-span-7", row: "row-span-1" },
-  { cat: "CEREMONY",        title: "Moonlit Varmala",                  sub: "Low‑light ambience • Couple reveal • Aisle management",  file: "ceremony-1.jpg",       col: "col-span-5", row: "row-span-2", float: true },
-  { cat: "LOGISTICS",       title: "Airport & Fleet Logistics",        sub: "Guest pickups • Routing grids • Chauffeur briefings",    file: "logistics-1.jpg",      col: "col-span-4", row: "row-span-1" },
-  { cat: "OPS",             title: "Leela Ops Briefing",              sub: "Housekeeping sync • Banquet huddles • F&B routing",       file: "ops-2.jpg",            col: "col-span-3", row: "row-span-1" },
-  { cat: "VENUE",           title: "Palatial Ballroom Welcome",       sub: "Pre‑function hospitality • Checkpoint zoning",           file: "venue-1.jpg",          col: "col-span-5", row: "row-span-1" },
-  { cat: "LUXURY WEDDING",  title: "Sangeet & Dance Night",           sub: "Couple entries • Performance blocking • Crowd energy",    file: "luxury-wedding-1.jpg", col: "col-span-7", row: "row-span-2" },
-  { cat: "CORPORATE",       title: "Brand Showcase Gala",             sub: "Lighting design • Stage reveal • Guest journey",         file: "corporate-2.jpg",      col: "col-span-5", row: "row-span-1" },
-  { cat: "HOSPITALITY",     title: "High‑Touch Guest Care",           sub: "Rooming lists • Late check‑ins • VIP follow‑through",    file: "hospitality-2.jpg",    col: "col-span-3", row: "row-span-1" },
+const GRID_LAYOUT = [
+  { col: "col-span-7", row: "row-span-2" },
+  { col: "col-span-5", row: "row-span-1" },
+  { col: "col-span-3", row: "row-span-1" },
+  { col: "col-span-2", row: "row-span-1" },
+  { col: "col-span-7", row: "row-span-1" },
+  { col: "col-span-5", row: "row-span-2", float: true },
+  { col: "col-span-4", row: "row-span-1" },
+  { col: "col-span-3", row: "row-span-1" },
+  { col: "col-span-5", row: "row-span-1" },
+  { col: "col-span-7", row: "row-span-2" },
+  { col: "col-span-5", row: "row-span-1" },
+  { col: "col-span-3", row: "row-span-1" },
 ];
 
-export default function PortfolioGallery() {
+export default function PortfolioGallery({ items: propItems = [], config = {} }) {
+  const items = propItems.length > 0
+    ? propItems.map((item, i) => ({
+        cat: item.category,
+        title: item.title,
+        sub: item.subtitle || "",
+        imageUrl: item.imageUrl,
+        ...(GRID_LAYOUT[i % GRID_LAYOUT.length]),
+      }))
+    : [];
+
   const [lightbox, setLightbox] = useState(null);
 
   const close = useCallback(() => setLightbox(null), []);
@@ -29,7 +39,7 @@ export default function PortfolioGallery() {
         return (prev + dir + items.length) % items.length;
       });
     },
-    []
+    [items.length]
   );
 
   useEffect(() => {
@@ -53,13 +63,13 @@ export default function PortfolioGallery() {
         {/* Header */}
         <div className="text-center mb-12 reveal">
           <p className="text-gv-gold font-inter text-[10px] tracking-[0.3em] uppercase font-semibold mb-4">
-            PORTFOLIO
+            {config.label || "PORTFOLIO"}
           </p>
           <h2 className="font-fraunces text-4xl sm:text-5xl text-gradient-gold mb-4">
-            Moments We&apos;ve Crafted
+            {config.heading || "Moments We've Crafted"}
           </h2>
           <p className="text-white/50 font-inter text-sm">
-            From Luxury Weddings to High‑Profile Corporate Events.
+            {config.subtitle || "From Luxury Weddings to High-Profile Corporate Events."}
           </p>
           <p className="text-white/25 font-inter text-xs mt-3">
             Click any frame to experience the showcase in full-screen.
@@ -84,7 +94,7 @@ export default function PortfolioGallery() {
             >
               {/* Image */}
               <img
-                src={`/images/guestversity/portfolio/${item.file}`}
+                src={item.imageUrl || "/images/guestversity/placeholder-portfolio.svg"}
                 alt={item.title}
                 loading="lazy"
                 className="absolute inset-0 w-full h-full object-cover transition-all duration-[900ms] group-hover:scale-110 group-hover:saturate-[1.2]"
@@ -128,7 +138,7 @@ export default function PortfolioGallery() {
             onClick={(e) => e.stopPropagation()}
           >
             <img
-              src={`/images/guestversity/portfolio/${items[lightbox].file}`}
+              src={items[lightbox].imageUrl || "/images/guestversity/placeholder-portfolio.svg"}
               alt={items[lightbox].title}
               className="w-full max-h-[70vh] object-contain"
               onError={(e) => {

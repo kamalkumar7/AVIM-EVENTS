@@ -3,11 +3,11 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 
-const counters = [
-  { end: 1500, suffix: "+", label: "Events Executed" },
-  { end: 12,   suffix: "+", label: "Years of Experience" },
-  { end: 27,   suffix: "+", label: "Cities Covered Pan India & Internationally" },
-  { end: 1000, suffix: "+", label: "Happy Clients" },
+const DEFAULT_COUNTERS = [
+  { value: 1500, suffix: "+", label: "Events Executed" },
+  { value: 12,   suffix: "+", label: "Years of Experience" },
+  { value: 27,   suffix: "+", label: "Cities Covered Pan India & Internationally" },
+  { value: 1000, suffix: "+", label: "Happy Clients" },
 ];
 
 function easeOutCubic(t) {
@@ -56,7 +56,9 @@ function AnimatedCounter({ end, suffix }) {
   );
 }
 
-export default function CountersSection() {
+export default function CountersSection({ stats = [], config = {} }) {
+  const counters = stats.length > 0 ? stats : DEFAULT_COUNTERS;
+
   return (
     <section className="py-20 sm:py-28 section-theme-charcoal" id="impact">
       <div className="max-w-7xl mx-auto px-6 md:px-10">
@@ -67,10 +69,10 @@ export default function CountersSection() {
           {/* Header */}
           <div className="text-center mb-12 reveal">
             <p className="text-gv-gold font-inter text-[10px] tracking-[0.3em] uppercase font-semibold mb-4">
-              IMPACT
+              {config.label || "IMPACT"}
             </p>
             <h2 className="font-fraunces text-3xl sm:text-4xl text-white">
-              Measured excellence, delivered quietly.
+              {config.heading || "Measured excellence, delivered quietly."}
             </h2>
           </div>
 
@@ -82,7 +84,7 @@ export default function CountersSection() {
                 className="text-center bg-white/[0.02] border border-white/[0.05] rounded-xl py-8 px-4 hover:border-gv-gold/30 transition-colors duration-500"
               >
                 <span className="font-fraunces text-4xl sm:text-5xl text-gradient-gold block mb-3">
-                  <AnimatedCounter end={c.end} suffix={c.suffix} />
+                  <AnimatedCounter end={c.value ?? c.end ?? 0} suffix={c.suffix} />
                 </span>
                 <span className="text-white/45 font-inter text-xs tracking-wide leading-snug block">
                   {c.label}

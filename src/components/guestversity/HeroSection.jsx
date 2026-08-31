@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
-const heroImages = [
+const DEFAULT_IMAGES = [
   "/images/guestversity/hero/hero-1.jpg",
   "/images/guestversity/hero/hero-2.jpg",
   "/images/guestversity/hero/hero-3.jpg",
@@ -12,7 +12,8 @@ const heroImages = [
   "/images/guestversity/hero/hero-6.jpg",
 ];
 
-export default function HeroSection() {
+export default function HeroSection({ slides = [], config = {} }) {
+  const heroImages = slides.length > 0 ? slides.map((s) => s.imageUrl) : DEFAULT_IMAGES;
   const [activeImg, setActiveImg] = useState(0);
 
   useEffect(() => {
@@ -20,7 +21,7 @@ export default function HeroSection() {
       setActiveImg((prev) => (prev + 1) % heroImages.length);
     }, 6500);
     return () => clearInterval(timer);
-  }, []);
+  }, [heroImages.length]);
 
   return (
     <section
@@ -112,35 +113,32 @@ export default function HeroSection() {
           {/* Badge */}
           <div className="inline-flex items-center border border-gv-gold/25 bg-white/[0.04] rounded-full px-5 py-2 mb-8">
             <span className="text-gv-gold text-[10px] font-semibold tracking-[0.2em] uppercase font-inter">
-              HOSPITALITY &nbsp;•&nbsp; LOGISTICS &nbsp;•&nbsp; EVENTS
+              {config.badge || "HOSPITALITY  •  LOGISTICS  •  EVENTS"}
             </span>
           </div>
 
           {/* Headline */}
           <h1 className="font-fraunces text-4xl sm:text-[3.5rem] leading-[1.06] mb-6">
             <span className="block text-gradient-gold hero-headline-line">
-              Redefining Hospitality
+              {config.headline_1 || "Redefining Hospitality"}
             </span>
             <span className="block text-white hero-headline-line">
-              &amp; Logistics Excellence
+              {config.headline_2 || "& Logistics Excellence"}
             </span>
           </h1>
 
           {/* Subtext */}
           <p className="text-white/60 text-base sm:text-lg leading-relaxed mb-8 max-w-[540px] font-inter">
-            Guestversity Group delivers Five‑Star Guest Experiences, Precision
-            Logistics, and Royal Wedding &amp; Corporate Event Execution —
-            bringing Guest Management, Travel, Designing, and Production under
-            one Disciplined, 24/7 Hospitality Team.
+            {config.subtext || "Guestversity Group delivers Five-Star Guest Experiences, Precision Logistics, and Royal Wedding & Corporate Event Execution — bringing Guest Management, Travel, Designing, and Production under one Disciplined, 24/7 Hospitality Team."}
           </p>
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-4 mb-8">
             <Link href="/services" className="gold-btn glow-pulse px-8 py-3.5 text-center">
-              Explore Services
+              {config.cta_primary || "Explore Services"}
             </Link>
             <Link href="/about" className="ghost-btn px-8 py-3.5 text-center">
-              Our Story
+              {config.cta_secondary || "Our Story"}
             </Link>
           </div>
 
@@ -170,7 +168,7 @@ export default function HeroSection() {
               {/* Title row */}
               <div className="flex items-start justify-between mb-5">
                 <h3 className="font-fraunces text-xl sm:text-2xl text-white">
-                  Signature Execution
+                  {config.card_title || "Signature Execution"}
                 </h3>
                 <span className="text-gv-gold text-[9px] tracking-[0.22em] font-semibold font-inter mt-1">
                   PREMIUM
@@ -179,8 +177,7 @@ export default function HeroSection() {
 
               {/* Description */}
               <p className="text-white/55 text-sm leading-relaxed mb-7 font-inter">
-                A polished operating system for luxury events — from arrival to
-                farewell, every touchpoint is choreographed.
+                {config.card_body || "A polished operating system for luxury events — from arrival to farewell, every touchpoint is choreographed."}
               </p>
 
               {/* Stat grid */}
