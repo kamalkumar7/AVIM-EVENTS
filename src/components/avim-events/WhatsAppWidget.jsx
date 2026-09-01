@@ -18,11 +18,11 @@ export default function WhatsAppWidget({ phone = "918951097078" }) {
   }
 
   return (
-    <div className="fixed bottom-8 right-6 z-50 flex flex-col items-end gap-3">
+    <div className="fixed bottom-6 right-4 sm:right-6 z-50 flex flex-col items-end gap-3">
       {/* Chat panel */}
       {open && (
         <div
-          className="glass-card-gv w-72 p-4 mb-1"
+          className="glass-card-gv w-[min(288px,calc(100vw-2rem))] p-4 max-h-[calc(100vh-8rem)] overflow-y-auto"
           style={{ animation: "heroLineReveal 240ms cubic-bezier(.2,.8,.2,1) forwards" }}
         >
           <div className="flex items-center justify-between mb-3">

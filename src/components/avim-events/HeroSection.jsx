@@ -89,21 +89,6 @@ export default function HeroSection({ slides = [], config = {} }) {
         }}
       />
 
-      {/* ── Floating lines ── */}
-      <div className="absolute inset-0 z-[2] pointer-events-none overflow-hidden hidden sm:block">
-        {[20, 45, 70].map((top, i) => (
-          <div
-            key={i}
-            className="absolute left-0 right-0 h-px anim-line"
-            style={{
-              top: `${top}%`,
-              background:
-                "linear-gradient(90deg, transparent 0%, rgba(212,175,55,0.08) 30%, rgba(212,175,55,0.14) 50%, rgba(212,175,55,0.08) 70%, transparent 100%)",
-              animationDelay: `${i * 1.5}s`,
-            }}
-          />
-        ))}
-      </div>
 
       {/* ── Content ── */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-10 py-24 pt-36 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">

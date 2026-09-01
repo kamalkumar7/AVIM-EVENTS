@@ -45,7 +45,12 @@ export default function Footer({ config = {} }) {
           <h3 className="font-inter text-[10px] text-gv-gold tracking-[0.25em] uppercase font-semibold mb-5">PAGES</h3>
           <ul className="space-y-3 font-inter text-sm">
             {[["About", "/about"], ["Services", "/services"], ["Blogs", "/blogs"], ["Contact", "/contact"], ["Terms of Service", "/terms"], ["Privacy Policy", "/privacy"]].map(([name, href]) => (
-              <li key={name}><Link href={href} className="text-white/50 hover:text-gv-gold transition-colors">{name}</Link></li>
+              <li key={name}>
+                <Link href={href} className="group relative inline-block text-white/50 hover:text-gv-gold transition-colors pb-0.5">
+                  {name}
+                  <span className="absolute bottom-0 left-0 w-full h-px bg-gv-gold origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out" />
+                </Link>
+              </li>
             ))}
           </ul>
         </div>
@@ -55,7 +60,12 @@ export default function Footer({ config = {} }) {
           <h3 className="font-inter text-[10px] text-gv-gold tracking-[0.25em] uppercase font-semibold mb-5">SERVICES</h3>
           <ul className="space-y-3 font-inter text-sm">
             {[["Hospitality", "/services"], ["Logistics", "/services"], ["Weddings", "/services"]].map(([name, href]) => (
-              <li key={name}><Link href={href} className="text-white/50 hover:text-gv-gold transition-colors">{name}</Link></li>
+              <li key={name}>
+                <Link href={href} className="group relative inline-block text-white/50 hover:text-gv-gold transition-colors pb-0.5">
+                  {name}
+                  <span className="absolute bottom-0 left-0 w-full h-px bg-gv-gold origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out" />
+                </Link>
+              </li>
             ))}
           </ul>
         </div>
@@ -70,13 +80,24 @@ export default function Footer({ config = {} }) {
             </li>
             <li>
               <span className="text-white/25 text-[9px] uppercase tracking-[0.2em] block mb-1">Email</span>
-              <a href={`mailto:${email}`} className="text-white/50 hover:text-gv-gold transition-colors">{email}</a>
+              <a href={`mailto:${email}`} className="group relative inline-block text-white/50 hover:text-gv-gold transition-colors pb-0.5">
+                {email}
+                <span className="absolute bottom-0 left-0 w-full h-px bg-gv-gold origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out" />
+              </a>
             </li>
             <li>
               <span className="text-white/25 text-[9px] uppercase tracking-[0.2em] block mb-1">Phone</span>
               <div className="space-y-1 text-white/50 text-xs">
-                <a href={`tel:${phone1.replace(/\s/g, "")}`} className="block hover:text-gv-gold transition-colors">{phone1}</a>
-                {phone2 && <a href={`tel:${phone2.replace(/\s/g, "")}`} className="block hover:text-gv-gold transition-colors">{phone2}</a>}
+                <a href={`tel:${phone1.replace(/\s/g, "")}`} className="group relative inline-block hover:text-gv-gold transition-colors pb-0.5">
+                  {phone1}
+                  <span className="absolute bottom-0 left-0 w-full h-px bg-gv-gold origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out" />
+                </a>
+                {phone2 && (
+                  <a href={`tel:${phone2.replace(/\s/g, "")}`} className="group relative inline-block hover:text-gv-gold transition-colors pb-0.5 mt-1">
+                    {phone2}
+                    <span className="absolute bottom-0 left-0 w-full h-px bg-gv-gold origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out" />
+                  </a>
+                )}
               </div>
             </li>
           </ul>
