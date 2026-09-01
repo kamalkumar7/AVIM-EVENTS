@@ -31,6 +31,15 @@ const DEFAULT_LOGISTICS_BULLETS = [
   "Contingencies for delays and reroutes",
 ];
 
+const DEFAULT_BIRTHDAY_BULLETS = [
+  "Custom theme conceptualisation and décor setup aligned to the celebrant's style",
+  "Cake consultation, floral arrangements, and ambient mood lighting",
+  "Entertainment curation — live performers, photo booths, games, and surprises",
+  "Invitation design, RSVP management, and guest coordination",
+  "Catering tie-ups and bespoke menu curation including dietary preferences",
+  "On-site AVIM team ensuring flawless execution from setup to wrap-up",
+];
+
 const DEFAULT_MORE_SERVICES = [
   { badge: "◆", title: "Logistics & Hospitality", description: "RSVP management, welcome hampers, arrivals and departures, venue registration, helpdesks, and on-ground Production Execution Team support for smooth coordination of events." },
   { badge: "◇", title: "Tours N Travels", description: "Vehicles for wedding and corporate requirements, curated fleets, trained chauffeurs, and routing for guest, family, and VIP movements." },
@@ -59,6 +68,7 @@ export default async function ServicesPage() {
     parallaxConfigs,
     moreHeaderConfigs,
     ctaConfigs,
+    birthdaysConfigs,
     navbarConfigs,
     footerConfigs,
     contactConfigs,
@@ -69,6 +79,7 @@ export default async function ServicesPage() {
     prisma.siteConfig.findMany({ where: { section: "services_parallax" } }),
     prisma.siteConfig.findMany({ where: { section: "services_more" } }),
     prisma.siteConfig.findMany({ where: { section: "services_cta" } }),
+    prisma.siteConfig.findMany({ where: { section: "services_birthdays" } }),
     prisma.siteConfig.findMany({ where: { section: "navbar" } }),
     prisma.siteConfig.findMany({ where: { section: "footer" } }),
     prisma.siteConfig.findMany({ where: { section: "contact_info" } }),
@@ -78,6 +89,7 @@ export default async function ServicesPage() {
   const parallax = cfgMap(parallaxConfigs);
   const moreHeader = cfgMap(moreHeaderConfigs);
   const cta = cfgMap(ctaConfigs);
+  const birthdaysCfg = cfgMap(birthdaysConfigs);
   const navbar = cfgMap(navbarConfigs);
   const footer = cfgMap(footerConfigs);
   const contact = cfgMap(contactConfigs);
@@ -101,6 +113,15 @@ export default async function ServicesPage() {
     desc: card2?.description || "Fleet management, routing, live coordination, VIP movement, and high-volume guest transfers — delivered with calm precision.",
     bullets: card2?.bullets ? parseBullets(card2.bullets, DEFAULT_LOGISTICS_BULLETS) : DEFAULT_LOGISTICS_BULLETS,
     imageUrl: card2?.imageUrl || "/images/avim-events/placeholder-hero.svg",
+  };
+
+  const card3 = servicesMainCards[2];
+  const block3 = {
+    badge: card3?.badge || birthdaysCfg.badge || "✿ BIRTHDAYS & CELEBRATIONS",
+    title: card3?.title || birthdaysCfg.heading || "Birthdays & Celebrations",
+    desc: card3?.description || birthdaysCfg.body || "Every birthday deserves a moment worth remembering — personalised themes, meticulous décor, and seamless coordination that lets you celebrate while we handle the rest.",
+    bullets: card3?.bullets ? parseBullets(card3.bullets, DEFAULT_BIRTHDAY_BULLETS) : DEFAULT_BIRTHDAY_BULLETS,
+    imageUrl: card3?.imageUrl || "/images/avim-events/placeholder-portfolio.svg",
   };
 
   const moreServices = servicesMoreCards.length > 0
@@ -277,6 +298,68 @@ export default async function ServicesPage() {
                 ))}
               </ul>
               <Link href="/contact" className="gold-btn px-7 py-3 text-xs">Enquire Now</Link>
+            </div>
+          </div>
+        </section>
+
+        <div className="h-px bg-gradient-to-r from-transparent via-gv-gold/20 to-transparent" />
+
+        {/* ── SERVICE BLOCK 3: BIRTHDAYS & CELEBRATIONS ── */}
+        <section className="py-20 sm:py-28 section-theme-black" id="birthdays">
+          <div className="max-w-7xl mx-auto px-6 md:px-10 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            <div className="lg:col-span-6 reveal-left">
+              <span
+                className="inline-flex items-center gap-2 font-inter text-[10px] tracking-[0.25em] uppercase px-3 py-1.5 rounded-full mb-6"
+                style={{
+                  border: "1px solid rgba(212,175,55,0.4)",
+                  color: "rgba(212,175,55,0.9)",
+                  background: "rgba(212,175,55,0.05)",
+                }}
+              >
+                {block3.badge}
+              </span>
+              <h2 className="font-fraunces text-3xl sm:text-4xl text-white mb-5 leading-snug">
+                {block3.title}
+              </h2>
+              <p className="font-inter text-white/60 text-base leading-relaxed mb-7">
+                {block3.desc}
+              </p>
+              <ul className="space-y-3 mb-8">
+                {block3.bullets.map((b) => (
+                  <li key={b} className="flex items-start gap-3">
+                    <span className="shrink-0 mt-1.5 w-1.5 h-1.5 rounded-full" style={{ background: "#D4AF37" }} />
+                    <span className="font-inter text-sm text-white/55 leading-relaxed">{b}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="flex gap-4 flex-wrap">
+                <Link href="/contact" className="gold-btn px-7 py-3 text-xs">Enquire Now</Link>
+                <Link href="/about" className="ghost-btn px-7 py-3 text-xs">Why AVIM Events</Link>
+              </div>
+            </div>
+            <div className="lg:col-span-6 reveal-right">
+              <div
+                className="glass-card-gv relative overflow-hidden aspect-[4/3] w-full"
+                style={{
+                  border: "1px solid rgba(212,175,55,0.2)",
+                  background:
+                    "radial-gradient(ellipse at 50% 80%, rgba(212,175,55,0.1) 0%, transparent 55%), rgba(255,255,255,0.03)",
+                }}
+              >
+                <Image
+                  src={block3.imageUrl}
+                  alt={block3.title}
+                  fill
+                  className="object-cover"
+                />
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, rgba(5,5,5,0.3) 0%, transparent 60%), linear-gradient(to top, rgba(5,5,5,0.6) 0%, transparent 50%)",
+                  }}
+                />
+              </div>
             </div>
           </div>
         </section>
