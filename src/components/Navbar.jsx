@@ -18,14 +18,14 @@ export default function Navbar({ config = {} }) {
 
   return (
     <nav className="fixed top-0 w-full z-50 bg-black/35 backdrop-blur-xl border-b border-white/10">
-      <div className="flex justify-between items-center px-6 md:px-10 py-3.5 max-w-7xl mx-auto">
+      <div className="flex justify-between items-center px-6 md:px-10 py-2 max-w-7xl mx-auto">
 
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
           <img
-            src="/images/avim-events/logos/logo_a_small.png"
+            src="/images/avim-events/logos/main-logo.png"
             alt="AVIM Events"
-            className="h-12 sm:h-14 w-auto"
+            className="h-9 sm:h-10 w-auto"
             style={{ filter: "drop-shadow(0 0 8px rgba(212,175,55,0.4))" }}
           />
         </Link>
@@ -38,14 +38,16 @@ export default function Navbar({ config = {} }) {
               <Link
                 key={link.name}
                 href={link.href}
-                className={`relative pb-0.5 transition-colors duration-200 nav-link-gv ${
+                className={`group relative pb-0.5 transition-colors duration-200 ${
                   active ? "text-gv-gold" : "text-white/70 hover:text-white"
                 }`}
               >
                 {link.name}
-                {active && (
-                  <span className="absolute bottom-0 left-0 right-0 h-px bg-gv-gold" />
-                )}
+                <span
+                  className={`absolute bottom-0 left-0 w-full h-px bg-gv-gold origin-left transition-transform duration-300 ease-out ${
+                    active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                  }`}
+                />
               </Link>
             );
           })}
