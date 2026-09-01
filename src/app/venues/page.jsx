@@ -46,7 +46,7 @@ export default async function VenuesPage() {
   const footer = cfgMap(footerConfigs);
   const contact = cfgMap(contactConfigs);
 
-  const waPhone = navbar.whatsapp_number || contact.whatsapp_number || "918268625482";
+  const waUrl = navbar.whatsapp_url || "https://wa.me/message/X4JENWAUTFKWA1?src=qr";
 
   const displayPalatial = palatialVenues.length > 0 ? palatialVenues : DEFAULT_PALATIAL;
   const displayElite = eliteVenues.length > 0 ? eliteVenues : DEFAULT_ELITE;
@@ -212,7 +212,7 @@ export default async function VenuesPage() {
       </main>
 
       <Footer config={footer} />
-      <WhatsAppWidget phone={waPhone} />
+      <WhatsAppWidget url={waUrl} />
       <ScrollToTopBtn />
     </div>
   );

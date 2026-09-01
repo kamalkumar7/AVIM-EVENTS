@@ -7,7 +7,7 @@ export default function ContactSection({ config = {} }) {
   const phone1 = config.phone_1 || "+91 82686 25482";
   const phone2 = config.phone_2 || "+91 73535 31961";
   const email = config.email || "theavimevents@gmail.com";
-  const waPhone = (config.whatsapp_number || phone1).replace(/\D/g, "");
+  const waUrl = config.whatsapp_url || `https://wa.me/${(config.whatsapp_number || phone1).replace(/\D/g, "")}`;
 
   const [form, setForm] = useState({
     name: "",
@@ -33,11 +33,11 @@ export default function ContactSection({ config = {} }) {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-6 md:px-10 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+    <div className="max-w-7xl mx-auto px-6 md:px-10 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-stretch">
 
       {/* Left — Form */}
-      <div className="lg:col-span-7">
-        <div className="glass-card-gv p-8 sm:p-12">
+      <div className="lg:col-span-7 h-full">
+        <div className="glass-card-gv p-8 sm:p-12 h-full">
           <h2 className="font-fraunces text-2xl sm:text-3xl text-white mb-2">
             Send an Enquiry
           </h2>
@@ -135,7 +135,7 @@ export default function ContactSection({ config = {} }) {
       </div>
 
       {/* Right — Contact info + WhatsApp */}
-      <div className="lg:col-span-5 space-y-6">
+      <div className="lg:col-span-5 flex flex-col gap-6 h-full">
         <div className="glass-card-gv p-8">
           <h3 className="font-fraunces text-xl text-white mb-6">Contact Details</h3>
           <div className="space-y-6 font-inter text-sm">
@@ -167,16 +167,13 @@ export default function ContactSection({ config = {} }) {
           </div>
         </div>
 
-        <div
-          className="glass-card-gv p-8 text-center"
-          style={{ border: "1px solid rgba(37,211,102,0.2)" }}
-        >
+        <div className="glass-card-gv p-8 text-center flex-1 flex flex-col justify-center">
           <h4 className="font-fraunces text-lg text-white mb-2">Instant Assistance</h4>
           <p className="font-inter text-sm text-white/45 mb-6 leading-relaxed">
             Prefer to message? Connect directly on WhatsApp for immediate responses.
           </p>
           <a
-            href={`https://wa.me/${waPhone}`}
+            href={waUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2 w-full py-3.5 rounded-xl font-inter text-xs font-semibold tracking-widest uppercase bg-[#25D366] text-white transition-all duration-300 hover:scale-[1.02]"

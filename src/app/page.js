@@ -79,7 +79,7 @@ export default async function Home() {
         { title: "On-ground Command Center", desc: "Control-room Style Operations for Live Tracking, Timing, and Vendor Sync." },
       ];
 
-  const waPhone = navbar.whatsapp_number || contact.whatsapp_number || "918268625482";
+  const waUrl = navbar.whatsapp_url || "https://wa.me/message/X4JENWAUTFKWA1?src=qr";
 
   return (
     <div className="antialiased relative min-h-screen" style={{ backgroundColor: "#050505", color: "#f0ebe0" }}>
@@ -199,7 +199,7 @@ export default async function Home() {
       </main>
 
       <Footer config={footer} />
-      <WhatsAppWidget phone={waPhone} />
+      <WhatsAppWidget url={waUrl} />
       <ScrollToTopBtn />
     </div>
   );

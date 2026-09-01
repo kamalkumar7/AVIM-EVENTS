@@ -122,6 +122,7 @@ async function main() {
     { section: "navbar", key: "logo_tagline", value: "HOSPITALITY  •  LOGISTICS" },
     { section: "navbar", key: "cta_text", value: "Enquire" },
     { section: "navbar", key: "whatsapp_number", value: "918268625482" },
+    { section: "navbar", key: "whatsapp_url", value: "https://wa.me/message/X4JENWAUTFKWA1?src=qr" },
 
     // Hero section
     { section: "hero_section", key: "badge", value: "LUXURY HOSPITALITY & LOGISTICS" },

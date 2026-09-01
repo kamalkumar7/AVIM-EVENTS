@@ -31,7 +31,7 @@ export default async function ContactPage() {
   const navbar = cfgMap(navbarConfigs);
   const footer = cfgMap(footerConfigs);
 
-  const waPhone = navbar.whatsapp_number || contact.whatsapp_number || "918268625482";
+  const waUrl = navbar.whatsapp_url || "https://wa.me/message/X4JENWAUTFKWA1?src=qr";
 
   return (
     <div
@@ -67,12 +67,12 @@ export default async function ContactPage() {
 
         {/* ── CONTACT FORM + DETAILS ── */}
         <section className="py-20 sm:py-28 section-theme-black">
-          <ContactSection config={contact} />
+          <ContactSection config={{ ...contact, whatsapp_url: waUrl }} />
         </section>
       </main>
 
       <Footer config={footer} />
-      <WhatsAppWidget phone={waPhone} />
+      <WhatsAppWidget url={waUrl} />
       <ScrollToTopBtn />
     </div>
   );

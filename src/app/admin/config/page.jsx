@@ -58,6 +58,7 @@ const SECTION_GROUPS = [
           { key: "logo_tagline", label: "Logo Tagline", type: "text" },
           { key: "cta_text", label: "CTA Button Text", type: "text" },
           { key: "whatsapp_number", label: "WhatsApp Number", type: "text" },
+          { key: "whatsapp_url", label: "WhatsApp Direct Link", type: "text" },
         ],
       },
       {
