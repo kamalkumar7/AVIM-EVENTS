@@ -89,10 +89,10 @@ export default function PortfolioShowcase() {
                     <span>👥 {item.guests}</span>
                   </div>
                   <Link
-                    href="/gallery"
+                    href="/contact"
                     className="inline-flex items-center gap-2 font-label-caps text-xs tracking-widest text-primary uppercase border-b border-primary/40 pb-0.5 hover:border-primary transition-colors w-fit"
                   >
-                    View Details →
+                    Enquire Now →
                   </Link>
                 </div>
               </div>
@@ -100,14 +100,7 @@ export default function PortfolioShowcase() {
           ))}
         </div>
 
-        <div className="text-center mt-12">
-          <Link
-            href="/gallery"
-            className="inline-block border border-primary text-primary font-label-caps text-xs uppercase tracking-widest px-12 py-4 hover:bg-primary/10 transition-colors font-semibold"
-          >
-            Explore Full Gallery
-          </Link>
-        </div>
+
       </div>
     </section>
   );

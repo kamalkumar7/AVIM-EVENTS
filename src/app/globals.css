@@ -224,6 +224,38 @@ body {
   animation-play-state: paused;
 }
 
+/* ── Page Transition ────────────────────────────────────── */
+@keyframes goldSweep {
+  0%   { transform: scaleX(0); opacity: 1; }
+  75%  { transform: scaleX(1); opacity: 1; }
+  100% { transform: scaleX(1); opacity: 0; }
+}
+
+@keyframes pageReveal {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.page-gold-sweep {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  transform-origin: left center;
+  background: linear-gradient(to right, #B9922B, #D4AF37, #D8BC5A, #D4AF37, #B9922B);
+  z-index: 9999;
+  pointer-events: none;
+  animation: goldSweep 0.55s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.page-transition-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  animation: pageReveal 0.45s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
 /* ── Hero Animations ────────────────────────────────────── */
 @keyframes slide-up {
   from {

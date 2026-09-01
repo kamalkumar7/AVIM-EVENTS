@@ -1,4 +1,5 @@
 import "./globals.css";
+import PageTransition from "@/components/PageTransition";
 
 export const metadata = {
   title: "AVIM Events | Luxury Royal Hospitality",
@@ -33,7 +34,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className="text-on-background font-body-rt antialiased relative min-h-screen flex flex-col">
-        {children}
+        <PageTransition>{children}</PageTransition>
       </body>
     </html>
   );
