@@ -284,6 +284,16 @@ const SECTION_GROUPS = [
         ],
       },
       {
+        id: "services_birthdays",
+        label: "Birthdays Block",
+        Icon: HiOutlineSparkles,
+        fields: [
+          { key: "badge", label: "Badge / Label", type: "text" },
+          { key: "heading", label: "Heading", type: "text" },
+          { key: "body", label: "Intro Body", type: "textarea" },
+        ],
+      },
+      {
         id: "services_cta",
         label: "Proposal CTA",
         Icon: HiOutlinePlay,
