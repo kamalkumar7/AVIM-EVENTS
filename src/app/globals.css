@@ -356,6 +356,10 @@ body {
   font-size: 0.75rem;
   border-radius: 0.5rem;
   transition: opacity 0.3s ease, box-shadow 0.3s ease;
+  /* Hardware acceleration to prevent flickering on mobile */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-font-smoothing: subpixel-antialiased;
 }
 .gold-btn::after {
   content: '';
@@ -452,6 +456,7 @@ body {
 /* ── Glow pulse (CTA button) ────────────────────────────── */
 .glow-pulse {
   animation: glowPulse 3.8s ease-in-out infinite;
+  will-change: box-shadow;
 }
 
 /* ── Hero headline stagger ──────────────────────────────── */

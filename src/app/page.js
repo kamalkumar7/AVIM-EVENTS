@@ -91,7 +91,7 @@ export default async function Home() {
 
         {/* ── ABOUT PREVIEW ── */}
         <section className="py-20 sm:py-28 section-theme-black" id="about">
-          <div className="max-w-7xl mx-auto px-6 md:px-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          <div className="max-w-7xl mx-auto px-6 md:px-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
             <div className="lg:col-span-5 reveal-left">
               <p className="text-gv-gold font-inter text-[10px] tracking-[0.3em] uppercase font-semibold mb-5">
                 {about.label || "ABOUT"}
@@ -183,14 +183,14 @@ export default async function Home() {
         {/* ── CTA FOOTER BAND ── */}
         <section className="py-20 sm:py-28 section-theme-navy" id="cta">
           <div className="max-w-3xl mx-auto px-6 text-center">
-            <div className="glass-card-gv p-10 sm:p-16" style={{ border: "1px solid rgba(212,175,55,0.25)", boxShadow: "0 0 60px rgba(212,175,55,0.08), 0 20px 50px rgba(0,0,0,0.5)" }}>
-              <h2 className="font-fraunces text-3xl sm:text-4xl xl:text-5xl text-white leading-tight mb-6 reveal">
+            <div className="glass-card-gv p-8 sm:p-16" style={{ border: "1px solid rgba(212,175,55,0.25)", boxShadow: "0 0 60px rgba(212,175,55,0.08), 0 20px 50px rgba(0,0,0,0.5)" }}>
+              <h2 className="font-fraunces text-3xl sm:text-4xl xl:text-5xl text-white leading-tight mb-5 sm:mb-6 reveal">
                 {cta.heading || "Ready to deliver a royal experience?"}
               </h2>
-              <p className="font-inter text-white/60 text-base sm:text-lg mb-10 leading-relaxed reveal reveal-delay">
+              <p className="font-inter text-white/60 text-sm sm:text-lg mb-8 sm:mb-10 leading-relaxed reveal reveal-delay">
                 {cta.body || "Let's build a flawless guest journey — elegant on the surface, powerful behind the scenes."}
               </p>
-              <Link href="/contact" className="gold-btn glow-pulse inline-block px-12 py-4 text-sm reveal reveal-delay2">
+              <Link href="/contact" className="gold-btn glow-pulse inline-block px-10 sm:px-12 py-3.5 sm:py-4 text-xs sm:text-sm reveal reveal-delay2">
                 {cta.btn_text || "Contact Us"}
               </Link>
             </div>
