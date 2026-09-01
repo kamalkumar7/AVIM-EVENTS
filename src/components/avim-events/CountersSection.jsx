@@ -78,9 +78,9 @@ export default function CountersSection({ stats = [], config = {} }) {
 
           {/* Stats grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-5 reveal">
-            {counters.map((c) => (
+            {counters.map((c, i) => (
               <div
-                key={c.label}
+                key={c.id ?? i}
                 className="text-center bg-white/[0.02] border border-white/[0.05] rounded-xl py-8 px-4 hover:border-gv-gold/30 transition-colors duration-500"
               >
                 <span className="font-fraunces text-4xl sm:text-5xl text-gradient-gold block mb-3">

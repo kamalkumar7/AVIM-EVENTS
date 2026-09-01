@@ -343,7 +343,7 @@ export default async function ServicesPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
               {moreServices.map((s, i) => (
                 <div
-                  key={s.title}
+                  key={s.id ?? i}
                   className={`glass-card-gv p-8 hover:border-gv-gold/40 hover:-translate-y-2 transition-all duration-500 group reveal${i === 1 ? " reveal-delay" : i === 2 ? " reveal-delay2" : ""}`}
                 >
                   <span className="text-gv-gold text-xl block mb-5">{s.badge}</span>
