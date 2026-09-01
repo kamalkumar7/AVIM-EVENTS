@@ -91,7 +91,7 @@ function AnimatedCounter({ end, suffix }) {
   );
 }
 
-export default function AboutStatsSection({ stats: propStats = [], milestones: propMilestones = [] }) {
+export default function AboutStatsSection({ stats: propStats = [], milestones: propMilestones = [], config = {} }) {
   const stats = propStats.length > 0
     ? propStats.map((s) => ({ end: Number(s.value) || 0, suffix: s.suffix || "+", label: s.label }))
     : DEFAULT_STATS;
@@ -112,10 +112,10 @@ export default function AboutStatsSection({ stats: propStats = [], milestones: p
         <div className="max-w-7xl mx-auto px-6 md:px-10">
           <div className="text-center mb-14 reveal">
             <p className="text-gv-gold font-inter text-[10px] tracking-[0.3em] uppercase font-semibold mb-4">
-              ACHIEVEMENTS
+              {config.label || "ACHIEVEMENTS"}
             </p>
             <h2 className="font-fraunces text-3xl sm:text-4xl text-white">
-              Built for luxury. Proven at scale.
+              {config.heading || "Built for luxury. Proven at scale."}
             </h2>
           </div>
 
@@ -144,13 +144,13 @@ export default function AboutStatsSection({ stats: propStats = [], milestones: p
         <div className="max-w-5xl mx-auto px-6 md:px-10">
           <div className="text-center mb-16 reveal">
             <p className="text-gv-gold font-inter text-[10px] tracking-[0.3em] uppercase font-semibold mb-4">
-              GLOBAL ACHIEVEMENTS
+              {config.milestones_label || "GLOBAL ACHIEVEMENTS"}
             </p>
             <h2 className="font-fraunces text-3xl sm:text-4xl text-white mb-3">
-              Global Milestones &amp; Prestigious Engagements
+              {config.milestones_heading || "Global Milestones & Prestigious Engagements"}
             </h2>
             <p className="font-inter text-white/50 text-sm max-w-lg mx-auto">
-              Trusted across nations, institutions, and high-profile platforms.
+              {config.milestones_subtitle || "Trusted across nations, institutions, and high-profile platforms."}
             </p>
             <div
               className="mx-auto mt-5"

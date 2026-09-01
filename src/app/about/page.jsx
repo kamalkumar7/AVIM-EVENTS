@@ -41,6 +41,7 @@ export default async function AboutPage() {
     aboutHeroConfigs,
     aboutLeadershipConfigs,
     aboutTeamConfigs,
+    aboutStatsConfigs,
     aboutStats,
     milestones,
     navbarConfigs,
@@ -51,6 +52,7 @@ export default async function AboutPage() {
     prisma.siteConfig.findMany({ where: { section: "about_hero" } }),
     prisma.siteConfig.findMany({ where: { section: "about_leadership" } }),
     prisma.siteConfig.findMany({ where: { section: "about_team" } }),
+    prisma.siteConfig.findMany({ where: { section: "about_stats" } }),
     prisma.counterStat.findMany({ where: { active: true, section: "about" }, orderBy: { order: "asc" } }),
     prisma.milestone.findMany({ where: { active: true }, orderBy: { order: "asc" } }),
     prisma.siteConfig.findMany({ where: { section: "navbar" } }),
@@ -61,6 +63,7 @@ export default async function AboutPage() {
   const heroConfig = cfgMap(aboutHeroConfigs);
   const leadershipConfig = cfgMap(aboutLeadershipConfigs);
   const teamConfig = cfgMap(aboutTeamConfigs);
+  const statsConfig = cfgMap(aboutStatsConfigs);
   const navbar = cfgMap(navbarConfigs);
   const footer = cfgMap(footerConfigs);
   const contact = cfgMap(contactConfigs);
@@ -239,7 +242,7 @@ export default async function AboutPage() {
 
         <div className="h-px bg-gradient-to-r from-transparent via-gv-gold/20 to-transparent" />
 
-        <AboutStatsSection stats={aboutStats} milestones={milestones} />
+        <AboutStatsSection stats={aboutStats} milestones={milestones} config={statsConfig} />
 
         <div className="h-px bg-gradient-to-r from-transparent via-gv-gold/20 to-transparent" />
 
