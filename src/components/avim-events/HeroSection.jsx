@@ -161,7 +161,7 @@ export default function HeroSection({ slides = [], config = {} }) {
             {/* Watermark */}
             <div
               className="absolute inset-0 bg-cover bg-center opacity-[0.14] pointer-events-none"
-              style={{ backgroundImage: "url(/images/avim-events/logo.svg)" }}
+              style={{ backgroundImage: "url(/images/avim-events/logos/main-logo.png)" }}
             />
 
             <div className="relative z-10">

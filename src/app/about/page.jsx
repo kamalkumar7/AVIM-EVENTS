@@ -109,7 +109,7 @@ export default async function AboutPage() {
             <div className="lg:col-span-5 flex justify-center lg:justify-end">
               <div className="w-56 h-56 sm:w-72 sm:h-72 relative opacity-90 flex items-center justify-center">
                 <Image
-                  src="/images/avim-events/logo.svg"
+                  src="/images/avim-events/logos/main-logo.png"
                   alt="AVIM Events"
                   width={288}
                   height={288}

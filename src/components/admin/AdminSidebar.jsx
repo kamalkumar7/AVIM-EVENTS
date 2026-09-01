@@ -65,10 +65,23 @@ export default function AdminSidebar() {
     >
       {/* Brand header */}
       <div className="px-4 py-4 border-b border-gray-100 flex items-center justify-between gap-2">
-        {!collapsed && (
-          <div className="min-w-0">
-            <p className="text-gray-900 font-semibold text-sm tracking-wide">AVIM Events</p>
-            <p className="text-gray-400 text-[10px] mt-0.5">Admin Panel</p>
+        {collapsed ? (
+          <img
+            src="/images/avim-events/logos/main-logo.png"
+            alt="AVIM Events"
+            className="h-8 w-8 object-contain rounded-full shrink-0"
+          />
+        ) : (
+          <div className="flex items-center gap-2.5 min-w-0">
+            <img
+              src="/images/avim-events/logos/main-logo.png"
+              alt="AVIM Events"
+              className="h-9 w-9 object-contain rounded-full shrink-0"
+            />
+            <div className="min-w-0">
+              <p className="text-gray-900 font-semibold text-sm tracking-wide">AVIM Events</p>
+              <p className="text-gray-400 text-[10px] mt-0.5">Admin Panel</p>
+            </div>
           </div>
         )}
         <button

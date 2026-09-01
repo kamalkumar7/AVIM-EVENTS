@@ -33,7 +33,11 @@ function LoginForm() {
     <div className="min-h-screen bg-gray-950 flex items-center justify-center p-4">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <p className="text-amber-400 font-bold text-xl tracking-widest uppercase">AVIM Events</p>
+          <img
+            src="/images/avim-events/logos/main-logo.png"
+            alt="AVIM Events"
+            className="h-20 w-auto mx-auto mb-2"
+          />
           <p className="text-gray-500 text-sm mt-1">Admin Panel</p>
         </div>
 
