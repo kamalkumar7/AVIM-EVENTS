@@ -40,9 +40,9 @@ export default function PropertiesSection({ properties = [], config = {} }) {
 
         {/* Logo grid */}
         <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 reveal">
-          {list.map((prop) => (
+          {list.map((prop, i) => (
             <div
-              key={prop.name}
+              key={prop.id ?? i}
               className="group border border-white/[0.06] bg-white/[0.02] rounded-xl p-4 flex items-center justify-center transition-all duration-500 hover:border-gv-gold/40 hover:bg-gv-gold/[0.03]"
               style={{ minHeight: "80px" }}
             >

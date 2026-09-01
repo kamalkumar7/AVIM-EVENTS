@@ -22,7 +22,12 @@ export default function Footer({ config = {} }) {
 
         {/* Brand */}
         <div className="sm:col-span-2 lg:col-span-1">
-          <h2 className="font-fraunces text-xl text-white mb-3">AVIM Events</h2>
+          <img
+            src="/images/avim-events/logos/main-logo.png"
+            alt="AVIM Events"
+            className="h-14 w-auto mb-3"
+            style={{ filter: "drop-shadow(0 0 6px rgba(212,175,55,0.3))" }}
+          />
           <p className="font-inter text-sm text-white/50 leading-relaxed mb-5 max-w-xs">
             {tagline}
           </p>
@@ -80,7 +85,7 @@ export default function Footer({ config = {} }) {
 
       <div className="border-t border-white/[0.07] px-6 md:px-10 py-5 max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-3">
         <p className="font-inter text-xs text-white/30">{copyright}</p>
-        <p className="font-inter text-[10px] text-white/20 tracking-wide">Website designed, built and managed by Masriq NextTech Solutions</p>
+        {/* <p className="font-inter text-[10px] text-white/20 tracking-wide">Website designed, built and managed by Masriq NextTech Solutions</p> */}
       </div>
     </footer>
   );

@@ -109,7 +109,7 @@ export default async function AboutPage() {
             <div className="lg:col-span-5 flex justify-center lg:justify-end">
               <div className="w-56 h-56 sm:w-72 sm:h-72 relative opacity-90 flex items-center justify-center">
                 <Image
-                  src="/images/avim-events/logo.svg"
+                  src="/images/avim-events/logos/main-logo.png"
                   alt="AVIM Events"
                   width={288}
                   height={288}
@@ -199,9 +199,9 @@ export default async function AboutPage() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-              {displayTeam.map((member) => (
+              {displayTeam.map((member, i) => (
                 <div
-                  key={member.name}
+                  key={member.id ?? i}
                   className="glass-card-gv p-6 group hover:border-gv-gold/40 hover:-translate-y-2 transition-all duration-500 reveal flex flex-col items-center text-center"
                   style={{ borderTop: "1px solid transparent" }}
                 >

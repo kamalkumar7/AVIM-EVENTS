@@ -114,8 +114,8 @@ export default async function Home() {
           </div>
 
           <div className="max-w-7xl mx-auto px-6 md:px-10 mt-14 grid grid-cols-1 md:grid-cols-3 gap-5">
-            {featureTiles.map((f) => (
-              <div key={f.title} className="glass-card-gv p-7 hover:border-gv-gold/40 transition-all duration-500 reveal" style={{ transform: "translateY(0)" }}>
+            {featureTiles.map((f, i) => (
+              <div key={f.id ?? i} className="glass-card-gv p-7 hover:border-gv-gold/40 transition-all duration-500 reveal" style={{ transform: "translateY(0)" }}>
                 <span className="text-gv-gold text-xl block mb-4">{f.icon}</span>
                 <h3 className="font-fraunces text-lg text-white mb-3">{f.title}</h3>
                 <p className="font-inter text-sm text-white/55 leading-relaxed">{f.desc}</p>
@@ -143,8 +143,8 @@ export default async function Home() {
               </Link>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-              {services.map((s) => (
-                <div key={s.title} className="glass-card-gv p-7 hover:border-gv-gold/40 transition-all duration-500 group reveal" style={{ transform: "translateY(0)" }}>
+              {services.map((s, i) => (
+                <div key={s.id ?? i} className="glass-card-gv p-7 hover:border-gv-gold/40 transition-all duration-500 group reveal" style={{ transform: "translateY(0)" }}>
                   <h3 className="font-fraunces text-lg text-white mb-3 group-hover:text-gv-gold transition-colors">{s.title}</h3>
                   <p className="font-inter text-sm text-white/55 leading-relaxed mb-6">{s.desc}</p>
                   <Link href="/contact" className="font-inter text-[11px] text-gv-gold tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity">Enquire now →</Link>

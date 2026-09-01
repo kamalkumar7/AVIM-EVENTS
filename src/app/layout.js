@@ -4,9 +4,9 @@ export const metadata = {
   title: "AVIM Events | Luxury Royal Hospitality",
   description: "Crafting legendary celebrations with royal heritage and bespoke event management.",
   icons: {
-    icon: "/icon.png",
-    shortcut: "/icon.png",
-    apple: "/icon.png",
+    icon: "/images/avim-events/logos/logo_a_small.png",
+    shortcut: "/images/avim-events/logos/logo_a_small.png",
+    apple: "/images/avim-events/logos/logo_a_small.png",
   },
 };
 

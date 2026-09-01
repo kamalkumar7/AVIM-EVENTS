@@ -151,7 +151,7 @@ export default async function ServicesPage() {
             <div className="lg:col-span-5 flex justify-center lg:justify-end">
               <div className="w-56 h-56 sm:w-72 sm:h-72 relative opacity-90 flex items-center justify-center">
                 <Image
-                  src="/images/avim-events/logo.svg"
+                  src="/images/avim-events/logos/main-logo.png"
                   alt="AVIM Events"
                   width={288}
                   height={288}
@@ -343,7 +343,7 @@ export default async function ServicesPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
               {moreServices.map((s, i) => (
                 <div
-                  key={s.title}
+                  key={s.id ?? i}
                   className={`glass-card-gv p-8 hover:border-gv-gold/40 hover:-translate-y-2 transition-all duration-500 group reveal${i === 1 ? " reveal-delay" : i === 2 ? " reveal-delay2" : ""}`}
                 >
                   <span className="text-gv-gold text-xl block mb-5">{s.badge}</span>

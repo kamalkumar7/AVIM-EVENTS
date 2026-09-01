@@ -120,9 +120,9 @@ export default function AboutStatsSection({ stats: propStats = [], milestones: p
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-5 reveal">
-            {stats.map((s) => (
+            {stats.map((s, i) => (
               <div
-                key={s.label}
+                key={s.id ?? i}
                 className="glass-card-gv text-center py-10 px-6 hover:border-gv-gold/40 transition-colors duration-500"
               >
                 <span className="font-fraunces text-4xl sm:text-5xl text-gradient-gold block mb-3">
@@ -165,7 +165,7 @@ export default function AboutStatsSection({ stats: propStats = [], milestones: p
           <div className="flex flex-col gap-8">
             {milestones.map((m, i) => (
               <div
-                key={m.title}
+                key={m.id ?? i}
                 className={`glass-card-gv flex flex-col sm:flex-row items-start gap-6 p-7 sm:p-10 hover:border-gv-gold/40 transition-all duration-500 reveal ${
                   m.dominant ? "border-gv-gold/30" : ""
                 }`}
