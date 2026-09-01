@@ -67,14 +67,14 @@ export default function AdminSidebar() {
       <div className="px-4 py-4 border-b border-gray-100 flex items-center justify-between gap-2">
         {collapsed ? (
           <img
-            src="/images/avim-events/logos/main-logo.png"
+            src="/images/avim-events/logos/logo_a_small.png"
             alt="AVIM Events"
             className="h-8 w-8 object-contain rounded-full shrink-0"
           />
         ) : (
           <div className="flex items-center gap-2.5 min-w-0">
             <img
-              src="/images/avim-events/logos/main-logo.png"
+              src="/images/avim-events/logos/logo_a_small.png"
               alt="AVIM Events"
               className="h-9 w-9 object-contain rounded-full shrink-0"
             />
