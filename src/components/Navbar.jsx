@@ -23,7 +23,7 @@ export default function Navbar({ config = {} }) {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
           <img
-            src="/images/avim-events/logos/logo_a_small.png"
+            src="/images/avim-events/logos/main-logo.png"
             alt="AVIM Events"
             className="h-12 sm:h-14 w-auto"
             style={{ filter: "drop-shadow(0 0 8px rgba(212,175,55,0.4))" }}

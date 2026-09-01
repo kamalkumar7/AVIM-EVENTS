@@ -158,12 +158,6 @@ export default function HeroSection({ slides = [], config = {} }) {
         {/* Right column — Glassmorphism card */}
         <div className="lg:col-span-5 reveal-right">
           <div className="glass-card-gv relative overflow-hidden p-7 sm:p-9">
-            {/* Watermark */}
-            <div
-              className="absolute inset-0 bg-cover bg-center opacity-[0.14] pointer-events-none"
-              style={{ backgroundImage: "url(/images/avim-events/logos/main-logo.png)" }}
-            />
-
             <div className="relative z-10">
               {/* Title row */}
               <div className="flex items-start justify-between mb-5">
