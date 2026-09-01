@@ -9,10 +9,10 @@ export default function Footer({ config = {} }) {
     { name: "Facebook", href: config.facebook_url || "https://www.facebook.com/AVIM Eventsgroup" },
   ];
 
-  const phone1 = config.phone_1 || "+91 89510 97078";
-  const phone2 = config.phone_2 || "+91 89517 97078";
-  const email = config.email || "info@avim-events.com";
-  const address = config.address || "11-B, 2nd Cross, Shampura Main Rd, RT Nagar Post, Kaval Bairasandra, Bengaluru, Karnataka 560032";
+  const phone1 = config.phone_1 || "+91 82686 25482";
+  const phone2 = config.phone_2 || "+91 73535 31961";
+  const email = config.email || "theavimevents@gmail.com";
+  const address = config.address || "ITI Layout, Hosapalaya, HSR Layout, Bengaluru, Karnataka 560068";
   const tagline = config.tagline || "Luxury hospitality and logistics execution for weddings, corporate events, tours & travel — with premium standards and precise operations.";
   const copyright = config.copyright || `© ${year} AVIM Events. All rights reserved.`;
 

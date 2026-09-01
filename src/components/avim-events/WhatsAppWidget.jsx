@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export default function WhatsAppWidget({ phone = "918951097078" }) {
+export default function WhatsAppWidget({ phone = "918268625482" }) {
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
 

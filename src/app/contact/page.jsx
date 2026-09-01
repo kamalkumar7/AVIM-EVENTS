@@ -31,7 +31,7 @@ export default async function ContactPage() {
   const navbar = cfgMap(navbarConfigs);
   const footer = cfgMap(footerConfigs);
 
-  const waPhone = navbar.whatsapp_number || contact.whatsapp_number || "918951097078";
+  const waPhone = navbar.whatsapp_number || contact.whatsapp_number || "918268625482";
 
   return (
     <div

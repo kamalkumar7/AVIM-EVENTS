@@ -69,7 +69,7 @@ export default async function AboutPage() {
   const contact = cfgMap(contactConfigs);
 
   const displayTeam = teamMembers.length > 0 ? teamMembers : DEFAULT_TEAM;
-  const waPhone = navbar.whatsapp_number || contact.whatsapp_number || "918951097078";
+  const waPhone = navbar.whatsapp_number || contact.whatsapp_number || "918268625482";
 
   return (
     <div className="antialiased relative min-h-screen" style={{ backgroundColor: "#050505", color: "#f0ebe0" }}>

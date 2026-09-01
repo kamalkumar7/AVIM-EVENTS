@@ -121,7 +121,7 @@ async function main() {
     // Navbar
     { section: "navbar", key: "logo_tagline", value: "HOSPITALITY  •  LOGISTICS" },
     { section: "navbar", key: "cta_text", value: "Enquire" },
-    { section: "navbar", key: "whatsapp_number", value: "918951097078" },
+    { section: "navbar", key: "whatsapp_number", value: "918268625482" },
 
     // Hero section
     { section: "hero_section", key: "badge", value: "LUXURY HOSPITALITY & LOGISTICS" },
@@ -243,12 +243,12 @@ async function main() {
     // Contact info
     { section: "contact_info", key: "heading", value: "Contact Us" },
     { section: "contact_info", key: "subheading", value: "We are here to help." },
-    { section: "contact_info", key: "address", value: "11-B, 2nd Cross, Shampura Main Rd, RT Nagar Post, Kaval Bairasandra, Bengaluru, Karnataka 560032" },
-    { section: "contact_info", key: "phone_1", value: "+91 89510 97078" },
-    { section: "contact_info", key: "phone_2", value: "+91 89517 97078" },
-    { section: "contact_info", key: "email", value: "info@avim-events.com" },
+    { section: "contact_info", key: "address", value: "ITI Layout, Hosapalaya, HSR Layout, Bengaluru, Karnataka 560068" },
+    { section: "contact_info", key: "phone_1", value: "+91 82686 25482" },
+    { section: "contact_info", key: "phone_2", value: "+91 73535 31961" },
+    { section: "contact_info", key: "email", value: "theavimevents@gmail.com" },
     { section: "contact_info", key: "hours", value: "Mon - Sat: 9:00 AM - 6:00 PM" },
-    { section: "contact_info", key: "whatsapp_number", value: "918951097078" },
+    { section: "contact_info", key: "whatsapp_number", value: "918268625482" },
 
     // Gallery page
     { section: "gallery_page", key: "heading", value: "A Tapestry of Celebrations" },
@@ -264,10 +264,10 @@ async function main() {
 
     // Footer
     { section: "footer", key: "tagline", value: "Luxury hospitality and logistics execution for weddings, corporate events, tours & travel — with premium standards and precise operations." },
-    { section: "footer", key: "address", value: "11-B, 2nd Cross, Shampura Main Rd, RT Nagar Post, Kaval Bairasandra, Bengaluru, Karnataka 560032" },
-    { section: "footer", key: "email", value: "info@avim-events.com" },
-    { section: "footer", key: "phone_1", value: "+91 89510 97078" },
-    { section: "footer", key: "phone_2", value: "+91 89517 97078" },
+    { section: "footer", key: "address", value: "ITI Layout, Hosapalaya, HSR Layout, Bengaluru, Karnataka 560068" },
+    { section: "footer", key: "email", value: "theavimevents@gmail.com" },
+    { section: "footer", key: "phone_1", value: "+91 82686 25482" },
+    { section: "footer", key: "phone_2", value: "+91 73535 31961" },
     { section: "footer", key: "instagram_url", value: "https://www.instagram.com/avim-eventsgroup/" },
     { section: "footer", key: "linkedin_url", value: "https://www.linkedin.com/company/avim-events-group/" },
     { section: "footer", key: "facebook_url", value: "https://www.facebook.com/AVIM Eventsgroup" },

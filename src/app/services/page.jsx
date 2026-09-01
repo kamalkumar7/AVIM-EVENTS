@@ -94,7 +94,7 @@ export default async function ServicesPage() {
   const footer = cfgMap(footerConfigs);
   const contact = cfgMap(contactConfigs);
 
-  const waPhone = navbar.whatsapp_number || contact.whatsapp_number || "918951097078";
+  const waPhone = navbar.whatsapp_number || contact.whatsapp_number || "918268625482";
 
   const card1 = servicesMainCards[0];
   const card2 = servicesMainCards[1];

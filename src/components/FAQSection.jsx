@@ -93,7 +93,7 @@ export default function FAQSection() {
             Didn&apos;t find your answer?
           </p>
           <a
-            href="mailto:hello@avimevents.com"
+            href="mailto:theavimevents@gmail.com"
             className="inline-block bg-primary text-on-primary font-label-caps text-xs uppercase tracking-widest px-12 py-4 font-semibold hover:opacity-90 transition-opacity"
           >
             Contact Our Team
