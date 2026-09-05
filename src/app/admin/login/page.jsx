@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense } from "react";
+import ParticlesBackground from "@/components/admin/ParticlesBackground";
 
 function LoginForm() {
   const router = useRouter();
@@ -31,6 +32,7 @@ function LoginForm() {
 
   return (
     <div className="min-h-screen bg-[#080808] flex items-center justify-center p-4 relative overflow-hidden">
+      <ParticlesBackground />
       {/* Subtle background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-amber-500/5 rounded-full blur-[100px] pointer-events-none" />
 

@@ -59,6 +59,10 @@ export default function AdminSidebar() {
     router.push("/admin/login");
   }
 
+  if (pathname === "/admin/login") {
+    return null;
+  }
+
   return (
     <aside
       className={`${collapsed ? "w-[68px]" : "w-60"} min-h-screen bg-[#0a0a0a] border-r border-gray-800/60 flex flex-col shrink-0 transition-all duration-300`}
