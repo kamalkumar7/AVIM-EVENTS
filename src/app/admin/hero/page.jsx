@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import Modal from "@/components/admin/Modal";
 import ImageUpload from "@/components/admin/ImageUpload";
+import AdminImage from "@/components/admin/AdminImage";
 
 export default function HeroPage() {
   const [slides, setSlides] = useState([]);
@@ -10,10 +11,13 @@ export default function HeroPage() {
   const [form, setForm] = useState({ imageUrl: "", order: 0, active: true });
   const [loading, setLoading] = useState(false);
 
+  const [initialLoad, setInitialLoad] = useState(true);
+
   async function load() {
     const res = await fetch("/api/admin/hero");
     const data = await res.json();
     setSlides(data);
+    setInitialLoad(false);
   }
 
   // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -68,7 +72,7 @@ export default function HeroPage() {
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
         {slides.map((slide, i) => (
           <div key={slide.id} className={`relative rounded-xl overflow-hidden border ${slide.active ? "border-gray-700" : "border-gray-800 opacity-50"} group`}>
-            <img src={slide.imageUrl} alt={`Slide ${i + 1}`} className="w-full h-40 object-cover" />
+            <AdminImage src={slide.imageUrl} alt={`Slide ${i + 1}`} className="w-full h-40 object-cover" />
             <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
               <button onClick={() => openEdit(slide)} className="text-xs bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded-lg">Edit</button>
               <button onClick={() => remove(slide.id)} className="text-xs bg-red-500/20 hover:bg-red-500/40 text-red-300 px-3 py-1.5 rounded-lg">Delete</button>
@@ -82,7 +86,13 @@ export default function HeroPage() {
             </button>
           </div>
         ))}
-        {slides.length === 0 && <p className="text-gray-500 text-sm col-span-3">No slides yet. Add one above.</p>}
+        {initialLoad ? (
+          <div className="col-span-full flex justify-center py-20">
+            <div className="w-8 h-8 border-2 border-amber-500/20 border-t-amber-500 rounded-full animate-spin"></div>
+          </div>
+        ) : slides.length === 0 ? (
+          <p className="text-gray-500 text-sm col-span-3">No slides yet. Add one above.</p>
+        ) : null}
       </div>
 
       <Modal open={modal} onClose={() => setModal(false)} title={editing ? "Edit Slide" : "Add Slide"}>

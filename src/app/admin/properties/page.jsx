@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import Modal from "@/components/admin/Modal";
 import ImageUpload from "@/components/admin/ImageUpload";
+import AdminImage from "@/components/admin/AdminImage";
 
 export default function PropertiesPage() {
   const [items, setItems] = useState([]);
@@ -10,9 +11,12 @@ export default function PropertiesPage() {
   const [form, setForm] = useState({ name: "", logoUrl: "", active: true });
   const [loading, setLoading] = useState(false);
 
+  const [initialLoad, setInitialLoad] = useState(true);
+
   async function load() {
     const res = await fetch("/api/admin/properties");
     setItems(await res.json());
+    setInitialLoad(false);
   }
   // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { load(); }, []);
@@ -50,11 +54,7 @@ export default function PropertiesPage() {
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mb-6">
         {items.map((item) => (
           <div key={item.id} className={`bg-gray-800 border border-gray-700 rounded-xl p-4 flex flex-col items-center gap-3 group relative ${!item.active ? "opacity-50" : ""}`}>
-            {item.logoUrl ? (
-              <img src={item.logoUrl} alt={item.name} className="h-10 object-contain" />
-            ) : (
-              <div className="h-10 w-20 bg-gray-700 rounded flex items-center justify-center text-[10px] text-gray-500">No logo</div>
-            )}
+            <AdminImage src={item.logoUrl} alt={item.name} className="h-10 object-contain w-20" />
             <p className="text-xs text-gray-300 text-center">{item.name}</p>
             <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
               <button onClick={() => openEdit(item)} className="text-[10px] bg-gray-700 hover:bg-gray-600 text-white px-1.5 py-0.5 rounded">Edit</button>
@@ -62,7 +62,13 @@ export default function PropertiesPage() {
             </div>
           </div>
         ))}
-        {items.length === 0 && <p className="text-gray-500 text-sm col-span-4">No properties yet.</p>}
+        {initialLoad ? (
+          <div className="col-span-full flex justify-center py-20">
+            <div className="w-8 h-8 border-2 border-amber-500/20 border-t-amber-500 rounded-full animate-spin"></div>
+          </div>
+        ) : items.length === 0 ? (
+          <p className="text-gray-500 text-sm col-span-4">No properties yet.</p>
+        ) : null}
       </div>
 
       <Modal open={modal} onClose={() => setModal(false)} title={editing ? "Edit Property" : "Add Property"}>

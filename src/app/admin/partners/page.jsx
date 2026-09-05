@@ -10,9 +10,12 @@ export default function PartnersPage() {
   const [form, setForm] = useState({ name: "", logoUrl: "", active: true });
   const [loading, setLoading] = useState(false);
 
+  const [initialLoad, setInitialLoad] = useState(true);
+
   async function load() {
     const res = await fetch("/api/admin/partners");
     setItems(await res.json());
+    setInitialLoad(false);
   }
   // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { load(); }, []);
@@ -82,9 +85,15 @@ export default function PartnersPage() {
                 </td>
               </tr>
             ))}
-            {items.length === 0 && (
+            {initialLoad ? (
+              <tr>
+                <td colSpan={5} className="py-20 text-center">
+                  <div className="inline-block w-8 h-8 border-2 border-amber-500/20 border-t-amber-500 rounded-full animate-spin"></div>
+                </td>
+              </tr>
+            ) : items.length === 0 ? (
               <tr><td colSpan={5} className="px-5 py-8 text-center text-gray-500">No partners yet.</td></tr>
-            )}
+            ) : null}
           </tbody>
         </table>
       </div>

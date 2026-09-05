@@ -9,9 +9,12 @@ export default function TestimonialsPage() {
   const [form, setForm] = useState({ author: "", quote: "", timeAgo: "", active: true });
   const [loading, setLoading] = useState(false);
 
+  const [initialLoad, setInitialLoad] = useState(true);
+
   async function load() {
     const res = await fetch("/api/admin/testimonials");
     setItems(await res.json());
+    setInitialLoad(false);
   }
   // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { load(); }, []);
@@ -70,7 +73,13 @@ export default function TestimonialsPage() {
             </div>
           </div>
         ))}
-        {items.length === 0 && <p className="text-gray-500 text-sm">No testimonials yet.</p>}
+        {initialLoad ? (
+          <div className="flex justify-center py-20">
+            <div className="w-8 h-8 border-2 border-amber-500/20 border-t-amber-500 rounded-full animate-spin"></div>
+          </div>
+        ) : items.length === 0 ? (
+          <p className="text-gray-500 text-sm">No testimonials yet.</p>
+        ) : null}
       </div>
 
       <Modal open={modal} onClose={() => setModal(false)} title={editing ? "Edit Testimonial" : "Add Testimonial"}>

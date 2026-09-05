@@ -1,12 +1,17 @@
 "use client";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function PageTransition({ children }) {
   const pathname = usePathname();
   const [trigger, setTrigger] = useState(0);
+  const isMounted = useRef(false);
 
   useEffect(() => {
+    if (!isMounted.current) {
+      isMounted.current = true;
+      return;
+    }
     setTrigger((t) => t + 1);
   }, [pathname]);
 

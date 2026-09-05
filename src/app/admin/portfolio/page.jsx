@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import Modal from "@/components/admin/Modal";
 import ImageUpload from "@/components/admin/ImageUpload";
+import AdminImage from "@/components/admin/AdminImage";
 
 export default function PortfolioPage() {
   const [items, setItems] = useState([]);
@@ -10,9 +11,12 @@ export default function PortfolioPage() {
   const [form, setForm] = useState({ category: "", title: "", subtitle: "", imageUrl: "", active: true });
   const [loading, setLoading] = useState(false);
 
+  const [initialLoad, setInitialLoad] = useState(true);
+
   async function load() {
     const res = await fetch("/api/admin/portfolio");
     setItems(await res.json());
+    setInitialLoad(false);
   }
   // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { load(); }, []);
@@ -55,11 +59,7 @@ export default function PortfolioPage() {
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
         {items.map((item) => (
           <div key={item.id} className={`relative rounded-xl overflow-hidden border border-gray-700 group ${!item.active ? "opacity-50" : ""}`}>
-            {item.imageUrl ? (
-              <img src={item.imageUrl} alt={item.title} className="w-full h-36 object-cover" />
-            ) : (
-              <div className="w-full h-36 bg-gray-800 flex items-center justify-center text-gray-600 text-xs">No image</div>
-            )}
+            <AdminImage src={item.imageUrl} alt={item.title} className="w-full h-36 object-cover" />
             <div className="p-3 bg-gray-800">
               <p className="text-[10px] text-amber-400 uppercase tracking-wider">{item.category}</p>
               <p className="text-white text-xs font-medium mt-0.5 truncate">{item.title}</p>
@@ -72,7 +72,13 @@ export default function PortfolioPage() {
             </div>
           </div>
         ))}
-        {items.length === 0 && <p className="text-gray-500 text-sm col-span-3">No portfolio items yet.</p>}
+        {initialLoad ? (
+          <div className="col-span-full flex justify-center py-20">
+            <div className="w-8 h-8 border-2 border-amber-500/20 border-t-amber-500 rounded-full animate-spin"></div>
+          </div>
+        ) : items.length === 0 ? (
+          <p className="text-gray-500 text-sm col-span-3">No portfolio items yet.</p>
+        ) : null}
       </div>
 
       <Modal open={modal} onClose={() => setModal(false)} title={editing ? "Edit Portfolio Item" : "Add Portfolio Item"}>

@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import Modal from "@/components/admin/Modal";
 import ImageUpload from "@/components/admin/ImageUpload";
+import AdminImage from "@/components/admin/AdminImage";
 
 export default function TeamPage() {
   const [items, setItems] = useState([]);
@@ -10,9 +11,12 @@ export default function TeamPage() {
   const [form, setForm] = useState({ name: "", role: "", location: "", description: "", initials: "", imageUrl: "", active: true });
   const [loading, setLoading] = useState(false);
 
+  const [initialLoad, setInitialLoad] = useState(true);
+
   async function load() {
     const res = await fetch("/api/admin/team");
     setItems(await res.json());
+    setInitialLoad(false);
   }
   // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { load(); }, []);
@@ -56,11 +60,7 @@ export default function TeamPage() {
         {items.map((item, i) => (
           <div key={item.id} className={`flex items-center gap-4 bg-gray-800 border border-gray-700 rounded-xl px-5 py-4 ${!item.active ? "opacity-50" : ""}`}>
             <span className="text-gray-500 text-xs w-5 text-center">{i + 1}</span>
-            {item.imageUrl ? (
-              <img src={item.imageUrl} alt={item.name} className="w-9 h-9 rounded-full object-cover" />
-            ) : (
-              <div className="w-9 h-9 rounded-full bg-amber-500/20 flex items-center justify-center text-amber-400 text-xs font-bold">{item.initials || item.name.slice(0, 2).toUpperCase()}</div>
-            )}
+            <AdminImage src={item.imageUrl} alt={item.name} className="w-9 h-9 rounded-full object-cover shrink-0" />
             <div className="flex-1 min-w-0">
               <p className="text-white font-medium text-sm">{item.name}</p>
               <p className="text-gray-400 text-xs">{item.role}{item.location ? ` • ${item.location}` : ""}</p>
@@ -72,7 +72,13 @@ export default function TeamPage() {
             </div>
           </div>
         ))}
-        {items.length === 0 && <p className="text-gray-500 text-sm">No team members yet.</p>}
+        {initialLoad ? (
+          <div className="flex justify-center py-20">
+            <div className="w-8 h-8 border-2 border-amber-500/20 border-t-amber-500 rounded-full animate-spin"></div>
+          </div>
+        ) : items.length === 0 ? (
+          <p className="text-gray-500 text-sm">No team members yet.</p>
+        ) : null}
       </div>
 
       <Modal open={modal} onClose={() => setModal(false)} title={editing ? "Edit Team Member" : "Add Team Member"}>

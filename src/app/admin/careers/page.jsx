@@ -7,12 +7,15 @@ export default function CareersAdminPage() {
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
 
+  const [initialLoad, setInitialLoad] = useState(true);
+
   async function load() {
     const res = await fetch("/api/admin/config?section=careers_section");
     const configs = await res.json();
     const map = {};
     configs.forEach((c) => { map[c.key] = c.value; });
     setData(map);
+    setInitialLoad(false);
   }
 
   // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -38,44 +41,50 @@ export default function CareersAdminPage() {
         <p className="text-gray-400 text-sm mt-0.5">Edit the Careers section content and job roles list.</p>
       </div>
 
-      <div className="bg-gray-800/50 border border-gray-700 rounded-xl p-6 space-y-5">
-        <div>
-          <label className="block text-xs text-gray-400 mb-1.5 uppercase tracking-wider">Section Label</label>
-          <input value={get("label")} onChange={(e) => set("label", e.target.value)} className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2.5 text-white text-sm focus:outline-none focus:border-amber-500" />
+      {initialLoad ? (
+        <div className="flex justify-center py-20">
+          <div className="w-8 h-8 border-2 border-amber-500/20 border-t-amber-500 rounded-full animate-spin"></div>
         </div>
-        <div>
-          <label className="block text-xs text-gray-400 mb-1.5 uppercase tracking-wider">Heading</label>
-          <input value={get("heading")} onChange={(e) => set("heading", e.target.value)} className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2.5 text-white text-sm focus:outline-none focus:border-amber-500" />
-        </div>
-        <div>
-          <label className="block text-xs text-gray-400 mb-1.5 uppercase tracking-wider">Body Paragraph 1</label>
-          <textarea value={get("body_1")} onChange={(e) => set("body_1", e.target.value)} rows={3} className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2.5 text-white text-sm resize-none focus:outline-none focus:border-amber-500" />
-        </div>
-        <div>
-          <label className="block text-xs text-gray-400 mb-1.5 uppercase tracking-wider">Body Paragraph 2</label>
-          <textarea value={get("body_2")} onChange={(e) => set("body_2", e.target.value)} rows={3} className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2.5 text-white text-sm resize-none focus:outline-none focus:border-amber-500" />
-        </div>
-        <div>
-          <label className="block text-xs text-gray-400 mb-1.5 uppercase tracking-wider">Quote</label>
-          <input value={get("quote")} onChange={(e) => set("quote", e.target.value)} className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2.5 text-white text-sm focus:outline-none focus:border-amber-500" />
-        </div>
-        <div>
-          <label className="block text-xs text-gray-400 mb-1.5 uppercase tracking-wider">Job Roles (one per line)</label>
-          <textarea value={get("job_roles")} onChange={(e) => set("job_roles", e.target.value)} rows={6} className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2.5 text-white text-sm resize-none focus:outline-none focus:border-amber-500 font-mono" placeholder={"Hospitality Executive\nGuest Coordination Lead\nLogistics Operations"} />
-        </div>
-        <div>
-          <label className="block text-xs text-gray-400 mb-1.5 uppercase tracking-wider">Careers Email</label>
-          <input value={get("careers_email")} onChange={(e) => set("careers_email", e.target.value)} type="email" className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2.5 text-white text-sm focus:outline-none focus:border-amber-500" placeholder="careers@avim-eventsgroup.com" />
-        </div>
-        <ImageUpload label="Section Photo" folder="avim-events/careers" value={get("photo_url")} onChange={(url) => set("photo_url", url)} />
+      ) : (
+        <div className="bg-gray-800/50 border border-gray-700 rounded-xl p-6 space-y-5">
+          <div>
+            <label className="block text-xs text-gray-400 mb-1.5 uppercase tracking-wider">Section Label</label>
+            <input value={get("label")} onChange={(e) => set("label", e.target.value)} className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2.5 text-white text-sm focus:outline-none focus:border-amber-500" />
+          </div>
+          <div>
+            <label className="block text-xs text-gray-400 mb-1.5 uppercase tracking-wider">Heading</label>
+            <input value={get("heading")} onChange={(e) => set("heading", e.target.value)} className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2.5 text-white text-sm focus:outline-none focus:border-amber-500" />
+          </div>
+          <div>
+            <label className="block text-xs text-gray-400 mb-1.5 uppercase tracking-wider">Body Paragraph 1</label>
+            <textarea value={get("body_1")} onChange={(e) => set("body_1", e.target.value)} rows={3} className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2.5 text-white text-sm resize-none focus:outline-none focus:border-amber-500" />
+          </div>
+          <div>
+            <label className="block text-xs text-gray-400 mb-1.5 uppercase tracking-wider">Body Paragraph 2</label>
+            <textarea value={get("body_2")} onChange={(e) => set("body_2", e.target.value)} rows={3} className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2.5 text-white text-sm resize-none focus:outline-none focus:border-amber-500" />
+          </div>
+          <div>
+            <label className="block text-xs text-gray-400 mb-1.5 uppercase tracking-wider">Quote</label>
+            <input value={get("quote")} onChange={(e) => set("quote", e.target.value)} className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2.5 text-white text-sm focus:outline-none focus:border-amber-500" />
+          </div>
+          <div>
+            <label className="block text-xs text-gray-400 mb-1.5 uppercase tracking-wider">Job Roles (one per line)</label>
+            <textarea value={get("job_roles")} onChange={(e) => set("job_roles", e.target.value)} rows={6} className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2.5 text-white text-sm resize-none focus:outline-none focus:border-amber-500 font-mono" placeholder={"Hospitality Executive\nGuest Coordination Lead\nLogistics Operations"} />
+          </div>
+          <div>
+            <label className="block text-xs text-gray-400 mb-1.5 uppercase tracking-wider">Careers Email</label>
+            <input value={get("careers_email")} onChange={(e) => set("careers_email", e.target.value)} type="email" className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2.5 text-white text-sm focus:outline-none focus:border-amber-500" placeholder="careers@avim-eventsgroup.com" />
+          </div>
+          <ImageUpload label="Section Photo" folder="avim-events/careers" value={get("photo_url")} onChange={(url) => set("photo_url", url)} />
 
-        <div className="flex items-center gap-3 pt-2">
-          <button onClick={save} disabled={saving} className="bg-amber-500 hover:bg-amber-400 disabled:opacity-50 text-black font-semibold px-6 py-2.5 rounded-lg text-sm">
-            {saving ? "Saving…" : saved ? "✓ Saved!" : "Save Changes"}
-          </button>
-          {saved && <p className="text-green-400 text-xs">Saved.</p>}
+          <div className="flex items-center gap-3 pt-2">
+            <button onClick={save} disabled={saving} className="bg-amber-500 hover:bg-amber-400 disabled:opacity-50 text-black font-semibold px-6 py-2.5 rounded-lg text-sm">
+              {saving ? "Saving…" : saved ? "✓ Saved!" : "Save Changes"}
+            </button>
+            {saved && <p className="text-green-400 text-xs">Saved.</p>}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

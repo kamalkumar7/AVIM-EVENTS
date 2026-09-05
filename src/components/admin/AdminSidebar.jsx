@@ -61,10 +61,10 @@ export default function AdminSidebar() {
 
   return (
     <aside
-      className={`${collapsed ? "w-[68px]" : "w-60"} min-h-screen bg-white border-r border-gray-200 flex flex-col shrink-0 transition-all duration-300`}
+      className={`${collapsed ? "w-[68px]" : "w-60"} min-h-screen bg-[#0a0a0a] border-r border-gray-800/60 flex flex-col shrink-0 transition-all duration-300`}
     >
       {/* Brand header */}
-      <div className="px-4 py-4 border-b border-gray-100 flex items-center justify-between gap-2">
+      <div className="px-4 py-4 border-b border-gray-800/60 flex items-center justify-between gap-2">
         {collapsed ? (
           <img
             src="/images/avim-events/logos/logo_a_small.png"
@@ -79,14 +79,14 @@ export default function AdminSidebar() {
               className="h-9 w-9 object-contain rounded-full shrink-0"
             />
             <div className="min-w-0">
-              <p className="text-gray-900 font-semibold text-sm tracking-wide">AVIM Events</p>
-              <p className="text-gray-400 text-[10px] mt-0.5">Admin Panel</p>
+              <p className="text-gray-200 font-semibold text-sm tracking-wide">AVIM Events</p>
+              <p className="text-[#C9A227] text-[10px] mt-0.5 uppercase tracking-wider font-medium">Admin Panel</p>
             </div>
           </div>
         )}
         <button
           onClick={() => setCollapsed((c) => !c)}
-          className="text-gray-400 hover:text-gray-600 p-1.5 rounded-md hover:bg-gray-100 transition-colors shrink-0"
+          className="text-gray-500 hover:text-gray-300 p-1.5 rounded-md hover:bg-white/5 transition-colors shrink-0"
           title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
         >
           {collapsed ? <HiOutlineMenuAlt2 size={16} /> : <HiOutlineChevronLeft size={16} />}
@@ -98,10 +98,10 @@ export default function AdminSidebar() {
         {NAV.map((item, i) => {
           if (item.divider) {
             if (collapsed) {
-              return <div key={i} className="my-3 mx-3 border-t border-gray-100" />;
+              return <div key={i} className="my-3 mx-3 border-t border-gray-800/60" />;
             }
             return (
-              <p key={i} className="px-4 pt-5 pb-1.5 text-[10px] text-gray-400 uppercase tracking-widest font-medium">
+              <p key={i} className="px-4 pt-5 pb-1.5 text-[10px] text-gray-500 uppercase tracking-widest font-medium">
                 {item.label}
               </p>
             );
@@ -117,11 +117,11 @@ export default function AdminSidebar() {
               title={collapsed ? item.label : undefined}
               className={`flex items-center gap-2.5 mx-2 px-3 py-2 rounded-lg text-[13px] transition-all duration-150 ${
                 active
-                  ? "bg-gray-900 text-white font-medium shadow-sm"
-                  : "text-gray-500 hover:text-gray-900 hover:bg-gray-50"
+                  ? "bg-amber-500/10 text-amber-400 font-medium border border-amber-500/20 shadow-[0_0_15px_rgba(201,162,39,0.05)]"
+                  : "text-gray-400 hover:text-gray-200 hover:bg-white/5 border border-transparent"
               }`}
             >
-              <Icon size={16} className={`shrink-0 ${active ? "text-white" : "text-gray-400"}`} />
+              <Icon size={16} className={`shrink-0 ${active ? "text-amber-400" : "text-gray-500"}`} />
               {!collapsed && <span className="truncate">{item.label}</span>}
             </Link>
           );
@@ -129,10 +129,10 @@ export default function AdminSidebar() {
       </nav>
 
       {/* Footer */}
-      <div className="px-3 py-3 border-t border-gray-100">
+      <div className="px-3 py-3 border-t border-gray-800/60">
         <button
           onClick={logout}
-          className={`w-full text-left text-xs text-gray-400 hover:text-red-500 transition-colors flex items-center gap-2 px-2 py-2 rounded-lg hover:bg-red-50 ${collapsed ? "justify-center" : ""}`}
+          className={`w-full text-left text-xs text-gray-500 hover:text-red-400 transition-colors flex items-center gap-2 px-2 py-2 rounded-lg hover:bg-red-500/10 ${collapsed ? "justify-center" : ""}`}
           title="Sign out"
         >
           <HiOutlineLogout size={15} />
@@ -140,21 +140,7 @@ export default function AdminSidebar() {
         </button>
       </div>
 
-      <style jsx>{`
-        .admin-scrollbar::-webkit-scrollbar {
-          width: 3px;
-        }
-        .admin-scrollbar::-webkit-scrollbar-track {
-          background: transparent;
-        }
-        .admin-scrollbar::-webkit-scrollbar-thumb {
-          background: rgba(0,0,0,0.08);
-          border-radius: 3px;
-        }
-        .admin-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: rgba(0,0,0,0.15);
-        }
-      `}</style>
+
     </aside>
   );
 }

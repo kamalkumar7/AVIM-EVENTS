@@ -535,3 +535,18 @@ body {
   from { transform: scale(1.00); }
   to   { transform: scale(1.05); }
 }
+
+/* ── Admin Dashboard Scrollbar ───────────────────────────── */
+.admin-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.admin-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.admin-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+.admin-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}

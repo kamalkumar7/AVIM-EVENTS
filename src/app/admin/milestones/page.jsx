@@ -9,9 +9,12 @@ export default function MilestonesPage() {
   const [form, setForm] = useState({ title: "", badge: "", description: "", location: "", featured: false, active: true });
   const [loading, setLoading] = useState(false);
 
+  const [initialLoad, setInitialLoad] = useState(true);
+
   async function load() {
     const res = await fetch("/api/admin/milestones");
     setItems(await res.json());
+    setInitialLoad(false);
   }
   // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { load(); }, []);
@@ -64,7 +67,13 @@ export default function MilestonesPage() {
             </div>
           </div>
         ))}
-        {items.length === 0 && <p className="text-gray-500 text-sm">No milestones yet.</p>}
+        {initialLoad ? (
+          <div className="flex justify-center py-20">
+            <div className="w-8 h-8 border-2 border-amber-500/20 border-t-amber-500 rounded-full animate-spin"></div>
+          </div>
+        ) : items.length === 0 ? (
+          <p className="text-gray-500 text-sm">No milestones yet.</p>
+        ) : null}
       </div>
 
       <Modal open={modal} onClose={() => setModal(false)} title={editing ? "Edit Milestone" : "Add Milestone"}>

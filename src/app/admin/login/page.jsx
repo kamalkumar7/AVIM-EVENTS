@@ -30,52 +30,57 @@ function LoginForm() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-950 flex items-center justify-center p-4">
-      <div className="w-full max-w-sm">
-        <div className="text-center mb-8">
+    <div className="min-h-screen bg-[#080808] flex items-center justify-center p-4 relative overflow-hidden">
+      {/* Subtle background glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-amber-500/5 rounded-full blur-[100px] pointer-events-none" />
+
+      <div className="w-full max-w-sm relative z-10">
+        <div className="text-center mb-10">
           <img
             src="/images/avim-events/logos/main-logo.png"
             alt="AVIM Events"
-            className="h-20 w-auto mx-auto mb-2"
+            className="h-24 w-auto mx-auto mb-4 hover:scale-105 transition-transform duration-500"
           />
-          <p className="text-gray-500 text-sm mt-1">Admin Panel</p>
+          <p className="text-[#C9A227] tracking-widest text-xs uppercase font-medium font-body-rt">Admin Portal</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="bg-gray-900 border border-gray-800 rounded-xl p-8 space-y-5">
-          <h1 className="text-white font-semibold text-lg text-center">Sign in</h1>
+        <form onSubmit={handleSubmit} className="glass-panel p-8 space-y-6">
+          <h1 className="text-white font-semibold text-xl text-center font-display-lg tracking-wide">Sign in</h1>
 
-          {error && <p className="text-red-400 text-sm text-center bg-red-500/10 rounded-lg px-3 py-2">{error}</p>}
+          {error && <p className="text-red-300 text-sm text-center bg-red-900/30 border border-red-500/30 rounded-lg px-3 py-2">{error}</p>}
 
-          <div>
-            <label className="block text-xs text-gray-400 mb-1.5">Username</label>
-            <input
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-              autoFocus
-              className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2.5 text-white text-sm focus:outline-none focus:border-amber-500 transition-colors"
-              placeholder="admin@avimevents"
-            />
-          </div>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-[11px] uppercase tracking-wider text-gray-400 mb-1.5 font-medium">Username</label>
+              <input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+                autoFocus
+                className="w-full bg-black/40 border border-[#C9A227]/20 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-[#C9A227] focus:bg-black/60 transition-all shadow-inner"
+                placeholder="admin@avimevents"
+              />
+            </div>
 
-          <div>
-            <label className="block text-xs text-gray-400 mb-1.5">Password</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2.5 text-white text-sm focus:outline-none focus:border-amber-500 transition-colors"
-            />
+            <div>
+              <label className="block text-[11px] uppercase tracking-wider text-gray-400 mb-1.5 font-medium">Password</label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                className="w-full bg-black/40 border border-[#C9A227]/20 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-[#C9A227] focus:bg-black/60 transition-all shadow-inner"
+              />
+            </div>
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-amber-500 hover:bg-amber-400 disabled:opacity-50 text-black font-semibold py-2.5 rounded-lg text-sm transition-colors"
+            className="w-full gold-btn py-3 mt-4"
           >
-            {loading ? "Signing in…" : "Sign in"}
+            {loading ? "Authenticating…" : "Enter Portal"}
           </button>
         </form>
       </div>

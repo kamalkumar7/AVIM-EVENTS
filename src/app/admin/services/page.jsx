@@ -16,9 +16,12 @@ export default function ServicesPage() {
   const [form, setForm] = useState({ section: "home", title: "", description: "", bullets: "", imageUrl: "", icon: "", badge: "", active: true });
   const [loading, setLoading] = useState(false);
 
+  const [initialLoad, setInitialLoad] = useState(true);
+
   async function load() {
     const res = await fetch("/api/admin/services");
     setItems(await res.json());
+    setInitialLoad(false);
   }
   // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { load(); }, []);
@@ -65,30 +68,36 @@ export default function ServicesPage() {
         <button onClick={openAdd} className="bg-amber-500 hover:bg-amber-400 text-black text-sm font-semibold px-4 py-2 rounded-lg">+ Add Service</button>
       </div>
 
-      {grouped.map((group) => (
-        <div key={group.value} className="mb-8">
-          <h2 className="text-sm font-semibold text-gray-300 mb-3 flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-amber-500" />{group.label}
-          </h2>
-          <div className="space-y-2">
-            {group.items.map((item) => (
-              <div key={item.id} className={`flex gap-4 items-center bg-gray-800 border border-gray-700 rounded-xl px-5 py-4 ${!item.active ? "opacity-50" : ""}`}>
-                {item.imageUrl && <img src={item.imageUrl} alt={item.title} className="w-12 h-10 object-cover rounded" />}
-                <div className="flex-1 min-w-0">
-                  <p className="text-white font-medium text-sm">{item.title}</p>
-                  <p className="text-gray-400 text-xs truncate">{item.description}</p>
-                </div>
-                <div className="flex gap-2 items-center shrink-0">
-                  <button onClick={() => toggle(item)} className={`text-xs px-2 py-0.5 rounded ${item.active ? "bg-green-500/20 text-green-400" : "bg-gray-500/20 text-gray-400"}`}>{item.active ? "On" : "Off"}</button>
-                  <button onClick={() => openEdit(item)} className="text-xs text-gray-400 hover:text-white">Edit</button>
-                  <button onClick={() => remove(item.id)} className="text-xs text-red-400">Delete</button>
-                </div>
-              </div>
-            ))}
-            {group.items.length === 0 && <p className="text-gray-600 text-xs">None yet.</p>}
-          </div>
+      {initialLoad ? (
+        <div className="flex justify-center py-20">
+          <div className="w-8 h-8 border-2 border-amber-500/20 border-t-amber-500 rounded-full animate-spin"></div>
         </div>
-      ))}
+      ) : (
+        grouped.map((group) => (
+          <div key={group.value} className="mb-8">
+            <h2 className="text-sm font-semibold text-gray-300 mb-3 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-amber-500" />{group.label}
+            </h2>
+            <div className="space-y-2">
+              {group.items.map((item) => (
+                <div key={item.id} className={`flex gap-4 items-center bg-gray-800 border border-gray-700 rounded-xl px-5 py-4 ${!item.active ? "opacity-50" : ""}`}>
+                  {item.imageUrl && <img src={item.imageUrl} alt={item.title} className="w-12 h-10 object-cover rounded" />}
+                  <div className="flex-1 min-w-0">
+                    <p className="text-white font-medium text-sm">{item.title}</p>
+                    <p className="text-gray-400 text-xs truncate">{item.description}</p>
+                  </div>
+                  <div className="flex gap-2 items-center shrink-0">
+                    <button onClick={() => toggle(item)} className={`text-xs px-2 py-0.5 rounded ${item.active ? "bg-green-500/20 text-green-400" : "bg-gray-500/20 text-gray-400"}`}>{item.active ? "On" : "Off"}</button>
+                    <button onClick={() => openEdit(item)} className="text-xs text-gray-400 hover:text-white">Edit</button>
+                    <button onClick={() => remove(item.id)} className="text-xs text-red-400">Delete</button>
+                  </div>
+                </div>
+              ))}
+              {group.items.length === 0 && <p className="text-gray-600 text-xs">None yet.</p>}
+            </div>
+          </div>
+        ))
+      )}
 
       <Modal open={modal} onClose={() => setModal(false)} title={editing ? "Edit Service" : "Add Service"}>
         <div className="space-y-4">

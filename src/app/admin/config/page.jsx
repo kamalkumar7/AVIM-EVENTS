@@ -377,6 +377,7 @@ export default function ConfigPage() {
   const [originalData, setOriginalData] = useState({});
   const [saving, setSaving] = useState({});
   const [saved, setSaved] = useState({});
+  const [initialLoad, setInitialLoad] = useState(true);
   const [activeTab, setActiveTab] = useState(ALL_SECTIONS[0].id);
   const [expandedGroups, setExpandedGroups] = useState(
     () => Object.fromEntries(SECTION_GROUPS.map((g) => [g.group, true]))
@@ -394,6 +395,7 @@ export default function ConfigPage() {
     });
     setData(map);
     setOriginalData(JSON.parse(JSON.stringify(map)));
+    setInitialLoad(false);
   }
 
   // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -464,7 +466,12 @@ export default function ConfigPage() {
         </p>
       </div>
 
-      <div className="flex gap-6">
+      {initialLoad ? (
+        <div className="flex justify-center py-20">
+          <div className="w-8 h-8 border-2 border-amber-500/20 border-t-amber-500 rounded-full animate-spin"></div>
+        </div>
+      ) : (
+        <div className="flex gap-6">
         {/* ── Left sidebar: grouped navigation ── */}
         <div className="w-60 shrink-0">
           {/* Search */}
@@ -662,7 +669,8 @@ export default function ConfigPage() {
             </div>
           </div>
         )}
-      </div>
+        </div>
+      )}
 
       {/* Utility styles */}
       <style jsx>{`

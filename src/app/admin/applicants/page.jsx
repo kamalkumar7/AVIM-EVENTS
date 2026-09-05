@@ -6,9 +6,12 @@ export default function ApplicantsPage() {
   const [items, setItems] = useState([]);
   const [viewing, setViewing] = useState(null);
 
+  const [initialLoad, setInitialLoad] = useState(true);
+
   async function load() {
     const res = await fetch("/api/admin/applicants");
     setItems(await res.json());
+    setInitialLoad(false);
   }
   // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { load(); }, []);
@@ -65,9 +68,15 @@ export default function ApplicantsPage() {
                 </td>
               </tr>
             ))}
-            {items.length === 0 && (
+            {initialLoad ? (
+              <tr>
+                <td colSpan={6} className="py-20 text-center">
+                  <div className="inline-block w-8 h-8 border-2 border-amber-500/20 border-t-amber-500 rounded-full animate-spin"></div>
+                </td>
+              </tr>
+            ) : items.length === 0 ? (
               <tr><td colSpan={6} className="px-5 py-10 text-center text-gray-500">No applications yet.</td></tr>
-            )}
+            ) : null}
           </tbody>
         </table>
       </div>

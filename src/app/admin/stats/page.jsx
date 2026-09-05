@@ -14,9 +14,12 @@ export default function StatsPage() {
   const [form, setForm] = useState({ section: "home", value: 0, suffix: "+", label: "", sublabel: "", active: true });
   const [loading, setLoading] = useState(false);
 
+  const [initialLoad, setInitialLoad] = useState(true);
+
   async function load() {
     const res = await fetch("/api/admin/stats");
     setItems(await res.json());
+    setInitialLoad(false);
   }
   // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { load(); }, []);
@@ -53,27 +56,33 @@ export default function StatsPage() {
         <button onClick={openAdd} className="bg-amber-500 hover:bg-amber-400 text-black text-sm font-semibold px-4 py-2 rounded-lg">+ Add Stat</button>
       </div>
 
-      {grouped.map((group) => (
-        <div key={group.value} className="mb-8">
-          <h2 className="text-sm font-semibold text-gray-300 mb-3 flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-amber-500" />{group.label}
-          </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            {group.items.map((item) => (
-              <div key={item.id} className={`bg-gray-800 border border-gray-700 rounded-xl p-4 ${!item.active ? "opacity-50" : ""}`}>
-                <p className="text-2xl font-bold text-amber-400">{item.value}{item.suffix}</p>
-                <p className="text-white text-xs font-medium mt-1">{item.label}</p>
-                {item.sublabel && <p className="text-gray-500 text-[10px] mt-0.5">{item.sublabel}</p>}
-                <div className="flex gap-2 mt-3">
-                  <button onClick={() => openEdit(item)} className="text-[10px] text-gray-400 hover:text-white">Edit</button>
-                  <button onClick={() => remove(item.id)} className="text-[10px] text-red-400 hover:text-red-300">Delete</button>
-                </div>
-              </div>
-            ))}
-            {group.items.length === 0 && <p className="text-gray-600 text-xs col-span-4">None yet.</p>}
-          </div>
+      {initialLoad ? (
+        <div className="flex justify-center py-20">
+          <div className="w-8 h-8 border-2 border-amber-500/20 border-t-amber-500 rounded-full animate-spin"></div>
         </div>
-      ))}
+      ) : (
+        grouped.map((group) => (
+          <div key={group.value} className="mb-8">
+            <h2 className="text-sm font-semibold text-gray-300 mb-3 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-amber-500" />{group.label}
+            </h2>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              {group.items.map((item) => (
+                <div key={item.id} className={`bg-gray-800 border border-gray-700 rounded-xl p-4 ${!item.active ? "opacity-50" : ""}`}>
+                  <p className="text-2xl font-bold text-amber-400">{item.value}{item.suffix}</p>
+                  <p className="text-white text-xs font-medium mt-1">{item.label}</p>
+                  {item.sublabel && <p className="text-gray-500 text-[10px] mt-0.5">{item.sublabel}</p>}
+                  <div className="flex gap-2 mt-3">
+                    <button onClick={() => openEdit(item)} className="text-[10px] text-gray-400 hover:text-white">Edit</button>
+                    <button onClick={() => remove(item.id)} className="text-[10px] text-red-400 hover:text-red-300">Delete</button>
+                  </div>
+                </div>
+              ))}
+              {group.items.length === 0 && <p className="text-gray-600 text-xs col-span-4">None yet.</p>}
+            </div>
+          </div>
+        ))
+      )}
 
       <Modal open={modal} onClose={() => setModal(false)} title={editing ? "Edit Stat" : "Add Stat"}>
         <div className="space-y-4">
