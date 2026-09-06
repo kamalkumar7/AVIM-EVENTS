@@ -42,7 +42,7 @@ export default function PropertiesPage() {
   }
 
   return (
-    <div className="p-8 max-w-5xl">
+    <div className="p-8 w-full">
       <div className="flex items-center justify-between mb-6">
         <div>
           <h1 className="text-xl font-bold text-white">Properties</h1>

@@ -47,37 +47,37 @@ export default function PortfolioPage() {
   }
 
   return (
-    <div className="p-8 max-w-5xl">
+    <div className="p-8 w-full">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-xl font-bold text-white">Portfolio Gallery</h1>
-          <p className="text-gray-400 text-sm mt-0.5">Items shown in the masonry lightbox gallery on the homepage.</p>
+          <h1 className="text-xl font-bold text-gray-900">Portfolio Gallery</h1>
+          <p className="text-gray-500 text-sm mt-0.5">Items shown in the masonry lightbox gallery on the homepage.</p>
         </div>
-        <button onClick={openAdd} className="bg-amber-500 hover:bg-amber-400 text-black text-sm font-semibold px-4 py-2 rounded-lg">+ Add Item</button>
+        <button onClick={openAdd} className="bg-gray-900 hover:bg-gray-800 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors">+ Add Item</button>
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
         {items.map((item) => (
-          <div key={item.id} className={`relative rounded-xl overflow-hidden border border-gray-700 group ${!item.active ? "opacity-50" : ""}`}>
+          <div key={item.id} className={`relative rounded-xl overflow-hidden border border-gray-200 group shadow-sm ${!item.active ? "opacity-50" : ""}`}>
             <AdminImage src={item.imageUrl} alt={item.title} className="w-full h-36 object-cover" />
-            <div className="p-3 bg-gray-800">
-              <p className="text-[10px] text-amber-400 uppercase tracking-wider">{item.category}</p>
-              <p className="text-white text-xs font-medium mt-0.5 truncate">{item.title}</p>
-              {item.subtitle && <p className="text-gray-500 text-[10px] truncate">{item.subtitle}</p>}
+            <div className="p-3 bg-white">
+              <p className="text-[10px] text-amber-600 uppercase tracking-wider font-medium">{item.category}</p>
+              <p className="text-gray-900 text-xs font-medium mt-0.5 truncate">{item.title}</p>
+              {item.subtitle && <p className="text-gray-400 text-[10px] truncate">{item.subtitle}</p>}
             </div>
             <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-              <button onClick={() => toggle(item)} className={`text-[10px] px-1.5 py-0.5 rounded ${item.active ? "bg-green-500/30 text-green-300" : "bg-gray-500/30 text-gray-300"}`}>{item.active ? "On" : "Off"}</button>
-              <button onClick={() => openEdit(item)} className="text-[10px] bg-gray-700 text-white px-1.5 py-0.5 rounded">Edit</button>
-              <button onClick={() => remove(item.id)} className="text-[10px] bg-red-500/30 text-red-300 px-1.5 py-0.5 rounded">Del</button>
+              <button onClick={() => toggle(item)} className={`text-[10px] px-1.5 py-0.5 rounded ${item.active ? "bg-emerald-500/80 text-white" : "bg-gray-500/80 text-white"}`}>{item.active ? "On" : "Off"}</button>
+              <button onClick={() => openEdit(item)} className="text-[10px] bg-white/90 text-gray-700 px-1.5 py-0.5 rounded shadow-sm">Edit</button>
+              <button onClick={() => remove(item.id)} className="text-[10px] bg-red-500/80 text-white px-1.5 py-0.5 rounded">Del</button>
             </div>
           </div>
         ))}
         {initialLoad ? (
           <div className="col-span-full flex justify-center py-20">
-            <div className="w-8 h-8 border-2 border-amber-500/20 border-t-amber-500 rounded-full animate-spin"></div>
+            <div className="w-8 h-8 border-2 border-gray-200 border-t-gray-600 rounded-full animate-spin"></div>
           </div>
         ) : items.length === 0 ? (
-          <p className="text-gray-500 text-sm col-span-3">No portfolio items yet.</p>
+          <p className="text-gray-400 text-sm col-span-3">No portfolio items yet.</p>
         ) : null}
       </div>
 
@@ -85,24 +85,24 @@ export default function PortfolioPage() {
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs text-gray-400 mb-1">Category *</label>
-              <input value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })} className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm" placeholder="e.g. WEDDING" />
+              <label className="block text-xs text-gray-500 mb-1">Category *</label>
+              <input value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })} className="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-gray-800 text-sm focus:outline-none focus:border-gray-400" placeholder="e.g. WEDDING" />
             </div>
             <div>
-              <label className="block text-xs text-gray-400 mb-1">Title *</label>
-              <input value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm" placeholder="e.g. Sunset Destination" />
+              <label className="block text-xs text-gray-500 mb-1">Title *</label>
+              <input value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} className="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-gray-800 text-sm focus:outline-none focus:border-gray-400" placeholder="e.g. Sunset Destination" />
             </div>
           </div>
           <div>
-            <label className="block text-xs text-gray-400 mb-1">Subtitle</label>
-            <input value={form.subtitle} onChange={(e) => setForm({ ...form, subtitle: e.target.value })} className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm" placeholder="Short description" />
+            <label className="block text-xs text-gray-500 mb-1">Subtitle</label>
+            <input value={form.subtitle} onChange={(e) => setForm({ ...form, subtitle: e.target.value })} className="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-gray-800 text-sm focus:outline-none focus:border-gray-400" placeholder="Short description" />
           </div>
           <ImageUpload label="Image" folder="avim-events/portfolio" value={form.imageUrl} onChange={(url) => setForm({ ...form, imageUrl: url })} />
           <label className="flex items-center gap-2 cursor-pointer">
             <input type="checkbox" checked={form.active} onChange={(e) => setForm({ ...form, active: e.target.checked })} className="accent-amber-500" />
-            <span className="text-sm text-gray-300">Show on site</span>
+            <span className="text-sm text-gray-700">Show on site</span>
           </label>
-          <button onClick={save} disabled={loading} className="w-full bg-amber-500 hover:bg-amber-400 disabled:opacity-50 text-black font-semibold py-2.5 rounded-lg text-sm">
+          <button onClick={save} disabled={loading} className="w-full bg-gray-900 hover:bg-gray-800 disabled:opacity-50 text-white font-semibold py-2.5 rounded-lg text-sm transition-colors">
             {loading ? "Saving…" : editing ? "Update" : "Add Item"}
           </button>
         </div>

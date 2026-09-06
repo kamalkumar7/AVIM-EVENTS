@@ -7,9 +7,9 @@ export default async function AdminLayout({ children }) {
   const session = await getSession();
 
   return (
-    <div className="flex min-h-screen bg-[#080808] text-gray-100">
+    <div className="flex h-screen overflow-hidden bg-[#f5f5f4] text-gray-900">
       {session?.isAdmin && <AdminSidebar />}
-      <main className="flex-1 overflow-auto">
+      <main className="flex-1 overflow-y-auto">
         {children}
       </main>
     </div>

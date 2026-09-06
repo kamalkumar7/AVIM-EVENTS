@@ -60,38 +60,38 @@ export default function HeroPage() {
   }
 
   return (
-    <div className="p-8 max-w-4xl">
+    <div className="p-8 w-full">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-xl font-bold text-white">Hero Slides</h1>
-          <p className="text-gray-400 text-sm mt-0.5">Manage the full-screen slideshow on the homepage.</p>
+          <h1 className="text-xl font-bold text-gray-900">Hero Slides</h1>
+          <p className="text-gray-500 text-sm mt-0.5">Manage the full-screen slideshow on the homepage.</p>
         </div>
-        <button onClick={openAdd} className="bg-amber-500 hover:bg-amber-400 text-black text-sm font-semibold px-4 py-2 rounded-lg transition-colors">+ Add Slide</button>
+        <button onClick={openAdd} className="bg-gray-900 hover:bg-gray-800 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors">+ Add Slide</button>
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
         {slides.map((slide, i) => (
-          <div key={slide.id} className={`relative rounded-xl overflow-hidden border ${slide.active ? "border-gray-700" : "border-gray-800 opacity-50"} group`}>
+          <div key={slide.id} className={`relative rounded-xl overflow-hidden border ${slide.active ? "border-gray-200" : "border-gray-200 opacity-50"} group shadow-sm`}>
             <AdminImage src={slide.imageUrl} alt={`Slide ${i + 1}`} className="w-full h-40 object-cover" />
-            <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-              <button onClick={() => openEdit(slide)} className="text-xs bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded-lg">Edit</button>
-              <button onClick={() => remove(slide.id)} className="text-xs bg-red-500/20 hover:bg-red-500/40 text-red-300 px-3 py-1.5 rounded-lg">Delete</button>
+            <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+              <button onClick={() => openEdit(slide)} className="text-xs bg-white/20 hover:bg-white/30 text-white px-3 py-1.5 rounded-lg backdrop-blur-sm">Edit</button>
+              <button onClick={() => remove(slide.id)} className="text-xs bg-red-500/20 hover:bg-red-500/40 text-white px-3 py-1.5 rounded-lg backdrop-blur-sm">Delete</button>
             </div>
             <div className="absolute top-2 left-2 flex gap-1.5">
               <span className="bg-black/60 text-white text-[10px] px-1.5 py-0.5 rounded">#{slide.order + 1}</span>
               {!slide.active && <span className="bg-red-500/60 text-white text-[10px] px-1.5 py-0.5 rounded">Hidden</span>}
             </div>
-            <button onClick={() => toggle(slide)} className={`absolute top-2 right-2 text-[10px] px-1.5 py-0.5 rounded ${slide.active ? "bg-green-500/30 text-green-300" : "bg-gray-500/30 text-gray-300"}`}>
+            <button onClick={() => toggle(slide)} className={`absolute top-2 right-2 text-[10px] px-1.5 py-0.5 rounded ${slide.active ? "bg-emerald-500/80 text-white" : "bg-gray-500/80 text-white"}`}>
               {slide.active ? "Active" : "Inactive"}
             </button>
           </div>
         ))}
         {initialLoad ? (
           <div className="col-span-full flex justify-center py-20">
-            <div className="w-8 h-8 border-2 border-amber-500/20 border-t-amber-500 rounded-full animate-spin"></div>
+            <div className="w-8 h-8 border-2 border-gray-200 border-t-gray-600 rounded-full animate-spin"></div>
           </div>
         ) : slides.length === 0 ? (
-          <p className="text-gray-500 text-sm col-span-3">No slides yet. Add one above.</p>
+          <p className="text-gray-400 text-sm col-span-3">No slides yet. Add one above.</p>
         ) : null}
       </div>
 
@@ -100,17 +100,17 @@ export default function HeroPage() {
           <ImageUpload label="Slide Image" folder="avim-events/hero" value={form.imageUrl} onChange={(url) => setForm({ ...form, imageUrl: url })} />
           <div className="flex gap-4">
             <div className="flex-1">
-              <label className="block text-xs text-gray-400 mb-1">Order</label>
-              <input type="number" value={form.order} onChange={(e) => setForm({ ...form, order: +e.target.value })} className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm" />
+              <label className="block text-xs text-gray-500 mb-1">Order</label>
+              <input type="number" value={form.order} onChange={(e) => setForm({ ...form, order: +e.target.value })} className="w-full bg-gray-50 border border-gray-200 rounded-lg px-3 py-2 text-gray-800 text-sm focus:outline-none focus:border-gray-400 focus:ring-1 focus:ring-gray-200" />
             </div>
             <div className="flex items-end pb-2">
               <label className="flex items-center gap-2 cursor-pointer">
                 <input type="checkbox" checked={form.active} onChange={(e) => setForm({ ...form, active: e.target.checked })} className="accent-amber-500" />
-                <span className="text-sm text-gray-300">Active</span>
+                <span className="text-sm text-gray-700">Active</span>
               </label>
             </div>
           </div>
-          <button onClick={save} disabled={loading} className="w-full bg-amber-500 hover:bg-amber-400 disabled:opacity-50 text-black font-semibold py-2.5 rounded-lg text-sm">
+          <button onClick={save} disabled={loading} className="w-full bg-gray-900 hover:bg-gray-800 disabled:opacity-50 text-white font-semibold py-2.5 rounded-lg text-sm transition-colors">
             {loading ? "Saving…" : editing ? "Update Slide" : "Add Slide"}
           </button>
         </div>

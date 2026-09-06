@@ -31,7 +31,7 @@ export default function ApplicantsPage() {
   const unread = items.filter((i) => !i.read).length;
 
   return (
-    <div className="p-8 max-w-5xl">
+    <div className="p-8 w-full">
       <div className="mb-6">
         <h1 className="text-xl font-bold text-white">Applicants</h1>
         <p className="text-gray-400 text-sm mt-0.5">Job applications submitted via the Careers form. {unread > 0 && <span className="text-amber-400">{unread} unread.</span>}</p>

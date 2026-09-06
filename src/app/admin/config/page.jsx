@@ -452,7 +452,7 @@ export default function ConfigPage() {
     : SECTION_GROUPS;
 
   return (
-    <div className="p-6 lg:p-8 max-w-7xl">
+    <div className="p-6 lg:p-8 w-full">
       {/* Page header */}
       <div className="mb-6">
         <div className="flex items-center gap-1.5 text-xs text-gray-400 mb-2">
