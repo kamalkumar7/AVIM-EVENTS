@@ -455,9 +455,9 @@ export default function ConfigPage() {
     <div className="p-6 lg:p-8 w-full">
       {/* Page header */}
       <div className="mb-6">
-        <div className="flex items-center gap-1.5 text-xs text-gray-400 mb-2">
+        <div className="flex items-center gap-1.5 text-xs text-gray-500 mb-2">
           <span>Admin</span>
-          <span className="text-gray-300">/</span>
+          <span className="text-gray-600">/</span>
           <span className="text-gray-600">Site Text</span>
         </div>
         <h1 className="text-2xl font-bold text-gray-900">Site Text Editor</h1>
@@ -477,7 +477,7 @@ export default function ConfigPage() {
           {/* Search */}
           <div className="mb-3">
             <div className="relative">
-              <HiOutlineSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={14} />
+              <HiOutlineSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={14} />
               <input
                 type="text"
                 value={searchQuery}
@@ -497,15 +497,15 @@ export default function ConfigPage() {
                   {/* Group header */}
                   <button
                     onClick={() => toggleGroup(group.group)}
-                    className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-[11px] font-medium uppercase tracking-wider text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
+                    className="w-full flex items-center justify-between px-3 py-2 rounded-lg text-[11px] font-medium uppercase tracking-wider text-gray-500 hover:text-gray-600 hover:bg-gray-100 transition-colors"
                   >
                     <span className="flex items-center gap-2">
                       <GroupIcon size={13} />
                       {group.group}
                     </span>
                     {expandedGroups[group.group]
-                      ? <HiOutlineChevronDown size={12} className="text-gray-300" />
-                      : <HiOutlineChevronRight size={12} className="text-gray-300" />
+                      ? <HiOutlineChevronDown size={12} className="text-gray-600" />
+                      : <HiOutlineChevronRight size={12} className="text-gray-600" />
                     }
                   </button>
 
@@ -525,12 +525,12 @@ export default function ConfigPage() {
                             }}
                             className={`w-full text-left px-3 py-2 rounded-lg text-xs transition-all duration-150 flex items-center justify-between group ${
                               isActive
-                                ? "bg-gray-900 text-white shadow-sm"
+                                ? "bg-gray-50 text-gray-900 shadow-sm"
                                 : "text-gray-500 hover:text-gray-800 hover:bg-gray-100"
                             }`}
                           >
                             <span className="flex items-center gap-2 min-w-0">
-                              <SectionIcon size={13} className={`shrink-0 ${isActive ? "text-gray-400" : "text-gray-300"}`} />
+                              <SectionIcon size={13} className={`shrink-0 ${isActive ? "text-gray-500" : "text-gray-600"}`} />
                               <span className="truncate">{s.label}</span>
                             </span>
                             <span className="flex items-center gap-1 shrink-0">
@@ -541,7 +541,7 @@ export default function ConfigPage() {
                                 <span className="text-emerald-500 text-[10px] font-medium">Saved</span>
                               )}
                               <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${
-                                isActive ? "bg-gray-700 text-gray-300" : "bg-gray-100 text-gray-400 group-hover:text-gray-500"
+                                isActive ? "bg-gray-700 text-gray-600" : "bg-gray-100 text-gray-500 group-hover:text-gray-500"
                               }`}>
                                 {s.fields.length}
                               </span>
@@ -564,14 +564,14 @@ export default function ConfigPage() {
             <div className="bg-white border border-gray-200 rounded-xl p-5 mb-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <div className="flex items-center gap-1.5 text-[11px] text-gray-400 mb-1">
+                  <div className="flex items-center gap-1.5 text-[11px] text-gray-500 mb-1">
                     {activeGroup && <activeGroup.Icon size={12} />}
                     <span>{activeGroup?.group}</span>
-                    <HiOutlineChevronRight size={10} className="text-gray-300" />
+                    <HiOutlineChevronRight size={10} className="text-gray-600" />
                     <span className="text-gray-600">{activeSection.label}</span>
                   </div>
                   <h2 className="text-lg text-gray-900 font-semibold flex items-center gap-2">
-                    <activeSection.Icon size={18} className="text-gray-400" />
+                    <activeSection.Icon size={18} className="text-gray-500" />
                     {activeSection.label}
                   </h2>
                 </div>
@@ -581,7 +581,7 @@ export default function ConfigPage() {
                       Unsaved
                     </span>
                   )}
-                  <span className="text-[11px] text-gray-400 bg-gray-50 border border-gray-200 rounded-full px-2.5 py-1">
+                  <span className="text-[11px] text-gray-500 bg-gray-50 border border-gray-200 rounded-full px-2.5 py-1">
                     {activeSection.fields.length} field{activeSection.fields.length !== 1 ? "s" : ""}
                   </span>
                 </div>
@@ -594,7 +594,7 @@ export default function ConfigPage() {
                 <div key={field.key} className="group">
                   <label className="flex items-center justify-between mb-1.5">
                     <span className="text-xs text-gray-500 uppercase tracking-wider font-medium">{field.label}</span>
-                    <span className="text-[10px] text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity font-mono">
+                    <span className="text-[10px] text-gray-600 opacity-0 group-hover:opacity-100 transition-opacity font-mono">
                       {activeSection.id}.{field.key}
                     </span>
                   </label>
@@ -626,8 +626,8 @@ export default function ConfigPage() {
                     disabled={saving[activeSection.id] || !hasUnsavedChanges(activeSection.id)}
                     className={`font-medium px-5 py-2.5 rounded-lg text-sm transition-all duration-200 flex items-center gap-2 ${
                       hasUnsavedChanges(activeSection.id)
-                        ? "bg-gray-900 hover:bg-gray-800 text-white shadow-sm"
-                        : "bg-gray-100 text-gray-400 cursor-not-allowed"
+                        ? "bg-gray-50 hover:bg-white text-gray-900 shadow-sm"
+                        : "bg-gray-100 text-gray-500 cursor-not-allowed"
                     } disabled:opacity-50`}
                   >
                     {saving[activeSection.id] ? (
@@ -659,7 +659,7 @@ export default function ConfigPage() {
                         [activeSection.id]: { ...(originalData[activeSection.id] || {}) },
                       }));
                     }}
-                    className="text-xs text-gray-400 hover:text-gray-600 transition-colors flex items-center gap-1"
+                    className="text-xs text-gray-500 hover:text-gray-600 transition-colors flex items-center gap-1"
                   >
                     <HiOutlineX size={12} />
                     Discard

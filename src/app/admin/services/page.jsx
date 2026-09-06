@@ -65,7 +65,7 @@ export default function ServicesPage() {
           <h1 className="text-xl font-bold text-gray-900">Services</h1>
           <p className="text-gray-500 text-sm mt-0.5">Service cards on the Home and Services pages.</p>
         </div>
-        <button onClick={openAdd} className="bg-gray-900 hover:bg-gray-800 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors">+ Add Service</button>
+        <button onClick={openAdd} className="bg-gray-50 hover:bg-white text-gray-900 text-sm font-semibold px-4 py-2 rounded-lg transition-colors">+ Add Service</button>
       </div>
 
       {initialLoad ? (
@@ -87,13 +87,13 @@ export default function ServicesPage() {
                     <p className="text-gray-500 text-xs truncate">{item.description}</p>
                   </div>
                   <div className="flex gap-2 items-center shrink-0">
-                    <button onClick={() => toggle(item)} className={`text-xs px-2 py-0.5 rounded ${item.active ? "bg-emerald-50 text-emerald-600 border border-emerald-200" : "bg-gray-100 text-gray-400 border border-gray-200"}`}>{item.active ? "On" : "Off"}</button>
+                    <button onClick={() => toggle(item)} className={`text-xs px-2 py-0.5 rounded ${item.active ? "bg-emerald-50 text-emerald-600 border border-emerald-200" : "bg-gray-100 text-gray-500 border border-gray-200"}`}>{item.active ? "On" : "Off"}</button>
                     <button onClick={() => openEdit(item)} className="text-xs text-gray-500 hover:text-gray-800">Edit</button>
                     <button onClick={() => remove(item.id)} className="text-xs text-red-500 hover:text-red-600">Delete</button>
                   </div>
                 </div>
               ))}
-              {group.items.length === 0 && <p className="text-gray-400 text-xs">None yet.</p>}
+              {group.items.length === 0 && <p className="text-gray-500 text-xs">None yet.</p>}
             </div>
           </div>
         ))
@@ -130,7 +130,7 @@ export default function ServicesPage() {
             <input type="checkbox" checked={form.active} onChange={(e) => setForm({ ...form, active: e.target.checked })} className="accent-amber-500" />
             <span className="text-sm text-gray-700">Active</span>
           </label>
-          <button onClick={save} disabled={loading} className="w-full bg-gray-900 hover:bg-gray-800 disabled:opacity-50 text-white font-semibold py-2.5 rounded-lg text-sm transition-colors">
+          <button onClick={save} disabled={loading} className="w-full bg-gray-50 hover:bg-white disabled:opacity-50 text-gray-900 font-semibold py-2.5 rounded-lg text-sm transition-colors">
             {loading ? "Saving…" : editing ? "Update" : "Add Service"}
           </button>
         </div>

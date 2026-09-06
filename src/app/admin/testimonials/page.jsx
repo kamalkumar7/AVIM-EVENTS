@@ -48,27 +48,27 @@ export default function TestimonialsPage() {
     <div className="p-8 w-full">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-xl font-bold text-white">Testimonials</h1>
-          <p className="text-gray-400 text-sm mt-0.5">Client reviews shown in the homepage carousel.</p>
+          <h1 className="text-xl font-bold text-gray-900">Testimonials</h1>
+          <p className="text-gray-500 text-sm mt-0.5">Client reviews shown in the homepage carousel.</p>
         </div>
         <button onClick={openAdd} className="bg-amber-500 hover:bg-amber-400 text-black text-sm font-semibold px-4 py-2 rounded-lg">+ Add Review</button>
       </div>
 
       <div className="space-y-3">
         {items.map((item) => (
-          <div key={item.id} className={`bg-gray-800 border border-gray-700 rounded-xl p-5 flex gap-4 ${!item.active ? "opacity-50" : ""}`}>
+          <div key={item.id} className={`bg-white border border-gray-200 rounded-xl p-5 flex gap-4 ${!item.active ? "opacity-50" : ""}`}>
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-1">
-                <span className="text-white font-semibold text-sm">{item.author}</span>
+                <span className="text-gray-900 font-semibold text-sm">{item.author}</span>
                 <span className="text-gray-500 text-xs">{item.timeAgo}</span>
               </div>
-              <p className="text-gray-400 text-sm leading-relaxed line-clamp-2">{item.quote}</p>
+              <p className="text-gray-500 text-sm leading-relaxed line-clamp-2">{item.quote}</p>
             </div>
             <div className="flex items-start gap-2 shrink-0">
-              <button onClick={() => toggle(item)} className={`text-xs px-2 py-0.5 rounded ${item.active ? "bg-green-500/20 text-green-400" : "bg-gray-500/20 text-gray-400"}`}>
+              <button onClick={() => toggle(item)} className={`text-xs px-2 py-0.5 rounded ${item.active ? "bg-green-500/20 text-green-400" : "bg-gray-500/20 text-gray-500"}`}>
                 {item.active ? "Visible" : "Hidden"}
               </button>
-              <button onClick={() => openEdit(item)} className="text-xs text-gray-400 hover:text-white">Edit</button>
+              <button onClick={() => openEdit(item)} className="text-xs text-gray-500 hover:text-gray-900">Edit</button>
               <button onClick={() => remove(item.id)} className="text-xs text-red-400 hover:text-red-300">Delete</button>
             </div>
           </div>
@@ -85,20 +85,20 @@ export default function TestimonialsPage() {
       <Modal open={modal} onClose={() => setModal(false)} title={editing ? "Edit Testimonial" : "Add Testimonial"}>
         <div className="space-y-4">
           <div>
-            <label className="block text-xs text-gray-400 mb-1">Author Name *</label>
-            <input value={form.author} onChange={(e) => setForm({ ...form, author: e.target.value })} className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm" placeholder="e.g. Prashobh Jayachandran" />
+            <label className="block text-xs text-gray-500 mb-1">Author Name *</label>
+            <input value={form.author} onChange={(e) => setForm({ ...form, author: e.target.value })} className="w-full bg-white border border-gray-200 rounded-lg px-3 py-2 text-gray-900 text-sm" placeholder="e.g. Prashobh Jayachandran" />
           </div>
           <div>
-            <label className="block text-xs text-gray-400 mb-1">Time Ago</label>
-            <input value={form.timeAgo} onChange={(e) => setForm({ ...form, timeAgo: e.target.value })} className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm" placeholder="e.g. 2 months ago" />
+            <label className="block text-xs text-gray-500 mb-1">Time Ago</label>
+            <input value={form.timeAgo} onChange={(e) => setForm({ ...form, timeAgo: e.target.value })} className="w-full bg-white border border-gray-200 rounded-lg px-3 py-2 text-gray-900 text-sm" placeholder="e.g. 2 months ago" />
           </div>
           <div>
-            <label className="block text-xs text-gray-400 mb-1">Review Text *</label>
-            <textarea value={form.quote} onChange={(e) => setForm({ ...form, quote: e.target.value })} rows={5} className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm resize-none" placeholder="Enter the full testimonial text…" />
+            <label className="block text-xs text-gray-500 mb-1">Review Text *</label>
+            <textarea value={form.quote} onChange={(e) => setForm({ ...form, quote: e.target.value })} rows={5} className="w-full bg-white border border-gray-200 rounded-lg px-3 py-2 text-gray-900 text-sm resize-none" placeholder="Enter the full testimonial text…" />
           </div>
           <label className="flex items-center gap-2 cursor-pointer">
             <input type="checkbox" checked={form.active} onChange={(e) => setForm({ ...form, active: e.target.checked })} className="accent-amber-500" />
-            <span className="text-sm text-gray-300">Show on site</span>
+            <span className="text-sm text-gray-600">Show on site</span>
           </label>
           <button onClick={save} disabled={loading} className="w-full bg-amber-500 hover:bg-amber-400 disabled:opacity-50 text-black font-semibold py-2.5 rounded-lg text-sm">
             {loading ? "Saving…" : editing ? "Update" : "Add Testimonial"}

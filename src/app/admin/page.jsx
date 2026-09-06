@@ -84,7 +84,7 @@ export default async function AdminDashboard() {
 
       {/* Quick access */}
       <div>
-        <h2 className="text-[11px] font-semibold text-gray-400 uppercase tracking-widest mb-4">Quick Access</h2>
+        <h2 className="text-[11px] font-semibold text-gray-500 uppercase tracking-widest mb-4">Quick Access</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {quickLinks.map((l) => {
             const { Icon } = l;
@@ -95,10 +95,10 @@ export default async function AdminDashboard() {
                 className="bg-white border border-gray-200 rounded-xl p-5 hover:border-gray-300 hover:shadow-md hover:-translate-y-1 transition-all duration-300 group"
               >
                 <div className="h-8 w-8 rounded-lg bg-gray-50 flex items-center justify-center border border-gray-200 group-hover:border-amber-400 group-hover:bg-amber-50 transition-colors mb-4">
-                  <Icon size={16} className="text-gray-400 group-hover:text-amber-600 transition-colors" />
+                  <Icon size={16} className="text-gray-500 group-hover:text-amber-600 transition-colors" />
                 </div>
                 <p className="text-sm text-gray-800 font-medium">{l.label}</p>
-                <p className="text-[11px] text-gray-400 mt-1 leading-relaxed">{l.desc}</p>
+                <p className="text-[11px] text-gray-500 mt-1 leading-relaxed">{l.desc}</p>
               </Link>
             );
           })}
@@ -111,7 +111,7 @@ export default async function AdminDashboard() {
 function TileGroup({ title, tiles }) {
   return (
     <div className="mb-10">
-      <h2 className="text-[11px] font-semibold text-gray-400 uppercase tracking-widest mb-4">{title}</h2>
+      <h2 className="text-[11px] font-semibold text-gray-500 uppercase tracking-widest mb-4">{title}</h2>
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
         {tiles.map((t) => {
           const { Icon } = t;
@@ -128,11 +128,11 @@ function TileGroup({ title, tiles }) {
               )}
               <div className="flex items-center justify-between mb-4">
                 <div className="h-8 w-8 rounded-lg bg-gray-50 flex items-center justify-center border border-gray-200 group-hover:border-amber-400 group-hover:bg-amber-50 transition-colors">
-                  <Icon size={16} className="text-gray-400 group-hover:text-amber-600 transition-colors" />
+                  <Icon size={16} className="text-gray-500 group-hover:text-amber-600 transition-colors" />
                 </div>
               </div>
               <p className="text-3xl font-light text-gray-900">{t.value}</p>
-              <p className="text-[11px] text-gray-400 uppercase tracking-wider font-medium mt-1">{t.label}</p>
+              <p className="text-[11px] text-gray-500 uppercase tracking-wider font-medium mt-1">{t.label}</p>
             </Link>
           );
         })}

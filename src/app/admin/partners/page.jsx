@@ -49,38 +49,38 @@ export default function PartnersPage() {
     <div className="p-8 w-full">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-xl font-bold text-white">Partners / Tieups</h1>
-          <p className="text-gray-400 text-sm mt-0.5">Wedding & corporate partner logos in the infinite marquee.</p>
+          <h1 className="text-xl font-bold text-gray-900">Partners / Tieups</h1>
+          <p className="text-gray-500 text-sm mt-0.5">Wedding & corporate partner logos in the infinite marquee.</p>
         </div>
         <button onClick={openAdd} className="bg-amber-500 hover:bg-amber-400 text-black text-sm font-semibold px-4 py-2 rounded-lg">+ Add Partner</button>
       </div>
 
-      <div className="bg-gray-800/50 border border-gray-700 rounded-xl overflow-hidden">
+      <div className="bg-white/50 border border-gray-200 rounded-xl overflow-hidden">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-gray-700">
-              <th className="text-left px-5 py-3 text-xs text-gray-400 uppercase tracking-wider">Logo</th>
-              <th className="text-left px-5 py-3 text-xs text-gray-400 uppercase tracking-wider">Name</th>
-              <th className="text-left px-5 py-3 text-xs text-gray-400 uppercase tracking-wider">Order</th>
-              <th className="text-left px-5 py-3 text-xs text-gray-400 uppercase tracking-wider">Status</th>
+            <tr className="border-b border-gray-200">
+              <th className="text-left px-5 py-3 text-xs text-gray-500 uppercase tracking-wider">Logo</th>
+              <th className="text-left px-5 py-3 text-xs text-gray-500 uppercase tracking-wider">Name</th>
+              <th className="text-left px-5 py-3 text-xs text-gray-500 uppercase tracking-wider">Order</th>
+              <th className="text-left px-5 py-3 text-xs text-gray-500 uppercase tracking-wider">Status</th>
               <th className="px-5 py-3" />
             </tr>
           </thead>
           <tbody>
             {items.map((item) => (
-              <tr key={item.id} className="border-b border-gray-800 hover:bg-gray-800/30">
+              <tr key={item.id} className="border-b border-gray-800 hover:bg-white/30">
                 <td className="px-5 py-3">
                   {item.logoUrl ? <img src={item.logoUrl} alt={item.name} className="h-8 w-8 object-contain rounded" /> : <span className="w-8 h-8 bg-gray-700 rounded flex items-center justify-center text-[10px] text-gray-500">N/A</span>}
                 </td>
-                <td className="px-5 py-3 text-white font-medium">{item.name}</td>
-                <td className="px-5 py-3 text-gray-400">{item.order}</td>
+                <td className="px-5 py-3 text-gray-900 font-medium">{item.name}</td>
+                <td className="px-5 py-3 text-gray-500">{item.order}</td>
                 <td className="px-5 py-3">
-                  <button onClick={() => toggle(item)} className={`text-xs px-2 py-0.5 rounded ${item.active ? "bg-green-500/20 text-green-400" : "bg-gray-500/20 text-gray-400"}`}>
+                  <button onClick={() => toggle(item)} className={`text-xs px-2 py-0.5 rounded ${item.active ? "bg-green-500/20 text-green-400" : "bg-gray-500/20 text-gray-500"}`}>
                     {item.active ? "Active" : "Hidden"}
                   </button>
                 </td>
                 <td className="px-5 py-3 text-right">
-                  <button onClick={() => openEdit(item)} className="text-xs text-gray-400 hover:text-white mr-4">Edit</button>
+                  <button onClick={() => openEdit(item)} className="text-xs text-gray-500 hover:text-gray-900 mr-4">Edit</button>
                   <button onClick={() => remove(item.id)} className="text-xs text-red-400 hover:text-red-300">Delete</button>
                 </td>
               </tr>
@@ -101,13 +101,13 @@ export default function PartnersPage() {
       <Modal open={modal} onClose={() => setModal(false)} title={editing ? "Edit Partner" : "Add Partner"}>
         <div className="space-y-4">
           <div>
-            <label className="block text-xs text-gray-400 mb-1">Name *</label>
-            <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white text-sm" placeholder="e.g. Meragi" />
+            <label className="block text-xs text-gray-500 mb-1">Name *</label>
+            <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="w-full bg-white border border-gray-200 rounded-lg px-3 py-2 text-gray-900 text-sm" placeholder="e.g. Meragi" />
           </div>
           <ImageUpload label="Logo (optional)" folder="avim-events/partners" value={form.logoUrl} onChange={(url) => setForm({ ...form, logoUrl: url })} />
           <label className="flex items-center gap-2 cursor-pointer">
             <input type="checkbox" checked={form.active} onChange={(e) => setForm({ ...form, active: e.target.checked })} className="accent-amber-500" />
-            <span className="text-sm text-gray-300">Show in marquee</span>
+            <span className="text-sm text-gray-600">Show in marquee</span>
           </label>
           <button onClick={save} disabled={loading} className="w-full bg-amber-500 hover:bg-amber-400 disabled:opacity-50 text-black font-semibold py-2.5 rounded-lg text-sm">
             {loading ? "Saving…" : editing ? "Update" : "Add Partner"}
