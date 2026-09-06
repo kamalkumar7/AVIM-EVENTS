@@ -7,7 +7,7 @@ import WhatsAppWidget from "@/components/avim-events/WhatsAppWidget";
 import ScrollToTopBtn from "@/components/avim-events/ScrollToTopBtn";
 import prisma from "@/lib/prisma";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 export const metadata = {
   title: "Services | AVIM Events",
