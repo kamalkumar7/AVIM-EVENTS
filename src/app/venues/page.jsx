@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import ScrollAnimation from "@/components/ScrollAnimation";
 import WhatsAppWidget from "@/components/avim-events/WhatsAppWidget";
 import ScrollToTopBtn from "@/components/avim-events/ScrollToTopBtn";
+import VenueImage from "@/components/avim-events/VenueImage";
 import prisma from "@/lib/prisma";
 
 export const revalidate = 60;
@@ -103,12 +104,11 @@ export default async function VenuesPage() {
                   className="glass-card-gv overflow-hidden group hover:-translate-y-2 transition-all duration-500 hover:border-gv-gold/40 reveal"
                 >
                   <div className="relative h-64 overflow-hidden">
-                    <img
+                    <VenueImage
                       src={venue.imageUrl || "/images/avim-events/placeholder-portfolio.svg"}
                       alt={venue.name}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       loading="lazy"
-                      onError={(e) => { e.currentTarget.src = "/images/avim-events/placeholder-portfolio.svg"; }}
                     />
                     <div
                       className="absolute inset-0 pointer-events-none"
@@ -167,12 +167,11 @@ export default async function VenuesPage() {
                   className="glass-card-gv overflow-hidden group hover:-translate-y-2 transition-all duration-500 hover:border-gv-gold/40 reveal"
                 >
                   <div className="relative h-52 overflow-hidden">
-                    <img
+                    <VenueImage
                       src={venue.imageUrl || "/images/avim-events/placeholder-portfolio.svg"}
                       alt={venue.name}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       loading="lazy"
-                      onError={(e) => { e.currentTarget.src = "/images/avim-events/placeholder-portfolio.svg"; }}
                     />
                     <div
                       className="absolute inset-0 pointer-events-none"
