@@ -44,7 +44,7 @@ export default function Footer({ config = {} }) {
         <div>
           <h3 className="font-inter text-[10px] text-gv-gold tracking-[0.25em] uppercase font-semibold mb-5">PAGES</h3>
           <ul className="space-y-3 font-inter text-sm">
-            {[["About", "/about"], ["Services", "/services"], ["Blogs", "/blogs"], ["Contact", "/contact"], ["Terms of Service", "/terms"], ["Privacy Policy", "/privacy"]].map(([name, href]) => (
+            {[["About", "/about"], ["Services", "/services"], ["Careers", "/careers"], ["Blogs", "/blogs"], ["Contact", "/contact"], ["Terms of Service", "/terms"], ["Privacy Policy", "/privacy"]].map(([name, href]) => (
               <li key={name}>
                 <Link href={href} className="group relative inline-block text-white/50 hover:text-gv-gold transition-colors pb-0.5">
                   {name}

@@ -5,10 +5,8 @@ import { HiOutlinePhotograph } from "react-icons/hi";
 export default function AdminImage({ src, alt, className }) {
   const [error, setError] = useState(false);
 
-  // Reset error state if src changes
-  useEffect(() => {
-    setError(false);
-  }, [src]);
+  // eslint-disable-next-line react-hooks/set-state-in-effect
+  useEffect(() => { setError(false); }, [src]);
 
   if (!src || error) {
     return (

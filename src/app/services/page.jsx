@@ -166,7 +166,7 @@ export default async function ServicesPage() {
                 )}
               </h1>
               <p className="font-inter text-white/60 text-base sm:text-lg leading-relaxed max-w-xl">
-                {hero.subtext || "Our services are designed to feel effortless for guests — powered by four specialised sectors: Logistics & Hospitality, Tours N Travels, Production Execution Team, and Designing N Printing, all running on precise logistics discipline."}
+                {hero.body || "Our services are designed to feel effortless for guests — powered by four specialised sectors: Logistics & Hospitality, Tours N Travels, Production Execution Team, and Designing N Printing, all running on precise logistics discipline."}
               </p>
             </div>
             <div className="lg:col-span-5 flex justify-center lg:justify-end">

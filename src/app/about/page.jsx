@@ -106,7 +106,7 @@ export default async function AboutPage() {
                 )}
               </h1>
               <p className="font-inter text-white/60 text-base sm:text-lg leading-relaxed max-w-xl">
-                {heroConfig.subtext || "We are a Detailed Hospitality & Logistics Organisation that implements Operations and Management for Guest Management, Travel, Designing, Production, and Wedding Coordination for Weddings and Corporate Events — where Comfort, Timing, and Discretion define the experience."}
+                {heroConfig.body || "We are a Detailed Hospitality & Logistics Organisation that implements Operations and Management for Guest Management, Travel, Designing, Production, and Wedding Coordination for Weddings and Corporate Events — where Comfort, Timing, and Discretion define the experience."}
               </p>
             </div>
             <div className="lg:col-span-5 flex justify-center lg:justify-end">
@@ -159,17 +159,17 @@ export default async function AboutPage() {
                 {leadershipConfig.name || "Mohammed Tabraiz Saheb"}
               </h2>
               <p className="font-inter text-sm text-white/50 italic mb-6 tracking-wide">
-                {leadershipConfig.role || "Founder & Managing Director"}
+                {leadershipConfig.title || "Founder & Managing Director"}
               </p>
               <p className="font-inter text-white/65 text-base leading-relaxed mb-8">
-                {leadershipConfig.desc || "Mohammed Tabraiz Saheb leads AVIM Events with a Clear Vision to deliver Best Guest Management service in Logistics and Hospitality. Under his direction, the company has Built a Reputation for Planning, Coordination, Execution at large scale."}
+                {leadershipConfig.body || "Mohammed Tabraiz Saheb leads AVIM Events with a Clear Vision to deliver Best Guest Management service in Logistics and Hospitality. Under his direction, the company has Built a Reputation for Planning, Coordination, Execution at large scale."}
               </p>
               <div className="glass-card-gv p-6" style={{ border: "1px solid rgba(255,255,255,0.1)" }}>
                 <p className="text-gv-gold font-inter text-[9px] tracking-[0.3em] uppercase font-semibold mb-3">
                   VISION STATEMENT
                 </p>
                 <blockquote className="font-fraunces text-white/85 text-lg leading-relaxed">
-                  &ldquo;{leadershipConfig.vision || "To Care for Every Guest, once they arrive and leave with unforgettable Happy Memories."}&rdquo;
+                  &ldquo;{leadershipConfig.vision_quote || "To Care for Every Guest, once they arrive and leave with unforgettable Happy Memories."}&rdquo;
                 </blockquote>
               </div>
             </div>
@@ -189,7 +189,7 @@ export default async function AboutPage() {
                 {teamConfig.heading || "Leadership & Execution Team"}
               </h2>
               <p className="font-inter text-white/45 text-sm">
-                {teamConfig.subtext || "Luxury standards. Operational precision. Regional strength."}
+                {teamConfig.subtitle || "Luxury standards. Operational precision. Regional strength."}
               </p>
               <div
                 className="mx-auto mt-5"
@@ -214,16 +214,25 @@ export default async function AboutPage() {
                       background: "linear-gradient(to right, transparent, rgba(212,175,55,0.65), transparent)",
                     }}
                   />
-                  <div
-                    className="w-16 h-16 rounded-full flex items-center justify-center mb-4 font-fraunces text-lg transition-transform duration-300 group-hover:scale-105"
-                    style={{
-                      background: "radial-gradient(circle, rgba(212,175,55,0.18) 0%, rgba(212,175,55,0.05) 100%)",
-                      border: "1px solid rgba(212,175,55,0.3)",
-                      color: "#D4AF37",
-                    }}
-                  >
-                    {member.initials || member.name?.split(" ").map((n) => n[0]).join("").slice(0, 2)}
-                  </div>
+                  {member.imageUrl ? (
+                    <img
+                      src={member.imageUrl}
+                      alt={member.name}
+                      className="w-16 h-16 rounded-full object-cover mb-4 transition-transform duration-300 group-hover:scale-105"
+                      style={{ border: "1px solid rgba(212,175,55,0.3)" }}
+                    />
+                  ) : (
+                    <div
+                      className="w-16 h-16 rounded-full flex items-center justify-center mb-4 font-fraunces text-lg transition-transform duration-300 group-hover:scale-105"
+                      style={{
+                        background: "radial-gradient(circle, rgba(212,175,55,0.18) 0%, rgba(212,175,55,0.05) 100%)",
+                        border: "1px solid rgba(212,175,55,0.3)",
+                        color: "#D4AF37",
+                      }}
+                    >
+                      {member.initials || member.name?.split(" ").map((n) => n[0]).join("").slice(0, 2)}
+                    </div>
+                  )}
                   <h3 className="font-fraunces text-base text-white mb-1">{member.name}</h3>
                   <p className="font-inter text-[11px] text-gv-gold tracking-wide mb-1">{member.role}</p>
                   {member.location && (

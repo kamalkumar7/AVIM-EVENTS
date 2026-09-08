@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
+import ImageUpload from "@/components/admin/ImageUpload";
 import {
   HiOutlineCog,
   HiOutlineHome,
@@ -97,6 +98,7 @@ const SECTION_GROUPS = [
           { key: "cta_secondary", label: "Secondary CTA", type: "text" },
           { key: "card_title", label: "Card Title", type: "text" },
           { key: "card_body", label: "Card Body", type: "textarea" },
+          { key: "image_opacity", label: "Background Image Opacity (0.0 – 1.0, default 0.16)", type: "text" },
         ],
       },
       {
@@ -221,7 +223,7 @@ const SECTION_GROUPS = [
           { key: "body", label: "Bio", type: "textarea" },
           { key: "vision_label", label: "Vision Label", type: "text" },
           { key: "vision_quote", label: "Vision Quote", type: "textarea" },
-          { key: "photo_url", label: "Photo URL", type: "text" },
+          { key: "photo_url", label: "Leadership Photo", type: "image", folder: "avim-events/leadership" },
         ],
       },
       {
@@ -324,7 +326,7 @@ const SECTION_GROUPS = [
           { key: "quote", label: "Quote", type: "text" },
           { key: "job_roles", label: "Job Roles (one per line)", type: "textarea" },
           { key: "careers_email", label: "Careers Email", type: "text" },
-          { key: "photo_url", label: "Section Photo URL", type: "text" },
+          { key: "photo_url", label: "Section Photo", type: "image", folder: "avim-events/careers" },
         ],
       },
       {
@@ -598,7 +600,14 @@ export default function ConfigPage() {
                       {activeSection.id}.{field.key}
                     </span>
                   </label>
-                  {field.type === "textarea" ? (
+                  {field.type === "image" ? (
+                    <ImageUpload
+                      label=""
+                      folder={field.folder || "avim-events"}
+                      value={getValue(activeSection.id, field.key)}
+                      onChange={(url) => setValue(activeSection.id, field.key, url)}
+                    />
+                  ) : field.type === "textarea" ? (
                     <textarea
                       value={getValue(activeSection.id, field.key)}
                       onChange={(e) => setValue(activeSection.id, field.key, e.target.value)}

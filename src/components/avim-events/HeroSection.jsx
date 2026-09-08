@@ -37,7 +37,7 @@ export default function HeroSection({ slides = [], config = {} }) {
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{
               backgroundImage: `url(${src}), url(/images/avim-events/placeholder-hero.svg)`,
-              opacity: activeImg === i ? 0.16 : 0,
+              opacity: activeImg === i ? parseFloat(config.image_opacity ?? "0.16") : 0,
               transform: activeImg === i ? "scale(1.05)" : "scale(1)",
               transition:
                 activeImg === i
