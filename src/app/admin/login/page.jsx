@@ -24,6 +24,7 @@ function LoginForm() {
     setLoading(false);
     if (res.ok) {
       router.push(params.get("from") || "/admin");
+      router.refresh();
     } else {
       const d = await res.json();
       setError(d.error || "Login failed");
