@@ -6,7 +6,7 @@ import ScrollToTopBtn from "@/components/avim-events/ScrollToTopBtn";
 import ContactSection from "@/components/avim-events/ContactSection";
 import prisma from "@/lib/prisma";
 
-export const revalidate = 60;
+export const revalidate = 10;
 
 export const metadata = {
   title: "Contact | AVIM Events",

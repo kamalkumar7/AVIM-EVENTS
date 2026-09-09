@@ -6,7 +6,7 @@ import WhatsAppWidget from "@/components/avim-events/WhatsAppWidget";
 import ScrollToTopBtn from "@/components/avim-events/ScrollToTopBtn";
 import prisma from "@/lib/prisma";
 
-export const revalidate = 60;
+export const revalidate = 10;
 
 export const metadata = {
   title: "Careers | AVIM Events",

@@ -8,7 +8,7 @@ import ScrollToTopBtn from "@/components/avim-events/ScrollToTopBtn";
 import AboutStatsSection from "@/components/avim-events/AboutStatsSection";
 import prisma from "@/lib/prisma";
 
-export const revalidate = 60;
+export const revalidate = 10;
 
 export const metadata = {
   title: "About | AVIM Events",

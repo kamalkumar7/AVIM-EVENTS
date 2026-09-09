@@ -7,7 +7,7 @@ import ScrollToTopBtn from "@/components/avim-events/ScrollToTopBtn";
 import VenueImage from "@/components/avim-events/VenueImage";
 import prisma from "@/lib/prisma";
 
-export const revalidate = 60;
+export const revalidate = 10;
 
 export const metadata = {
   title: "Venues | AVIM Events",
