@@ -19,12 +19,13 @@ import {
 export const dynamic = "force-dynamic";
 
 export default async function AdminDashboard() {
-  const [heroCount, partnerCount, testimonialCount, portfolioCount, teamCount, serviceCount, milestoneCount, venueCount, applicantCount, enquiryCount] = await Promise.all([
+  const [heroCount, partnerCount, testimonialCount, portfolioCount, teamCount, leaderCount, serviceCount, milestoneCount, venueCount, applicantCount, enquiryCount] = await Promise.all([
     prisma.heroSlide.count(),
     prisma.tieupPartner.count(),
     prisma.testimonial.count(),
     prisma.portfolioItem.count(),
     prisma.teamMember.count(),
+    prisma.leader.count(),
     prisma.serviceCard.count(),
     prisma.milestone.count(),
     prisma.venueCard.count(),
@@ -39,6 +40,7 @@ export default async function AdminDashboard() {
   ];
 
   const peopleTiles = [
+    { label: "Leaders", value: leaderCount, href: "/admin/leaders", Icon: HiOutlineUserGroup },
     { label: "Team Members", value: teamCount, href: "/admin/team", Icon: HiOutlineUserGroup },
     { label: "Partners", value: partnerCount, href: "/admin/partners", Icon: HiOutlineLink },
     { label: "Testimonials", value: testimonialCount, href: "/admin/testimonials", Icon: HiOutlineChatAlt2 },

@@ -6,6 +6,7 @@ import ScrollAnimation from "@/components/ScrollAnimation";
 import WhatsAppWidget from "@/components/avim-events/WhatsAppWidget";
 import ScrollToTopBtn from "@/components/avim-events/ScrollToTopBtn";
 import AboutStatsSection from "@/components/avim-events/AboutStatsSection";
+import LeadershipCarousel from "@/components/avim-events/LeadershipCarousel";
 import prisma from "@/lib/prisma";
 
 export const revalidate = 10;
@@ -47,6 +48,7 @@ export default async function AboutPage() {
     navbarConfigs,
     footerConfigs,
     contactConfigs,
+    leaders,
   ] = await Promise.all([
     prisma.teamMember.findMany({ where: { active: true }, orderBy: { order: "asc" } }),
     prisma.siteConfig.findMany({ where: { section: "about_hero" } }),
@@ -58,6 +60,7 @@ export default async function AboutPage() {
     prisma.siteConfig.findMany({ where: { section: "navbar" } }),
     prisma.siteConfig.findMany({ where: { section: "footer" } }),
     prisma.siteConfig.findMany({ where: { section: "contact_info" } }),
+    prisma.leader.findMany({ where: { active: true }, orderBy: { order: "asc" } }),
   ]);
 
   const heroConfig = cfgMap(aboutHeroConfigs);
@@ -127,54 +130,7 @@ export default async function AboutPage() {
         <div className="h-px bg-gradient-to-r from-transparent via-gv-gold/20 to-transparent" />
 
         {/* ── LEADERSHIP ── */}
-        <section className="py-20 sm:py-28 section-theme-black" id="leadership">
-          <div className="max-w-7xl mx-auto px-6 md:px-10 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-            <div className="lg:col-span-5 order-2 lg:order-1 reveal-left">
-              <div
-                className="glass-card-gv relative overflow-hidden aspect-[4/5] max-w-sm mx-auto lg:mx-0"
-                style={{
-                  border: "1px solid rgba(212,175,55,0.25)",
-                  boxShadow: "0 20px 60px rgba(0,0,0,0.7), 0 0 40px rgba(212,175,55,0.08)",
-                  background:
-                    "radial-gradient(ellipse at 50% 80%, rgba(212,175,55,0.12) 0%, transparent 55%), rgba(255,255,255,0.03)",
-                }}
-              >
-                <Image
-                  src={leadershipConfig.photo_url || "/images/avim-events/placeholder-hero.svg"}
-                  alt={leadershipConfig.name || "Mohammed Tabraiz Saheb"}
-                  fill
-                  className="object-cover"
-                />
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{ background: "linear-gradient(to top, rgba(5,5,5,0.5) 0%, transparent 50%)" }}
-                />
-              </div>
-            </div>
-            <div className="lg:col-span-7 order-1 lg:order-2 reveal-right">
-              <p className="text-gv-gold font-inter text-[10px] tracking-[0.3em] uppercase font-semibold mb-5">
-                {leadershipConfig.label || "LEADERSHIP"}
-              </p>
-              <h2 className="font-fraunces text-3xl sm:text-4xl text-white mb-2 leading-snug">
-                {leadershipConfig.name || "Mohammed Tabraiz Saheb"}
-              </h2>
-              <p className="font-inter text-sm text-white/50 italic mb-6 tracking-wide">
-                {leadershipConfig.title || "Founder & Managing Director"}
-              </p>
-              <p className="font-inter text-white/65 text-base leading-relaxed mb-8">
-                {leadershipConfig.body || "Mohammed Tabraiz Saheb leads AVIM Events with a Clear Vision to deliver Best Guest Management service in Logistics and Hospitality. Under his direction, the company has Built a Reputation for Planning, Coordination, Execution at large scale."}
-              </p>
-              <div className="glass-card-gv p-6" style={{ border: "1px solid rgba(255,255,255,0.1)" }}>
-                <p className="text-gv-gold font-inter text-[9px] tracking-[0.3em] uppercase font-semibold mb-3">
-                  VISION STATEMENT
-                </p>
-                <blockquote className="font-fraunces text-white/85 text-lg leading-relaxed">
-                  &ldquo;{leadershipConfig.vision_quote || "To Care for Every Guest, once they arrive and leave with unforgettable Happy Memories."}&rdquo;
-                </blockquote>
-              </div>
-            </div>
-          </div>
-        </section>
+        <LeadershipCarousel leaders={leaders} config={leadershipConfig} />
 
         <div className="h-px bg-gradient-to-r from-transparent via-gv-gold/20 to-transparent" />
 

@@ -6,7 +6,12 @@ export async function withAdmin(handler) {
   if (!session) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
-  return handler();
+  try {
+    return await handler();
+  } catch (error) {
+    console.error("API Error:", error);
+    return NextResponse.json({ error: "Internal Server Error", details: error.message }, { status: 500 });
+  }
 }
 
 export function ok(data) {

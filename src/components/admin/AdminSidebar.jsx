@@ -33,6 +33,7 @@ const NAV = [
   { href: "/admin/portfolio", label: "Portfolio", Icon: HiOutlineCollection },
 
   { label: "People & Partners", divider: true },
+  { href: "/admin/leaders", label: "Leaders", Icon: HiOutlineUserGroup },
   { href: "/admin/team", label: "Team", Icon: HiOutlineUserGroup },
   { href: "/admin/testimonials", label: "Testimonials", Icon: HiOutlineChatAlt2 },
   { href: "/admin/partners", label: "Partners", Icon: HiOutlineLink },
