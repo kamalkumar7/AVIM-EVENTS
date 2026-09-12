@@ -1,12 +1,13 @@
 import Link from "next/link";
+import { FaInstagram, FaLinkedinIn, FaFacebookF } from "react-icons/fa";
 
 const year = new Date().getFullYear();
 
 export default function Footer({ config = {} }) {
   const socials = [
-    { name: "Instagram", href: config.instagram_url || "https://www.instagram.com/avim-eventsgroup/" },
-    { name: "LinkedIn", href: config.linkedin_url || "https://www.linkedin.com/company/avim-events-group/" },
-    { name: "Facebook", href: config.facebook_url || "https://www.facebook.com/AVIM Eventsgroup" },
+    { name: "Instagram", icon: FaInstagram, href: config.instagram_url || "https://www.instagram.com/avim-eventsgroup/" },
+    { name: "LinkedIn", icon: FaLinkedinIn, href: config.linkedin_url || "https://www.linkedin.com/company/avim-events-group/" },
+    { name: "Facebook", icon: FaFacebookF, href: config.facebook_url || "https://www.facebook.com/AVIMEventsgroup" },
   ];
 
   const phone1 = config.phone_1 || "+91 82686 25482";
@@ -18,10 +19,10 @@ export default function Footer({ config = {} }) {
 
   return (
     <footer className="border-t border-white/10 bg-black/30">
-      <div className="max-w-7xl mx-auto px-6 md:px-10 py-12 sm:py-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
+      <div className="max-w-7xl mx-auto px-6 md:px-10 py-12 sm:py-16 grid grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
 
         {/* Brand */}
-        <div className="sm:col-span-2 lg:col-span-1">
+        <div className="col-span-2 lg:col-span-1 flex flex-col items-center lg:items-start text-center lg:text-left">
           <img
             src="/images/avim-events/logos/main-logo.png"
             alt="AVIM Events"
@@ -31,10 +32,18 @@ export default function Footer({ config = {} }) {
           <p className="font-inter text-sm text-white/50 leading-relaxed mb-5 max-w-xs">
             {tagline}
           </p>
-          <div className="flex gap-4 text-sm font-inter">
+          <div className="flex gap-3 justify-center lg:justify-start">
             {socials.map((s) => (
-              <a key={s.name} href={s.href} target="_blank" rel="noopener noreferrer" className="text-white/45 hover:text-gv-gold transition-colors">
-                {s.name}
+              <a
+                key={s.name}
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={s.name}
+                className="w-8 h-8 rounded-full flex items-center justify-center text-white/45 hover:text-gv-gold hover:border-gv-gold/50 transition-all duration-300"
+                style={{ border: "1px solid rgba(255,255,255,0.12)" }}
+              >
+                <s.icon size={14} />
               </a>
             ))}
           </div>

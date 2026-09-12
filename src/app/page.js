@@ -116,8 +116,10 @@ export default async function Home() {
           <div className="max-w-7xl mx-auto px-6 md:px-10 mt-14 grid grid-cols-1 md:grid-cols-3 gap-5">
             {featureTiles.map((f, i) => (
               <div key={f.id ?? i} className="glass-card-gv p-7 hover:border-gv-gold/40 transition-all duration-500 reveal" style={{ transform: "translateY(0)" }}>
-                <span className="text-gv-gold text-xl block mb-4">{f.icon}</span>
-                <h3 className="font-fraunces text-lg text-white mb-3">{f.title}</h3>
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-gv-gold text-xl shrink-0">{f.icon}</span>
+                  <h3 className="font-fraunces text-lg text-white">{f.title}</h3>
+                </div>
                 <p className="font-inter text-sm text-white/55 leading-relaxed">{f.desc}</p>
               </div>
             ))}
