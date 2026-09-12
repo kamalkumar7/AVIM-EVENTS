@@ -129,16 +129,14 @@ export default async function Home() {
         {/* ── SERVICES HIGHLIGHTS ── */}
         <section className="py-20 sm:py-28 section-theme-charcoal" id="services">
           <div className="max-w-7xl mx-auto px-6 md:px-10">
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-14 reveal">
-              <div>
-                <p className="text-gv-gold font-inter text-[10px] tracking-[0.3em] uppercase font-semibold mb-4">
-                  {servicesHeader.label || "SERVICES"}
-                </p>
-                <h2 className="font-fraunces text-3xl sm:text-4xl xl:text-5xl text-white leading-tight max-w-xl">
-                  {servicesHeader.heading || "High-end experiences. High-performance logistics."}
-                </h2>
-              </div>
-              <Link href="/services" className="text-gv-gold font-inter text-sm hover:text-white transition-colors shrink-0 whitespace-nowrap">
+            <div className="mb-14 reveal">
+              <p className="text-gv-gold font-inter text-[10px] tracking-[0.3em] uppercase font-semibold mb-4">
+                {servicesHeader.label || "SERVICES"}
+              </p>
+              <h2 className="font-fraunces text-3xl sm:text-4xl xl:text-5xl text-white leading-tight max-w-xl mb-6">
+                {servicesHeader.heading || "High-end experiences. High-performance logistics."}
+              </h2>
+              <Link href="/services" className="text-gv-gold font-inter text-sm hover:text-white transition-colors">
                 {servicesHeader.view_all_link || "View all services →"}
               </Link>
             </div>
